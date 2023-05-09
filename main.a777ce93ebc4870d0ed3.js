@@ -1,44 +1,29 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/modules/burger.js":
-/*!*******************************!*\
-  !*** ./src/modules/burger.js ***!
-  \*******************************/
-/***/ (() => {
-
-var menuBtn = document.querySelector('.header__burger');
-var menu = document.querySelector('.burger');
-var close = document.querySelector('.burger__btn');
-menuBtn.addEventListener('click', function () {
-  menu.classList.add('active');
-});
-close.addEventListener('click', function () {
-  menu.classList.remove('active');
-});
-
-/***/ }),
-
-/***/ "./src/modules/slider.js":
-/*!*******************************!*\
-  !*** ./src/modules/slider.js ***!
-  \*******************************/
+/***/ "./src/modules/brendSlider.js":
+/*!************************************!*\
+  !*** ./src/modules/brendSlider.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.esm.js");
 /* harmony import */ var swiper_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper/css */ "./node_modules/swiper/swiper.min.css");
 /* harmony import */ var swiper_css_navigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/css/navigation */ "./node_modules/swiper/modules/navigation/navigation.min.css");
 /* harmony import */ var swiper_css_pagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper/css/pagination */ "./node_modules/swiper/modules/pagination/pagination.min.css");
+/* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./elements */ "./src/modules/elements.js");
+/* harmony import */ var _matchMedia__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./matchMedia */ "./src/modules/matchMedia.js");
 
 
 
 
-var swiper, repairSlide, priceSlide;
-function widowWidht() {
-  var viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth);
-  if (viewport_width <= 320) {
+
+
+var swiper;
+function sliderFunc() {
+  if (_matchMedia__WEBPACK_IMPORTED_MODULE_5__.mediaQuerySmall.matches) {
     swiper = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"]('.brends__slider', {
       modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Navigation, swiper__WEBPACK_IMPORTED_MODULE_0__.Pagination],
       slidesPerView: 'auto',
@@ -48,7 +33,298 @@ function widowWidht() {
         clickable: true
       }
     });
-    repairSlide = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"]('.repair__slider', {
+  } else if (swiper) {
+    swiper.destroy();
+  }
+}
+_matchMedia__WEBPACK_IMPORTED_MODULE_5__.mediaQuerySmall.addEventListener('change', sliderFunc);
+sliderFunc(_matchMedia__WEBPACK_IMPORTED_MODULE_5__.mediaQuerySmall);
+function btnSlide() {
+  _elements__WEBPACK_IMPORTED_MODULE_4__.elementsToSledeBrends.classList.toggle('btn-slides-block');
+  _elements__WEBPACK_IMPORTED_MODULE_4__.btnSliderOn.classList.toggle('btn-close');
+  _elements__WEBPACK_IMPORTED_MODULE_4__.btnSliderOf.classList.toggle('btn-close');
+}
+_elements__WEBPACK_IMPORTED_MODULE_4__.btnBrends.addEventListener('click', btnSlide);
+
+/***/ }),
+
+/***/ "./src/modules/btn-on.js":
+/*!*******************************!*\
+  !*** ./src/modules/btn-on.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./elements */ "./src/modules/elements.js");
+
+function btnActive() {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.spanTab.classList.toggle('btn-close');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.spanDesctop.classList.toggle('btn-close');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.aboutBtnOn.classList.toggle('btn-close');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.aboutBtnClose.classList.toggle('btn-close');
+}
+_elements__WEBPACK_IMPORTED_MODULE_0__.btnOn.addEventListener('click', btnActive);
+
+/***/ }),
+
+/***/ "./src/modules/burger.js":
+/*!*******************************!*\
+  !*** ./src/modules/burger.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./elements */ "./src/modules/elements.js");
+
+_elements__WEBPACK_IMPORTED_MODULE_0__.menuBtn.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.menu.classList.add('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.add('body-overflow');
+});
+_elements__WEBPACK_IMPORTED_MODULE_0__.close.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.menu.classList.remove('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.toggle('body-overflow');
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    _elements__WEBPACK_IMPORTED_MODULE_0__.menu.classList.remove('active');
+    _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.remove('body-overflow');
+  }
+});
+window.addEventListener('click', function (targetClose) {
+  var target = targetClose.target;
+  if (target.closest('.burger__menu')) {
+    if (!target.closest('.burger__overlay')) {
+      _elements__WEBPACK_IMPORTED_MODULE_0__.menu.classList.toggle('active');
+      _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.toggle('body-overflow');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./src/modules/elements.js":
+/*!*********************************!*\
+  !*** ./src/modules/elements.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "aboutBtnClose": () => (/* binding */ aboutBtnClose),
+/* harmony export */   "aboutBtnOn": () => (/* binding */ aboutBtnOn),
+/* harmony export */   "body": () => (/* binding */ body),
+/* harmony export */   "btnBrends": () => (/* binding */ btnBrends),
+/* harmony export */   "btnCall": () => (/* binding */ btnCall),
+/* harmony export */   "btnCallServices": () => (/* binding */ btnCallServices),
+/* harmony export */   "btnChat": () => (/* binding */ btnChat),
+/* harmony export */   "btnChatServices": () => (/* binding */ btnChatServices),
+/* harmony export */   "btnOn": () => (/* binding */ btnOn),
+/* harmony export */   "btnRepair": () => (/* binding */ btnRepair),
+/* harmony export */   "btnSlideOf": () => (/* binding */ btnSlideOf),
+/* harmony export */   "btnSlideOn": () => (/* binding */ btnSlideOn),
+/* harmony export */   "btnSliderOf": () => (/* binding */ btnSliderOf),
+/* harmony export */   "btnSliderOn": () => (/* binding */ btnSliderOn),
+/* harmony export */   "burgerBtnChat": () => (/* binding */ burgerBtnChat),
+/* harmony export */   "burgerBtnTel": () => (/* binding */ burgerBtnTel),
+/* harmony export */   "callerClose": () => (/* binding */ callerClose),
+/* harmony export */   "callerMenu": () => (/* binding */ callerMenu),
+/* harmony export */   "close": () => (/* binding */ close),
+/* harmony export */   "elementsToSledeBrends": () => (/* binding */ elementsToSledeBrends),
+/* harmony export */   "elementsToSledeRepair": () => (/* binding */ elementsToSledeRepair),
+/* harmony export */   "formClose": () => (/* binding */ formClose),
+/* harmony export */   "formMenu": () => (/* binding */ formMenu),
+/* harmony export */   "menu": () => (/* binding */ menu),
+/* harmony export */   "menuBtn": () => (/* binding */ menuBtn),
+/* harmony export */   "modalCall": () => (/* binding */ modalCall),
+/* harmony export */   "modalForm": () => (/* binding */ modalForm),
+/* harmony export */   "spanDesctop": () => (/* binding */ spanDesctop),
+/* harmony export */   "spanTab": () => (/* binding */ spanTab)
+/* harmony export */ });
+var btnOn = document.querySelector('.about__btn');
+var spanTab = document.querySelector('.span-tab');
+var spanDesctop = document.querySelector('.span-desctop');
+var menuBtn = document.querySelector('.header__burger');
+var menu = document.querySelector('.burger__menu');
+var close = document.querySelector('.burger__btn');
+var body = document.querySelector('body');
+var elementsToSledeBrends = document.querySelector('.brends__swiper-wrapper');
+var elementsToSledeRepair = document.querySelector('.repair__slider-wrapper');
+var btnRepair = document.querySelector('.repair__btn-onclick');
+var btnBrends = document.querySelector('.brends__btn-onclick');
+var btnChat = document.querySelector('.btn-mail');
+var btnChatServices = document.querySelector('.btn-mail-services');
+var formMenu = document.querySelector('.modal-form__menu');
+var formClose = document.querySelector('.modal-form__close');
+var btnCall = document.querySelector('.btn-status');
+var btnCallServices = document.querySelector('.btn-status-services');
+var callerMenu = document.querySelector('.modal-caller__menu');
+var callerClose = document.querySelector('.modal-caller__close');
+var aboutBtnClose = document.querySelector('.about__btn-close');
+var aboutBtnOn = document.querySelector('.about__btn-on');
+var btnSlideOn = document.querySelector('.repair__slide-on');
+var btnSlideOf = document.querySelector('.repair__slide-of');
+var btnSliderOn = document.querySelector('.brends__btn-on');
+var btnSliderOf = document.querySelector('.brends__btn-of');
+var burgerBtnTel = document.querySelector('.burger__button-tel');
+var burgerBtnChat = document.querySelector('.burger__button-chat');
+var modalForm = document.getElementById('modal-form');
+var modalCall = document.getElementById('modal-call');
+
+/***/ }),
+
+/***/ "./src/modules/matchMedia.js":
+/*!***********************************!*\
+  !*** ./src/modules/matchMedia.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "mediaQueryFull": () => (/* binding */ mediaQueryFull),
+/* harmony export */   "mediaQueryMedium": () => (/* binding */ mediaQueryMedium),
+/* harmony export */   "mediaQuerySmall": () => (/* binding */ mediaQuerySmall)
+/* harmony export */ });
+var mediaQuerySmall = window.matchMedia('(max-width: 750px)');
+var mediaQueryMedium = window.matchMedia('(max-width: 900px)');
+var mediaQueryFull = window.matchMedia('(max-width: 2000px)');
+
+/***/ }),
+
+/***/ "./src/modules/modal-call.js":
+/*!***********************************!*\
+  !*** ./src/modules/modal-call.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./elements */ "./src/modules/elements.js");
+
+_elements__WEBPACK_IMPORTED_MODULE_0__.btnChat.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.formMenu.classList.add('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.add('body-overflow');
+  elem.setAttribute('inert', 'inert');
+  atr.setAttribute('inert', 'inert');
+});
+_elements__WEBPACK_IMPORTED_MODULE_0__.burgerBtnChat.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.formMenu.classList.add('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.add('body-overflow');
+  elem.setAttribute('inert', 'inert');
+  atr.setAttribute('inert', 'inert');
+});
+_elements__WEBPACK_IMPORTED_MODULE_0__.btnChatServices.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.formMenu.classList.add('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.add('body-overflow');
+  elem.setAttribute('inert', 'inert');
+  atr.setAttribute('inert', 'inert');
+});
+_elements__WEBPACK_IMPORTED_MODULE_0__.formClose.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.formMenu.classList.remove('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.remove('body-overflow');
+  elem.removeAttribute('inert');
+  atr.removeAttribute('inert');
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    _elements__WEBPACK_IMPORTED_MODULE_0__.formMenu.classList.remove('active');
+    _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.remove('body-overflow');
+    elem.removeAttribute('inert');
+    atr.removeAttribute('inert');
+  }
+});
+window.addEventListener('click', function (targetCloseForm) {
+  var targetForm = targetCloseForm.target;
+  if (targetForm.closest('.modal-form__menu')) {
+    if (!targetForm.closest('.modal-form__inner')) {
+      _elements__WEBPACK_IMPORTED_MODULE_0__.formMenu.classList.remove('active');
+      _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.remove('body-overflow');
+      elem.removeAttribute('inert');
+      atr.removeAttribute('inert');
+    }
+  }
+});
+function setFocus() {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.modalForm.setAttribute('tabindex', '1');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.modalForm.focus();
+}
+setFocus();
+
+/***/ }),
+
+/***/ "./src/modules/modal-caller.js":
+/*!*************************************!*\
+  !*** ./src/modules/modal-caller.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./elements */ "./src/modules/elements.js");
+
+_elements__WEBPACK_IMPORTED_MODULE_0__.btnCall.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.callerMenu.classList.add('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.add('body-overflow');
+  elem.setAttribute('inert', 'inert');
+});
+_elements__WEBPACK_IMPORTED_MODULE_0__.burgerBtnTel.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.callerMenu.classList.add('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.add('body-overflow');
+  elem.setAttribute('inert', 'inert');
+});
+_elements__WEBPACK_IMPORTED_MODULE_0__.btnCallServices.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.callerMenu.classList.add('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.add('body-overflow');
+  elem.setAttribute('inert', 'inert');
+});
+_elements__WEBPACK_IMPORTED_MODULE_0__.callerClose.addEventListener('click', function () {
+  _elements__WEBPACK_IMPORTED_MODULE_0__.callerMenu.classList.remove('active');
+  _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.remove('body-overflow');
+  elem.removeAttribute('inert');
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    _elements__WEBPACK_IMPORTED_MODULE_0__.callerMenu.classList.remove('active');
+    _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.remove('body-overflow');
+    elem.removeAttribute('inert');
+  }
+});
+window.addEventListener('click', function (targetCloseCaller) {
+  var targetCaller = targetCloseCaller.target;
+  if (targetCaller.closest('.modal-caller__menu')) {
+    if (!targetCaller.closest('.modal-caller__inner')) {
+      _elements__WEBPACK_IMPORTED_MODULE_0__.callerMenu.classList.remove('active');
+      _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.remove('body-overflow');
+      elem.removeAttribute('inert');
+    }
+  }
+});
+function setModalFocus() {
+  modalCall.setAttribute('tabindex', '1');
+  modalCall.focus();
+}
+setModalFocus();
+
+/***/ }),
+
+/***/ "./src/modules/priceSlider.js":
+/*!************************************!*\
+  !*** ./src/modules/priceSlider.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.esm.js");
+/* harmony import */ var swiper_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper/css */ "./node_modules/swiper/swiper.min.css");
+/* harmony import */ var swiper_css_navigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/css/navigation */ "./node_modules/swiper/modules/navigation/navigation.min.css");
+/* harmony import */ var swiper_css_pagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper/css/pagination */ "./node_modules/swiper/modules/pagination/pagination.min.css");
+/* harmony import */ var _matchMedia__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./matchMedia */ "./src/modules/matchMedia.js");
+
+
+
+
+
+var swiper;
+function sliderFunc() {
+  if (_matchMedia__WEBPACK_IMPORTED_MODULE_4__.mediaQuerySmall.matches) {
+    swiper = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"]('.price__slider', {
       modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Navigation, swiper__WEBPACK_IMPORTED_MODULE_0__.Pagination],
       slidesPerView: 'auto',
       spaceBetween: 16,
@@ -57,23 +333,58 @@ function widowWidht() {
         clickable: true
       }
     });
-    priceSlide = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"]('.price__slider', {
+  } else if (swiper) {
+    swiper.destroy();
+  }
+}
+_matchMedia__WEBPACK_IMPORTED_MODULE_4__.mediaQuerySmall.addEventListener('change', sliderFunc);
+sliderFunc(_matchMedia__WEBPACK_IMPORTED_MODULE_4__.mediaQuerySmall);
+
+/***/ }),
+
+/***/ "./src/modules/repairSlider.js":
+/*!*************************************!*\
+  !*** ./src/modules/repairSlider.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.esm.js");
+/* harmony import */ var swiper_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper/css */ "./node_modules/swiper/swiper.min.css");
+/* harmony import */ var swiper_css_navigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/css/navigation */ "./node_modules/swiper/modules/navigation/navigation.min.css");
+/* harmony import */ var swiper_css_pagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper/css/pagination */ "./node_modules/swiper/modules/pagination/pagination.min.css");
+/* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./elements */ "./src/modules/elements.js");
+/* harmony import */ var _matchMedia__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./matchMedia */ "./src/modules/matchMedia.js");
+
+
+
+
+
+
+var swiper;
+function sliderFunc() {
+  if (_matchMedia__WEBPACK_IMPORTED_MODULE_5__.mediaQuerySmall.matches) {
+    swiper = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"]('.repair__slider', {
       modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Navigation, swiper__WEBPACK_IMPORTED_MODULE_0__.Pagination],
       slidesPerView: 'auto',
-      spaceBetween: 12,
+      spaceBetween: 16,
       pagination: {
         el: ".swiper-pagination",
         clickable: true
       }
     });
-  } else if (swiper, repairSlide, priceSlide) {
+  } else if (swiper) {
     swiper.destroy();
-    repairSlide.destroy();
-    priceSlide.destroy();
   }
 }
-widowWidht();
-window.addEventListener('resize', widowWidht);
+_matchMedia__WEBPACK_IMPORTED_MODULE_5__.mediaQuerySmall.addEventListener('change', sliderFunc);
+sliderFunc(_matchMedia__WEBPACK_IMPORTED_MODULE_5__.mediaQuerySmall);
+function btnRep() {
+  _elements__WEBPACK_IMPORTED_MODULE_4__.elementsToSledeRepair.classList.toggle('btn-slides-block');
+  _elements__WEBPACK_IMPORTED_MODULE_4__.btnSlideOn.classList.toggle('btn-close');
+  _elements__WEBPACK_IMPORTED_MODULE_4__.btnSlideOf.classList.toggle('btn-close');
+}
+_elements__WEBPACK_IMPORTED_MODULE_4__.btnRepair.addEventListener('click', btnRep);
 
 /***/ }),
 
@@ -83,7 +394,6 @@ window.addEventListener('resize', widowWidht);
   \****************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -110,7 +420,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, "/*! normalize.css v8.0.1 | MIT License
   \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -137,7 +446,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, ":root {\n  --swiper-navigation-size:44
   \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -164,7 +472,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".swiper-pagination {\n  position: abso
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -196,7 +503,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, "/**\n * Swiper 9.3.0\n * Most modern m
   \*************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -228,7 +534,7 @@ var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_g
 var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_4___);
 var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_5___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"TTLakes\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"woff\");\n}\n@font-face {\n  font-family: \"TTLakes\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") format(\"woff\");\n}\n@font-face {\n  font-family: \"TTLakes\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ") format(\"woff\");\n}\n.container {\n  max-width: 72rem;\n  padding: 0 1rem;\n  margin: 0 auto;\n  position: relative;\n}\n\n.btn-reset {\n  border: none;\n  outline: none;\n  background-color: transparent;\n  cursor: pointer;\n  padding: 0;\n}\n\na {\n  outline: none;\n}\n\ninput[type=radio] {\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n}\n\nhtml {\n  box-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: inherit;\n}\n\nbody {\n  font-family: \"SFProDisplay\", sans-serif;\n  margin: 0;\n  background-color: #F8F8F8;\n}\n\nh1, h2, h3, h4, h5, h6 {\n  margin: 0;\n  padding: 0;\n}\n\np {\n  margin: 0;\n  padding: 0;\n}\n\nul, ol, menu {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\na {\n  color: inherit;\n  -webkit-text-decoration: none;\n  text-decoration: none;\n}\n\nimg {\n  max-width: 100%;\n}\n\n.header {\n  border-bottom: solid #D9FFF5;\n  background-color: var(--white-color);\n  margin-bottom: 1.5rem;\n  width: 100vw;\n  margin-left: calc(50% - 50vw);\n}\n.header__inner {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n.header__logo {\n  position: relative;\n}\n.header__logo::after {\n  content: \"\";\n  position: absolute;\n  border-right: solid #EAEAEA;\n  top: 0.6rem;\n  right: -0.9rem;\n  height: 1.9rem;\n}\n.header__buttons {\n  display: flex;\n}\n.header__btn-phone, .header__btn-chat, .header__user {\n  display: none;\n}\n.header__btn-repair {\n  padding-right: 1rem;\n}\n\n.burger {\n  display: none;\n}\n\n.burger {\n  padding: 0 1.9rem;\n  display: none;\n}\n\n.active {\n  width: 100%;\n  height: 100%;\n  display: block;\n  position: absolute;\n  top: 0;\n  left: 0;\n  -webkit-backdrop-filter: blur(0.25rem);\n  backdrop-filter: blur(0.25rem);\n  z-index: 2;\n}\n\n.burger__menu {\n  width: 21rem;\n  position: absolute;\n  left: 0.1rem;\n  padding-left: 1.8rem;\n  padding-top: 1.1rem;\n  background-color: var(--white-color);\n  box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2);\n}\n\n.burger__overlay-inner {\n  display: flex;\n  margin-bottom: 2.3rem;\n}\n\n.burger__btn {\n  padding-right: 1rem;\n}\n\n.burger__logo {\n  padding-right: 5rem;\n}\n\n.burger__navigation {\n  margin-bottom: 15rem;\n}\n\n.burger__list-item {\n  padding-bottom: 1.8rem;\n}\n\n.burger__list-item:hover {\n  transition: 0.5s;\n  color: var(--nav-text-color);\n}\n\n.burger__buttons {\n  display: flex;\n  gap: 1rem;\n  margin-bottom: 1.1rem;\n}\n\n.burger__mail {\n  display: block;\n  margin-bottom: 0.8rem;\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n}\n\n.burger__tel {\n  font-family: \"TT Lakes\";\n  font-size: 1.5rem;\n  display: block;\n  margin-bottom: 2.6rem;\n}\n\n.burger__radio {\n  padding-left: 0;\n  padding-right: 0.4rem;\n  cursor: pointer;\n}\n\n.burger__radio:hover {\n  color: var(--nav-text-color);\n}\n\n.burger__radio:active {\n  color: var(--nav-text-color);\n}\n\n.burger__radio:focus {\n  border: solid var(--pink-color);\n}\n\n.burger__radio:disabled {\n  color: var(--black-color);\n}\n\n.services__inner {\n  margin-bottom: 1.5rem;\n}\n.services__title {\n  font-family: \"TT Lakes\";\n  font-size: 1.75rem;\n  line-height: 2.5rem;\n  margin-bottom: 1.5rem;\n  position: relative;\n}\n.services__title::before {\n  content: \"\";\n  position: absolute;\n  width: 0.25rem;\n  height: 2.5rem;\n  left: -0.9rem;\n  background: #41F6D7;\n  border-radius: 1px;\n}\n.services__buttons {\n  display: none;\n}\n.services__menu {\n  display: flex;\n  overflow-y: hidden;\n}\n.services__item {\n  white-space: nowrap;\n  display: block;\n  padding: 0.5rem 1rem;\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  color: var(--nav-text-color);\n  transition: 0.3s;\n  border-radius: 6px;\n  border: solid transparent;\n}\n.services__item:hover, .services__item:focus, .services__item:active {\n  transition: 0.3s;\n  background-color: var(--white-color);\n  border: solid #D9FFF5;\n  border-radius: 6px;\n  transition: 0.5s;\n}\n\n.about__inner {\n  margin-bottom: 2.5rem;\n}\n.about__text {\n  font-family: \"TT Lakes\";\n  font-size: 0.9rem;\n  line-height: 1.2rem;\n  margin-bottom: 1rem;\n}\n.about__btn {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  margin-bottom: 1rem;\n  position: relative;\n  padding-left: 2rem;\n  border: solid transparent;\n}\n.about__btn::before {\n  content: \"«\";\n  position: absolute;\n  font-size: 1.6rem;\n  -webkit-transform: rotate(0.75turn);\n          transform: rotate(0.75turn);\n  left: 0;\n  top: -0.3rem;\n  color: #41f6d7;\n}\n.about__img {\n  border-radius: 5px;\n  width: 20rem;\n  height: 11rem;\n}\n\n.span-tab,\n.span-desctop {\n  display: none;\n}\n\n.brends {\n  margin-bottom: 1.5rem;\n}\n.brends__title-container {\n  border-top: solid #D9FFF5;\n  height: 5rem;\n  width: 100vw;\n  margin-left: calc(50% - 50vw);\n  background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\n  margin-bottom: 2rem;\n}\n.brends__title {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  text-transform: uppercase;\n  color: #B5B6BC;\n  padding: 1rem;\n}\n.brends__slider {\n  position: relative;\n}\n.brends__slider::after {\n  content: \"\";\n  position: absolute;\n  top: -0.75rem;\n  left: 16rem;\n  z-index: 5;\n  width: 2rem;\n  height: 5.8rem;\n  background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\n}\ndiv .brends__slide {\n  display: flex;\n  max-width: 13rem;\n  border-radius: 5px;\n  padding: 1rem 1rem;\n  border: solid #EAEAEA;\n  margin-bottom: 2rem;\n  background-color: #fff;\n}\n.brends__slide-lenovo, .brends__slide-Samsung {\n  padding-right: 1rem;\n  width: 100%;\n  max-width: 6.8rem;\n}\n.brends__slide-Apple, .brends__slide-Hp {\n  padding-right: 5rem;\n  width: 3.25rem;\n}\n.brends__slide-Acer {\n  padding-right: 2rem;\n  width: 6rem;\n}\n.brends__slide-Bosch {\n  width: 8rem;\n}\n.brends__slide-btn-bosch {\n  margin-left: 0;\n}\n.brends__slide-btn {\n  position: relative;\n  width: 2.5rem;\n  height: 2.5rem;\n  border-radius: 100%;\n  border: solid #FF3E79;\n  margin-left: 2rem;\n}\n.brends__slide-btn::after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  top: 1rem;\n  left: 1rem;\n  border: solid 2px #FF3E79;\n  border-radius: 7px;\n  background-color: #FF3E79;\n  width: 0.5rem;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.brends__slide-btn::before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  top: 1.4rem;\n  left: 1rem;\n  border: solid 2px #FF3E79;\n  border-radius: 7px;\n  background-color: #FF3E79;\n  width: 0.5rem;\n  -webkit-transform: rotate(130deg);\n  transform: rotate(130deg);\n}\n\n.swiper-pagination-bullet {\n  min-width: 0.6rem;\n}\n\ndiv .swiper-pagination-bullet-active {\n  background: #B5B6BC;\n}\n\n.repair__title-container {\n  border-top: solid #D9FFF5;\n  height: 5rem;\n  width: 100vw;\n  margin-left: calc(50% - 50vw);\n  background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\n  margin-bottom: 2rem;\n}\n.repair__title {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  text-transform: uppercase;\n  color: #B5B6BC;\n  padding: 1rem;\n}\n.repair__slider {\n  position: relative;\n}\n.repair__slider::after {\n  content: \"\";\n  position: absolute;\n  top: -0.75rem;\n  left: 16rem;\n  z-index: 5;\n  width: 2rem;\n  height: 11.8rem;\n  background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\n}\ndiv .repair__slide {\n  display: flex;\n  flex-direction: column;\n  width: 15rem;\n  height: 10rem;\n  border: solid #EAEAEA;\n  border-radius: 0.4rem;\n  background-color: #fff;\n  position: relative;\n  margin-bottom: 2rem;\n}\n.repair__slide-text {\n  padding-top: 1rem;\n  padding-left: 1rem;\n}\n.repair__slide-btn {\n  position: absolute;\n  bottom: 1rem;\n  right: 1rem;\n}\n\n.price__title-container {\n  border-top: solid #D9FFF5;\n  height: 5rem;\n  width: 100vw;\n  margin-left: calc(50% - 50vw);\n  background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\n  margin-bottom: 2rem;\n}\n.price__title {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  text-transform: uppercase;\n  color: #B5B6BC;\n  padding: 1rem;\n}\n.price__slider {\n  position: relative;\n}\n.price__slider::after {\n  content: \"\";\n  position: absolute;\n  top: -0.75rem;\n  left: 16rem;\n  z-index: 5;\n  width: 2rem;\n  height: 13.8rem;\n  background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\n}\ndiv .price__slide {\n  display: flex;\n  align-items: flex-end;\n  flex-direction: column;\n  width: 16.3rem;\n  height: 12.5rem;\n  border: solid #EAEAEA;\n  border-radius: 0.4rem;\n  background-color: #fff;\n  position: relative;\n  margin-bottom: 2rem;\n}\n.price__slide-content {\n  padding-top: 1rem;\n  padding-left: 1rem;\n}\n.price__slide-text {\n  padding-top: 1rem;\n  padding-left: 1rem;\n}\n.price__slide-title {\n  font-family: \"TT Lakes\";\n  font-size: 0.9rem;\n  line-height: 1rem;\n  color: #B5B6BC;\n  padding-bottom: 0.25rem;\n}\n.price__slide-lining {\n  font-family: \"TT Lakes\";\n  font-size: 0.9rem;\n  line-height: 1.1rem;\n  padding-bottom: 1rem;\n}\n.price__slide-btn {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  color: #fff;\n  width: 4rem;\n  height: 1.5rem;\n  padding: 0.25rem 2.5rem 0.25rem 0.8rem;\n  background: #FF3E79;\n  border-radius: 1rem;\n  position: relative;\n  margin-top: -3rem;\n  margin-right: 1rem;\n}\n.price__slide-btn::after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  top: 0.8rem;\n  right: 0.7rem;\n  border: solid 2px #fff;\n  border-radius: 7px;\n  background-color: #fff;\n  width: 0.4rem;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.price__slide-btn::before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  top: 1.1rem;\n  right: 0.7rem;\n  border: solid 2px #fff;\n  border-radius: 7px;\n  background-color: #fff;\n  width: 0.4rem;\n  -webkit-transform: rotate(130deg);\n  transform: rotate(130deg);\n}\n.price__info {\n  margin-top: 1rem;\n}\n.price__info-text {\n  font-family: \"TT Lakes\";\n  font-size: 14px;\n  line-height: 20px;\n  margin-bottom: 1rem;\n}\n.price__info-link {\n  position: relative;\n}\n.price__info-link::after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  top: 1.8rem;\n  right: -1.3rem;\n  border: solid 1px #FF3E79;\n  border-radius: 7px;\n  background-color: #FF3E79;\n  width: 0.5rem;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.price__info-link::before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  top: 2.1rem;\n  right: -1.3rem;\n  border: solid 1px #FF3E79;\n  border-radius: 7px;\n  background-color: #FF3E79;\n  width: 0.5rem;\n  -webkit-transform: rotate(130deg);\n  transform: rotate(130deg);\n}\n.price__info-link {\n  font-family: \"TT Lakes\";\n  font-size: 16px;\n  line-height: 24px;\n  text-transform: uppercase;\n}\n\n.footer {\n  display: flex;\n  flex-direction: column;\n  text-align: center;\n  opacity: 0.72;\n  width: 100vw;\n  margin-left: calc(50% - 50vw);\n  border-top: solid #D9FFF5;\n  margin-top: 2.5rem;\n}\n.footer__content {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1rem;\n  color: #B5B6BC;\n  mix-blend-mode: normal;\n  margin-top: 1rem;\n  padding-bottom: 1rem;\n}\n@media (min-width: 47.5rem){\n  .header__btn-phone,\n  .header__btn-chat,\n  .header__user {\n    display: block;\n  }\n  .header__inner {\n    justify-content: flex-start;\n  }\n  .header__logo {\n    padding-left: 3rem;\n  }\n  .header__buttons {\n    padding-left: 16rem;\n    gap: 1rem;\n  }\n  .header__btn-repair {\n    padding-right: 0;\n    padding-left: 1rem;\n  }\n  .header__btn--border {\n    position: relative;\n  }\n  .header__btn--border::after {\n    content: \"\";\n    position: absolute;\n    border-right: solid var(--border-gray-color);\n    bottom: 0.2rem;\n    right: -1rem;\n    height: 1.9rem;\n  }\n  .header__logo::after {\n    display: none;\n  }\n  .header__logo::before {\n    content: \"\";\n    position: absolute;\n    border-right: solid var(--border-gray-color);\n    top: 0.6rem;\n    left: 1.4rem;\n    height: 1.9rem;\n  }\n  .about__inner {\n    display: flex;\n    gap: 3.1rem;\n  }\n  .span-tab {\n    display: block;\n  }\n  .about__img {\n    width: 100%;\n    min-width: 22.5rem;\n    height: 13rem;\n  }\n}\n@media (min-width: 69rem){\n  .header {\n    display: none;\n  }\n  .services__inner {\n    margin-top: 2.6rem;\n    display: flex;\n    flex-wrap: wrap;\n    margin-bottom: 1.2rem;\n  }\n  .services__menu {\n    flex-wrap: wrap;\n    gap: 1.2rem;\n  }\n  .services__buttons {\n    display: block;\n    display: flex;\n    align-items: center;\n    padding-left: 32rem;\n    gap: 2rem;\n  }\n  .services__buttons-item {\n    display: flex;\n    align-items: center;\n    gap: 0.5rem;\n  }\n  .span-desctop {\n    display: block;\n  }\n  .about__img {\n    width: 100%;\n    min-width: 33.25rem;\n    height: 19.2rem;\n  }\n}\n@media (min-width: 90rem) and (max-width: 256rem){\n  .container {\n    -webkit-transform: translate(10rem, 0.6rem);\n            transform: translate(10rem, 0.6rem);\n  }\n  .burger {\n    height: 100vh;\n    display: block;\n    position: absolute;\n    left: -362px;\n    top: -50px;\n    -webkit-backdrop-filter: none;\n            backdrop-filter: none;\n  }\n  .burger__menu {\n    box-shadow: none;\n    padding-top: 3rem;\n    padding-left: 3rem;\n    width: 20.7rem;\n    left: 2rem;\n  }\n  .burger__btn {\n    display: none;\n  }\n  .burger__logo {\n    padding-right: 7.4rem;\n  }\n}", "",{"version":3,"sources":["webpack://./src/index.scss","webpack://./src/style/_fonts.scss","webpack://./src/style/_overall.scss","webpack://./src/style/_global.scss","webpack://./src/style/_var.scss","webpack://./src/style/Components/_header.scss","webpack://./src/style/Components/_burger.scss","webpack://./src/style/Components/_services.scss","webpack://./src/style/Components/_about.scss","webpack://./src/style/Components/_brends-slider.scss","webpack://./src/style/Components/_repair.scss","webpack://./src/style/Components/_price.scss","webpack://./src/style/Components/_footer.scss","webpack://./<no source>","webpack://./src/style/Components/_media.scss"],"names":[],"mappings":"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","sourcesContent":["@import '~normalize.css';\r\n@import 'style/fonts';\r\n@import 'style/var';\r\n@import 'style/overall';\r\n@import 'style/global';\r\n\r\n\r\n\r\n@import 'style/Components/header';\r\n@import 'style/Components/burger';\r\n@import 'style/Components/services';\r\n@import 'style/Components/about';\r\n@import 'style/Components/brends-slider';\r\n@import 'style/Components/repair';\r\n@import 'style/Components/price';\r\n@import 'style/Components/footer';\r\n@import 'style/Components/media';","@font-face {\r\n  font-family: 'TTLakes';\r\n  src: url('../fonts/TTLakes-Regular.woff2') format('woff2'),\r\n    url('../fonts/TTLakes-Regular.woff') format('woff');\r\n}\r\n@font-face {\r\n  font-family: 'TTLakes';\r\n  src: url('../fonts/TTLakes-Medium.woff2') format('woff2'),\r\n    url('../fonts/TTLakes-Medium.woff') format('woff');\r\n}\r\n@font-face {\r\n  font-family: 'TTLakes';\r\n  src: url('../fonts/TTLakes-Bold.woff2') format('woff2'),\r\n    url('../fonts/TTLakes-Bold.woff') format('woff');\r\n}\r\n",".container {\r\n  max-width: 72rem;\r\n  padding: 0 1rem;\r\n  margin: 0 auto;\r\n  position: relative;\r\n}\r\n.btn-reset {\r\n  border: none;\r\n  outline: none;\r\n  background-color: transparent;\r\n  cursor: pointer;\r\n  padding: 0;\r\n}\r\n\r\na {\r\n  outline: none;\r\n}\r\n\r\ninput[type=\"radio\"]{\r\n  opacity: 0;\r\n  z-index: -1;\r\n  position: absolute;\r\n}","html {\n\tbox-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n\tbox-sizing: inherit;\n}\n\nbody {\n\tfont-family: 'SFProDisplay', sans-serif;\n\tmargin: 0;\n\tbackground-color: $body;\n}\n\nh1, h2, h3, h4, h5, h6 {\n\tmargin: 0;\n\tpadding: 0;\n}\n\np {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nul, ol, menu {\n\tmargin: 0;\n\tpadding: 0;\n\tlist-style: none;\n}\n\na {\n\tcolor: inherit;\n\ttext-decoration: none;\n}\n\nimg {\n\tmax-width: 100%;\n\t\n}","$back: rgb(41, 41, 9);\r\n$text: #B5B6BC;\r\n$white: #fff;\r\n$border: #EAEAEA;\r\n$pink: #FF3E79;\r\n$pagination: #B5B6BC;\r\n$body: #F8F8F8;\r\n$line:#D9FFF5;\r\n\r\n\r\n\r\n",".header{\r\n    border-bottom: solid #D9FFF5;\r\n    background-color: var(--white-color);\r\n    margin-bottom: 1.5rem;\r\n    width: 100vw;\r\n    margin-left: calc(50% - 50vw);\r\n\r\n\r\n    &__inner {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-items: center;\r\n        padding-top: 1rem;\r\n        padding-bottom: 1rem;\r\n    }\r\n\r\n    &__logo{\r\n        position: relative;\r\n\r\n        &::after{\r\n            content: \"\";\r\n            position: absolute;\r\n            border-right: solid $border;\r\n            top: 0.6rem;\r\n            right: -0.9rem;\r\n            height: 1.9rem;\r\n        }\r\n    }\r\n\r\n\r\n    &__buttons{\r\n        display: flex;\r\n    }\r\n\r\n    &__btn-phone,\r\n    &__btn-chat ,\r\n    &__user{\r\n        display: none;\r\n    }   \r\n\r\n    &__btn-repair {\r\n        padding-right: 1rem;\r\n    \r\n    }\r\n\r\n}\r\n.burger{\r\n    display: none;\r\n}",".burger{\r\n    padding: 0 1.9rem;\r\n    display: none;\r\n}\r\n\r\n.active{\r\n    width: 100%;\r\n    height: 100%;\r\n    display: block;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    -webkit-backdrop-filter: blur(0.25rem);\r\n    backdrop-filter: blur(0.25rem);\r\n    z-index: 2;\r\n}\r\n.burger__menu{\r\n    width: 21rem;\r\n    position: absolute;\r\n    left: 0.1rem;\r\n    padding-left: 1.8rem;\r\n    padding-top: 1.1rem;\r\n    background-color: var(--white-color);\r\n     box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2); \r\n}\r\n.burger__overlay-inner{\r\n    display: flex;\r\n    margin-bottom: 2.3rem;\r\n}\r\n.burger__btn{\r\n    padding-right: 1rem;\r\n}\r\n.burger__logo{\r\n    padding-right: 5rem;\r\n}\r\n.burger__navigation{\r\n    margin-bottom: 15rem;\r\n}\r\n.burger__list-item{\r\n    padding-bottom: 1.8rem;\r\n}\r\n.burger__list-item:hover{\r\n    transition: 0.5s;\r\n    color: var(--nav-text-color);\r\n}\r\n.burger__buttons{\r\n    display: flex;\r\n    gap: 1rem;\r\n    margin-bottom: 1.1rem;\r\n}\r\n.burger__mail{\r\n    display: block;\r\n    margin-bottom: 0.8rem;\r\n    font-family: 'TT Lakes';\r\n    font-size: 1rem;\r\n}\r\n.burger__tel{\r\n    font-family: 'TT Lakes';\r\n    font-size: 1.5rem;\r\n    display: block;\r\n    margin-bottom: 2.6rem;\r\n}\r\n.burger__radio {\r\n    padding-left: 0;\r\n    padding-right: 0.4rem;\r\n    cursor: pointer;\r\n}\r\n.burger__radio:hover{\r\n    color: var(--nav-text-color);\r\n}\r\n.burger__radio:active{\r\n    color: var(--nav-text-color);\r\n}\r\n.burger__radio:focus{\r\n    border: solid var(--pink-color);\r\n}\r\n.burger__radio:disabled{\r\n    color: var(--black-color);\r\n}",".services{\r\n\r\n    &__inner{\r\n        margin-bottom: 1.5rem;\r\n    }\r\n    &__title {\r\n        font-family: 'TT Lakes';\r\n        font-size: 1.75rem;\r\n        line-height: 2.5rem;\r\n        margin-bottom: 1.5rem;\r\n        position: relative;\r\n\r\n        &::before{\r\n            content: \"\";\r\n            position: absolute;\r\n            width: 0.25rem;\r\n            height: 2.5rem;\r\n            left: -0.9rem;\r\n            background: #41F6D7;\r\n            border-radius: 1px;\r\n        }\r\n    }\r\n\r\n    &__buttons{\r\n        display: none;\r\n    }\r\n    &__menu {\r\n        display: flex;\r\n        overflow-y: hidden;\r\n    }\r\n    &__item {\r\n        white-space: nowrap;\r\n        display: block;\r\n        padding: 0.5rem 1rem;\r\n        font-family: \"TT Lakes\";\r\n        font-size: 1rem;\r\n        color: var(--nav-text-color);\r\n        transition: 0.3s;\r\n        border-radius: 6px;\r\n        border: solid transparent;\r\n    }\r\n    &__item:hover,\r\n    &__item:focus,\r\n    &__item:active{\r\n        transition: 0.3s;\r\n        background-color: var(--white-color);\r\n        border: solid #D9FFF5;\r\n        border-radius: 6px;\r\n        transition: 0.5s;\r\n    }\r\n}\r\n\r\n",".about{\r\n    &__inner{\r\n        margin-bottom: 2.5rem;\r\n    }\r\n    &__text {\r\n        font-family: 'TT Lakes';\r\n        font-size: 0.9rem;\r\n        line-height: 1.2rem;\r\n        margin-bottom: 1rem;\r\n    }\r\n    \r\n    &__btn {\r\n        font-family: 'TT Lakes';\r\n        font-size: 1rem;\r\n        margin-bottom: 1rem;\r\n        position: relative;\r\n        padding-left: 2rem;\r\n        border: solid transparent;\r\n\r\n        &::before{\r\n            content: \"«\";\r\n            position: absolute;\r\n            font-size: 1.6rem;\r\n            transform: rotate(0.75turn);\r\n            left: 0;\r\n            top: -0.3rem;\r\n            color: #41f6d7;\r\n        }\r\n    }\r\n    &__img {\r\n        border-radius: 5px;\r\n        width: 20rem;\r\n        height: 11rem;\r\n    }\r\n}\r\n.span-tab,\r\n.span-desctop {\r\n    display: none;\r\n}",".brends{\r\n    margin-bottom: 1.5rem;\r\n\r\n    &__title-container{\r\n        border-top: solid $line;\r\n        height: 5rem;\r\n        width: 100vw;\r\n        margin-left: calc(50% - 50vw);\r\n        background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\r\n        margin-bottom: 2rem;\r\n    }\r\n\r\n    &__title{\r\n        font-family: 'TT Lakes';\r\n        font-size: 1rem;\r\n        line-height: 1.5rem;\r\n        text-transform: uppercase;\r\n        color: $text;\r\n        padding: 1rem;\r\n    }\r\n\r\n    &__slider{\r\n        position: relative;\r\n\r\n        &::after{\r\n            content: \"\";\r\n            position: absolute;\r\n            top: -0.75rem;\r\n            left: 16rem;\r\n            z-index: 5;\r\n            width: 2rem;\r\n            height: 5.8rem;\r\n            background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\r\n            }\r\n    }\r\n\r\n   div &__slide{\r\n        display: flex;\r\n        max-width: 13rem;\r\n        border-radius: 5px;\r\n        padding: 1rem 1rem;\r\n        border: solid $border;\r\n        margin-bottom: 2rem;\r\n        background-color: $white;\r\n    }\r\n\r\n    &__slide-lenovo,\r\n    &__slide-Samsung{\r\n        padding-right: 1rem;\r\n        width: 100%;\r\n        max-width: 6.8rem;\r\n    }\r\n\r\n    &__slide-Apple,\r\n    &__slide-Hp{\r\n        padding-right: 5rem;\r\n        width: 3.25rem;\r\n    }\r\n\r\n    &__slide-Acer{\r\n        padding-right: 2rem;\r\n        width: 6rem;\r\n    }\r\n\r\n    &__slide-Bosch{\r\n        width: 8rem;\r\n    }\r\n\r\n    &__slide-btn-bosch{\r\n        margin-left: 0;\r\n    }\r\n\r\n    &__slide-btn{\r\n        position: relative;\r\n        width: 2.5rem;\r\n        height: 2.5rem;\r\n        border-radius: 100%;\r\n        border: solid $pink;\r\n        margin-left: 2rem;\r\n\r\n        &::after{\r\n            content: \"\";\r\n            position: absolute;\r\n            display: block;\r\n            top: 1rem;\r\n            left: 1rem;\r\n            border: solid 2px #FF3E79;\r\n            border-radius: 7px;\r\n            background-color: #FF3E79;\r\n            width: 0.5rem;\r\n            -webkit-transform: rotate(45deg);\r\n            transform: rotate(45deg);\r\n        }\r\n        &::before{\r\n            content: \"\";\r\n            position: absolute;\r\n            display: block;\r\n            top: 1.4rem;\r\n            left: 1rem;\r\n            border: solid 2px #FF3E79;\r\n            border-radius: 7px;\r\n            background-color: #FF3E79;\r\n            width: 0.5rem;\r\n            -webkit-transform: rotate(130deg);\r\n            transform: rotate(130deg);\r\n        }\r\n    }\r\n}\r\n.swiper-pagination-bullet{\r\n    min-width: 0.60rem;\r\n}\r\ndiv .swiper-pagination-bullet-active{\r\n    background: $pagination;\r\n}",".repair{\r\n    &__title-container{\r\n        border-top: solid $line;\r\n        height: 5rem;\r\n        width: 100vw;\r\n        margin-left: calc(50% - 50vw);\r\n        background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\r\n        margin-bottom: 2rem;\r\n    }\r\n\r\n    &__title{\r\n        font-family: 'TT Lakes';\r\n        font-size: 1rem;\r\n        line-height: 1.5rem;\r\n        text-transform: uppercase;\r\n        color: $text;\r\n        padding: 1rem;\r\n    }\r\n\r\n    \r\n    &__slider{\r\n        position: relative;\r\n\r\n        &::after{\r\n            content: \"\";\r\n            position: absolute;\r\n            top: -0.75rem;\r\n            left: 16rem;\r\n            z-index: 5;\r\n            width: 2rem;\r\n            height: 11.8rem;\r\n            background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\r\n            }\r\n    }\r\n\r\n    div &__slide{\r\n        display: flex;\r\n        flex-direction: column;\r\n        width: 15rem;\r\n        height: 10rem;\r\n        border: solid $border;\r\n        border-radius: 0.4rem;\r\n        background-color: $white;\r\n        position: relative;\r\n        margin-bottom: 2rem;\r\n    }\r\n\r\n    &__slide-text{\r\n        padding-top: 1rem;\r\n        padding-left: 1rem;\r\n    }\r\n\r\n    &__slide-btn{\r\n        position: absolute;\r\n        bottom: 1rem;\r\n        right: 1rem;\r\n    }\r\n}",".price{\r\n    &__title-container{\r\n        border-top: solid $line;\r\n        height: 5rem;\r\n        width: 100vw;\r\n        margin-left: calc(50% - 50vw);\r\n        background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\r\n        margin-bottom: 2rem;\r\n    }\r\n\r\n    &__title{\r\n        font-family: 'TT Lakes';\r\n        font-size: 1rem;\r\n        line-height: 1.5rem;\r\n        text-transform: uppercase;\r\n        color: $text;\r\n        padding: 1rem;\r\n    }\r\n\r\n    \r\n    &__slider{\r\n        position: relative;\r\n\r\n        &::after{\r\n            content: \"\";\r\n            position: absolute;\r\n            top: -0.75rem;\r\n            left: 16rem;\r\n            z-index: 5;\r\n            width: 2rem;\r\n            height: 13.8rem;\r\n            background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\r\n            }\r\n    }\r\n\r\n    div &__slide{\r\n        display: flex;\r\n        align-items: flex-end;\r\n        flex-direction: column;\r\n        width: 16.3rem;\r\n        height: 12.5rem;\r\n        border: solid $border;\r\n        border-radius: 0.4rem;\r\n        background-color: $white;\r\n        position: relative;\r\n        margin-bottom: 2rem;\r\n    }\r\n\r\n    &__slide-content{\r\n        padding-top: 1rem;\r\n        padding-left: 1rem;\r\n    }\r\n\r\n    &__slide-text{\r\n        padding-top: 1rem;\r\n        padding-left: 1rem;\r\n    }\r\n\r\n    &__slide-title{\r\n        font-family: 'TT Lakes';\r\n        font-size: 0.9rem;\r\n        line-height: 1rem;\r\n        color: $text;\r\n        padding-bottom: 0.25rem;\r\n    }\r\n\r\n    &__slide-lining{\r\n        font-family: 'TT Lakes';\r\n        font-size: 0.9rem;\r\n        line-height: 1.1rem;\r\n        padding-bottom: 1rem;\r\n    }\r\n\r\n    &__slide-btn{\r\n        font-family: 'TT Lakes';\r\n        font-size: 1rem;\r\n        line-height: 1.5rem;\r\n        color: $white;\r\n        width: 4rem;\r\n        height: 1.5rem;\r\n        padding: 0.25rem 2.5rem 0.25rem 0.8rem;\r\n        background: $pink;\r\n        border-radius: 1rem;\r\n        position: relative;\r\n        margin-top: -3rem;\r\n        margin-right: 1rem;\r\n\r\n        &::after{\r\n            content: \"\";\r\n            position: absolute;\r\n            display: block;\r\n            top: 0.8rem;\r\n            right: 0.7rem;\r\n            border: solid 2px $white;\r\n            border-radius: 7px;\r\n            background-color: $white;\r\n            width: 0.4rem;\r\n            -webkit-transform: rotate(45deg);\r\n            transform: rotate(45deg);\r\n        }\r\n        &::before{\r\n            content: \"\";\r\n            position: absolute;\r\n            display: block;\r\n            top: 1.1rem;\r\n            right: 0.7rem;\r\n            border: solid 2px $white;\r\n            border-radius: 7px;\r\n            background-color: $white;\r\n            width: 0.4rem;\r\n            -webkit-transform: rotate(130deg);\r\n            transform: rotate(130deg);\r\n        }\r\n    }\r\n\r\n    &__info{\r\n        margin-top: 1rem;\r\n    }\r\n\r\n    &__info-text{    \r\n    font-family: 'TT Lakes';\r\n    font-size: 14px;\r\n    line-height: 20px;\r\n    margin-bottom: 1rem;\r\n    }\r\n\r\n    &__info-link{\r\n        position: relative;\r\n        &::after{\r\n            content: \"\";\r\n            position: absolute;\r\n            display: block;\r\n            top: 1.8rem;\r\n            right: -1.3rem;\r\n            border: solid 1px $pink;\r\n            border-radius: 7px;\r\n            background-color: $pink;\r\n            width: 0.5rem;\r\n            -webkit-transform: rotate(45deg);\r\n            transform: rotate(45deg);\r\n        }\r\n        &::before{\r\n            content: \"\";\r\n            position: absolute;\r\n            display: block;\r\n            top: 2.1rem;\r\n            right: -1.3rem;\r\n            border: solid 1px $pink;\r\n            border-radius: 7px;\r\n            background-color: $pink;\r\n            width: 0.5rem;\r\n            -webkit-transform: rotate(130deg);\r\n            transform: rotate(130deg);\r\n        }\r\n    }\r\n\r\n    &__info-link{\r\n        font-family: 'TT Lakes';\r\n        font-size: 16px;\r\n        line-height: 24px;\r\n        text-transform: uppercase;\r\n    }\r\n}",".footer{\r\n    display: flex;\r\n    flex-direction: column;\r\n    text-align: center;\r\n    opacity: 0.72;\r\n    width: 100vw;\r\n    margin-left: calc(50% - 50vw);\r\n    border-top: solid $line;\r\n    margin-top: 2.5rem;\r\n\r\n    &__content{\r\n        font-family: 'TT Lakes';\r\n        font-size: 1rem;\r\n        line-height: 1rem;\r\n        color: $text;\r\n        mix-blend-mode: normal;\r\n        margin-top: 1rem;\r\n        padding-bottom: 1rem;\r\n    }\r\n}",null,"@media(min-width: 47.5rem){\r\n    .header__btn-phone,\r\n    .header__btn-chat ,\r\n    .header__user{\r\n    display: block;\r\n    }\r\n    .header__inner{\r\n        justify-content: flex-start;\r\n    }\r\n    .header__logo{\r\n        padding-left: 3rem;\r\n    }\r\n    .header__buttons{\r\n        padding-left: 16rem;\r\n        gap: 1rem;\r\n    }\r\n    .header__btn-repair{\r\n        padding-right: 0;\r\n        padding-left: 1rem;\r\n    }\r\n    .header__btn--border{\r\n        position: relative;\r\n    }\r\n    .header__btn--border::after{\r\n        content: \"\";\r\n        position: absolute;\r\n        border-right: solid var(--border-gray-color);\r\n        bottom: 0.2rem;\r\n        right: -1rem;\r\n        height: 1.9rem;\r\n    }\r\n    .header__logo::after {\r\n        display: none;\r\n    }\r\n    .header__logo::before {\r\n        content: \"\";\r\n        position: absolute;\r\n        border-right: solid var(--border-gray-color);\r\n        top: 0.6rem;\r\n        left: 1.4rem;\r\n        height: 1.9rem;\r\n    }\r\n    .about__inner{\r\n        display: flex;\r\n        gap: 3.1rem;\r\n    }\r\n    .span-tab{\r\n        display: block;\r\n    }\r\n    .about__img{\r\n        width: 100%;\r\n        min-width: 22.5rem;\r\n        height: 13rem;\r\n    }\r\n    \r\n}\r\n@media(min-width: 69rem){\r\n    .header{\r\n        display: none;\r\n    }\r\n    .services__inner{\r\n        margin-top: 2.6rem;\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        margin-bottom: 1.2rem;\r\n    }\r\n    .services__menu{\r\n        flex-wrap: wrap;\r\n        gap: 1.2rem;\r\n    }\r\n    .services__buttons{\r\n        display: block;\r\n        display: flex;\r\n        align-items: center;\r\n        padding-left: 32rem;\r\n        gap: 2rem;\r\n    }\r\n    .services__buttons-item{\r\n        display: flex;\r\n        align-items: center;\r\n        gap: 0.5rem;\r\n    }\r\n    .span-desctop{\r\n        display: block;\r\n    }\r\n    .about__img{\r\n        width: 100%;\r\n        min-width: 33.25rem;\r\n        height: 19.2rem;\r\n    }\r\n}\r\n@media(min-width: 90rem) and (max-width: 256rem){\r\n    .container {\r\n        transform: translate(10rem, 0.6rem);\r\n      }\r\n      .burger{\r\n        height: 100vh;\r\n        display: block;\r\n        position: absolute;\r\n        left: -362px;\r\n        top: -50px;\r\n        backdrop-filter: none;\r\n      }\r\n      .burger__menu{\r\n        box-shadow: none;\r\n        padding-top: 3rem;\r\n        padding-left: 3rem;\r\n        width: 20.7rem;\r\n        left: 2rem;\r\n      }\r\n      .burger__btn{\r\n        display: none;\r\n      }\r\n      .burger__logo{\r\n        padding-right: 7.4rem;\r\n      }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"TT Lakes\";\n  font-weight: normal;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"woff\");\n}\n@font-face {\n  font-family: \"TT Lakes\";\n  font-weight: 500;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") format(\"woff\");\n}\n@font-face {\n  font-family: \"TT Lakes\";\n  font-weight: bold;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ") format(\"woff\");\n}\n.container {\n  max-width: 72rem;\n  padding: 0 1rem;\n  margin: 0 auto;\n  position: relative;\n  overflow: hidden;\n}\n\n.site-wrapper {\n  max-width: 92rem;\n  margin: 0 auto;\n}\n\n.btn-reset {\n  border: none;\n  outline: none;\n  background-color: transparent;\n  cursor: pointer;\n  padding: 0;\n}\n\na {\n  outline: none;\n}\n\ninput[type=radio] {\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n}\n\n.btn-on {\n  display: block;\n}\n\n.btn-close {\n  display: none;\n}\n\n.burger-close {\n  display: none;\n}\n\n.body-overflow {\n  overflow: hidden;\n}\n\ndiv .swiper-wrapper {\n  overflow: visible;\n}\n\ndiv > div.btn-slides-none {\n  display: none;\n}\n\ndiv > div.btn-slides-block {\n  max-height: none;\n  max-height: initial;\n}\n\n:focus {\n  box-shadow: 0 0 3px rgba(0, 0, 0, 0.75);\n}\n\nhtml {\n  box-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: inherit;\n}\n\nbody {\n  font-family: \"SFProDisplay\", sans-serif;\n  margin: 0;\n  background-color: #F8F8F8;\n}\n\nh1, h2, h3, h4, h5, h6 {\n  margin: 0;\n  padding: 0;\n}\n\np {\n  margin: 0;\n  padding: 0;\n}\n\nul, ol, menu {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\na {\n  color: inherit;\n  -webkit-text-decoration: none;\n  text-decoration: none;\n}\n\nimg {\n  max-width: 100%;\n}\n\n.header__position {\n  border-bottom: solid #D9FFF5;\n  background-color: #fff;\n  margin-bottom: 1.5rem;\n  width: 100vw;\n}\n.header__inner {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n.header__logo {\n  position: relative;\n}\n.header__logo::after {\n  content: \"\";\n  position: absolute;\n  border-right: solid #EAEAEA;\n  top: 0.6rem;\n  right: -0.9rem;\n  height: 1.9rem;\n}\n.header__buttons {\n  display: flex;\n}\n.header__btn-call, .header__btn-message, .header__users {\n  display: none;\n}\n.header__btn-mail {\n  margin-right: 1rem;\n}\n.header__burger--active:focus, .header__burger--active:active {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n}\n.header__btn-call--active:active, .header__btn-call--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n}\n.header__btn-chat--active:active, .header__btn-chat--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n}\n.header__user--active:active, .header__user--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n}\n.header__btn-mail--active:active, .header__btn-mail--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n}\n.header__btn-status--active:active, .header__btn-status--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n}\n\n.burger {\n  max-width: 20rem;\n}\n.burger__menu {\n  width: 100%;\n  height: 100%;\n  display: block;\n  position: fixed;\n  top: 0;\n  left: 0;\n  -webkit-backdrop-filter: blur(0.25rem);\n  backdrop-filter: blur(0.25rem);\n  z-index: 2;\n  display: none;\n  transition: -webkit-transform 1s;\n  transition: transform 1s;\n  transition: transform 1s, -webkit-transform 1s;\n  overflow-y: scroll;\n}\n.burger__menu.active {\n  display: block;\n}\n.burger__overlay {\n  position: absolute;\n  left: 0.1rem;\n  min-height: 100vh;\n  padding-left: 1.8rem;\n  padding-top: 1.1rem;\n  background-color: #fff;\n  box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2);\n}\n.burger__overlay-inner {\n  display: flex;\n  margin-bottom: 2.3rem;\n  align-items: center;\n}\n.burger__btn {\n  margin-right: 1rem;\n}\n.burger__logo {\n  padding-right: 4rem;\n}\n.burger__btn-search {\n  margin-right: 1rem;\n}\n.burger__navigation {\n  margin-bottom: 2rem;\n}\n.burger__list li:nth-child(3) {\n  position: relative;\n}\n.burger__list li:nth-child(3)::before {\n  content: \"\";\n  position: absolute;\n  width: 0.25rem;\n  height: 1.5rem;\n  left: -1.8rem;\n  background: #41f6d7;\n  border-radius: 1px;\n}\n.burger__list-item {\n  margin-bottom: 1.8rem;\n}\n.burger__link--active:hover, .burger__link--active:focus, .burger__link--active:active {\n  transition: 0.5s;\n  color: #B5B6BC;\n}\n.burger__buttons {\n  display: flex;\n  gap: 1rem;\n  margin-bottom: 1.1rem;\n}\n.burger__mail {\n  display: block;\n  margin-bottom: 0.8rem;\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n}\n.burger__tel {\n  font-family: \"TT Lakes\";\n  font-size: 1.5rem;\n  display: block;\n  margin-bottom: 2.6rem;\n}\n.burger__radio {\n  padding-left: 0;\n  padding-right: 0.4rem;\n  cursor: pointer;\n}\n.burger__radio:hover {\n  color: #B5B6BC;\n}\n.burger__radio:active {\n  color: #B5B6BC;\n}\n.burger__radio:focus {\n  border: solid #FF3E79;\n}\n.burger__radio:disabled {\n  color: rgb(41, 41, 9);\n}\n.burger__btn--active:active, .burger__btn--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n  padding: 0;\n}\n.burger__btn-search--active:active, .burger__btn-search--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n  padding: 0;\n}\n.burger__button-tel--active:active, .burger__button-tel--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n  padding: 0;\n}\n.burger__button-chat--active:active, .burger__button-chat--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n  padding: 0;\n}\n\n.services__inner {\n  margin-bottom: 1.5rem;\n}\n.services__title {\n  font-family: \"TT Lakes\";\n  font-size: 1.75rem;\n  line-height: 2.5rem;\n  margin-bottom: 1.5rem;\n  position: relative;\n}\n.services__title::before {\n  content: \"\";\n  position: absolute;\n  width: 0.25rem;\n  height: 2.5rem;\n  left: -0.9rem;\n  background: #41f6d7;\n  border-radius: 1px;\n}\n.services__buttons {\n  display: none;\n}\n.services__menu {\n  display: flex;\n  overflow-y: hidden;\n}\n.services__item {\n  white-space: nowrap;\n  display: block;\n  padding: 0.5rem 1rem;\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  color: #B5B6BC;\n  transition: 0.3s;\n  border-radius: 6px;\n  border: solid transparent;\n}\n.services__item--active:hover, .services__item--active:focus, .services__item--active:active {\n  transition: 0.3s;\n  background-color: #fff;\n  border: solid #D9FFF5;\n  border-radius: 6px;\n  transition: 0.5s;\n}\n\n.about__inner {\n  margin-bottom: 2.5rem;\n}\n.about__text {\n  font-family: \"TT Lakes\";\n  font-size: 0.9rem;\n  line-height: 1.2rem;\n  letter-spacing: 0.012rem;\n  margin-bottom: 1rem;\n  color: #1B1C21;\n}\n.about__btn-on {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  margin-bottom: 1rem;\n  position: relative;\n  padding-left: 2rem;\n  border: solid transparent;\n}\n.about__btn-on::before {\n  content: \"«\";\n  position: absolute;\n  font-size: 1.6rem;\n  -webkit-transform: rotate(0.75turn);\n          transform: rotate(0.75turn);\n  left: 0;\n  top: -0.3rem;\n  color: #41f6d7;\n}\n.about__btn-close {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  margin-bottom: 1rem;\n  position: relative;\n  padding-left: 2rem;\n  border: solid transparent;\n}\n.about__btn-close::before {\n  content: \"«\";\n  position: absolute;\n  font-size: 1.6rem;\n  -webkit-transform: rotate(0.25turn);\n          transform: rotate(0.25turn);\n  left: 0;\n  top: -0.3rem;\n  color: #41f6d7;\n}\n.about__img {\n  border-radius: 5px;\n  max-width: 100%;\n  max-height: auto;\n}\n\n.brends {\n  margin-bottom: 1.5rem;\n}\n.brends__title-container {\n  border-top: solid #D9FFF5;\n  height: 5rem;\n  background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\n  margin-bottom: 2rem;\n  width: 100vw;\n}\n.brends__title {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  text-transform: uppercase;\n  color: #B5B6BC;\n  padding: 1rem;\n}\ndiv .brends__slide {\n  display: flex;\n  max-width: 13rem;\n  border-radius: 5px;\n  padding: 1rem 1rem;\n  border: solid #EAEAEA;\n  margin-bottom: 2rem;\n  background-color: #fff;\n}\n.brends__slide-lenovo, .brends__slide-Samsung {\n  padding-right: 2.5rem;\n  width: 100%;\n  max-width: 6.8rem;\n}\n.brends__slide-Apple, .brends__slide-Hp {\n  padding-right: 6rem;\n  width: 3.25rem;\n}\n.brends__slide-Acer {\n  padding-right: 3.3rem;\n  width: 6rem;\n}\n.brends__slide-Bosch {\n  width: 8rem;\n  padding-right: 1.3rem;\n}\n.brends__slide-ViewSonic, .brends__slide-Sony {\n  padding-right: 1.3rem;\n}\n.brends__btn-onclick {\n  display: none;\n}\n.brends__btn-on {\n  position: relative;\n  font-family: \"TT Lakes\";\n  font-style: normal;\n  font-weight: 500;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  padding-top: 1.5rem;\n  padding-left: 2rem;\n}\n.brends__btn-on::before {\n  content: \"«\";\n  position: absolute;\n  font-size: 1.6rem;\n  -webkit-transform: rotate(0.75turn);\n  transform: rotate(0.75turn);\n  left: 0.2rem;\n  color: #41f6d7;\n}\n.brends__btn-of {\n  position: relative;\n  font-family: \"TT Lakes\";\n  font-style: normal;\n  font-weight: 500;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  padding-top: 1.5rem;\n  padding-left: 2rem;\n}\n.brends__btn-of::before {\n  content: \"«\";\n  position: absolute;\n  font-size: 1.6rem;\n  -webkit-transform: rotate(0.25turn);\n  transform: rotate(0.25turn);\n  left: 0.2rem;\n  color: #41f6d7;\n}\n\n.swiper-pagination-bullet {\n  min-width: 0.6rem;\n}\n\ndiv .swiper-pagination-bullet-active {\n  background: #B5B6BC;\n}\n\n.repair__title-container {\n  border-top: solid #D9FFF5;\n  height: 5rem;\n  background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\n  margin-bottom: 2rem;\n  width: 100vw;\n}\n.repair__title {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  text-transform: uppercase;\n  color: #B5B6BC;\n  padding: 1rem;\n}\ndiv .repair__slide {\n  display: flex;\n  flex-direction: column;\n  width: 13rem;\n  height: 10rem;\n  border: solid #EAEAEA;\n  border-radius: 0.4rem;\n  background-color: #fff;\n  position: relative;\n  margin-bottom: 2rem;\n}\n.repair__slide-text {\n  padding-top: 1rem;\n  padding-left: 1rem;\n}\n.repair__slide-btn {\n  position: absolute;\n  bottom: 1rem;\n  right: 1rem;\n}\n.repair__btn-onclick {\n  display: none;\n}\n.repair__slide-on {\n  position: relative;\n  font-family: \"TT Lakes\";\n  font-style: normal;\n  font-weight: 500;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  padding-top: 1.5rem;\n  padding-left: 2rem;\n}\n.repair__slide-on::before {\n  content: \"«\";\n  position: absolute;\n  font-size: 1.6rem;\n  -webkit-transform: rotate(0.75turn);\n  transform: rotate(0.75turn);\n  left: 0.2rem;\n  color: #41f6d7;\n}\n.repair__slide-of {\n  position: relative;\n  font-family: \"TT Lakes\";\n  font-style: normal;\n  font-weight: 500;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  padding-top: 1.5rem;\n  padding-left: 2rem;\n}\n.repair__slide-of::before {\n  content: \"«\";\n  position: absolute;\n  font-size: 1.6rem;\n  -webkit-transform: rotate(0.25turn);\n  transform: rotate(0.25turn);\n  left: 0.2rem;\n  color: #41f6d7;\n}\n\n.swiper-wrapper {\n  overflow: hidden;\n}\n\n.price__title-container {\n  border-top: solid #D9FFF5;\n  height: 5rem;\n  background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\n  margin-top: 2rem;\n  margin-bottom: 2rem;\n  width: 100vw;\n}\n.price__title {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  text-transform: uppercase;\n  color: #B5B6BC;\n  padding: 1rem;\n}\ndiv .price__slide {\n  width: 16.3rem;\n  height: 12.5rem;\n  border: solid #EAEAEA;\n  border-radius: 0.4rem;\n  background-color: #fff;\n  position: relative;\n  margin-bottom: 2rem;\n}\n.price__slide-content {\n  padding-top: 1rem;\n  padding-left: 1rem;\n  max-width: 16.25rem;\n}\n.price__slide-text {\n  padding-top: 1rem;\n  padding-left: 1rem;\n}\n.price__slide-title {\n  font-family: \"TT Lakes\";\n  font-size: 0.9rem;\n  line-height: 1rem;\n  color: #B5B6BC;\n  padding-bottom: 0.25rem;\n}\n.price__slide-lining {\n  font-family: \"TT Lakes\";\n  font-size: 0.9rem;\n  line-height: 1.1rem;\n  padding-bottom: 1rem;\n}\n.price__slide-btn {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  color: #fff;\n  width: 4rem;\n  height: 1.5rem;\n  padding: 0.25rem 2.5rem 0.25rem 0.8rem;\n  background: #FF3E79;\n  border-radius: 1rem;\n  position: relative;\n  float: right;\n  margin-top: -3rem;\n  margin-right: 1rem;\n}\n.price__slide-btn::after {\n  content: \"\";\n  position: absolute;\n  display: block;\n  top: 0.8rem;\n  right: 0.7rem;\n  border: solid 2px #fff;\n  border-radius: 7px;\n  background-color: #fff;\n  width: 0.4rem;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.price__slide-btn::before {\n  content: \"\";\n  position: absolute;\n  display: block;\n  top: 1.1rem;\n  right: 0.7rem;\n  border: solid 2px #fff;\n  border-radius: 7px;\n  background-color: #fff;\n  width: 0.4rem;\n  -webkit-transform: rotate(130deg);\n  transform: rotate(130deg);\n}\n.price__info {\n  margin-top: 1rem;\n  max-width: 26rem;\n}\n.price__info-text {\n  font-family: \"TT Lakes\";\n  font-size: 0.9rem;\n  line-height: 1.25rem;\n  margin-bottom: 1rem;\n}\n.price__info-link {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  text-transform: uppercase;\n  padding-right: 1rem;\n}\n.price__title-desctop {\n  display: none;\n}\n\n.footer {\n  display: flex;\n  flex-direction: column;\n  text-align: center;\n  opacity: 0.72;\n  border-top: solid #D9FFF5;\n  margin-top: 2.5rem;\n  width: 100vw;\n}\n.footer__content {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1rem;\n  color: #B5B6BC;\n  mix-blend-mode: normal;\n  margin-top: 1rem;\n  padding-bottom: 1rem;\n}\n\n.modal-form__overlay {\n  padding-right: 257px;\n  gap: 0;\n  margin-left: 0;\n  justify-content: flex-end;\n  display: flex;\n}\n.modal-form__close {\n  width: 2.5rem;\n  height: 2.5rem;\n  margin-top: 1.5rem;\n  z-index: 1;\n}\n.modal-form__inner {\n  max-width: 20rem;\n  padding-top: 6.5rem;\n  min-height: 100vh;\n  position: absolute;\n  right: 0;\n  padding-right: 2rem;\n  padding-left: 2rem;\n  background-color: #fff;\n  box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2);\n}\n.modal-form__menu {\n  width: 100%;\n  height: 100%;\n  display: block;\n  position: fixed;\n  top: 0;\n  right: 0;\n  -webkit-backdrop-filter: blur(0.25rem);\n  backdrop-filter: blur(0.25rem);\n  z-index: 2;\n  display: none;\n  overflow-y: scroll;\n}\n.modal-form__menu.active {\n  display: block;\n}\n.modal-form__title {\n  font-family: \"TT Lakes\";\n  font-size: 1.5rem;\n  line-height: 2rem;\n  letter-spacing: -0.6px;\n}\n.modal-form__call {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  margin-bottom: 1rem;\n}\n.modal-form__input {\n  width: 16rem;\n  height: 3rem;\n  padding: 0.8rem 1rem;\n  border: 1px solid #EAEAEA;\n  border-radius: 8px;\n}\n.modal-form__input[type] {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  color: #B5B6BC;\n}\n.modal-form__textarea {\n  width: 16rem;\n  height: 7.4rem;\n  padding: 0.8rem 1rem;\n  border: 1px solid #EAEAEA;\n  border-radius: 8px;\n}\n.modal-form__textarea::-webkit-input-placeholder {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  color: #B5B6BC;\n}\n.modal-form__textarea::placeholder {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  color: #B5B6BC;\n}\n.modal-form__text {\n  font-family: \"TT Lakes\";\n  font-size: 0.9rem;\n  line-height: 1rem;\n  color: #B5B6BC;\n  margin-bottom: 3.4rem;\n}\n.modal-form__text span {\n  color: #FF3E79;\n}\n.modal-form__btn {\n  font-family: \"TT Lakes\";\n  font-size: 0.8rem;\n  line-height: 1.5rem;\n  color: #fff;\n  width: 9rem;\n  height: 2rem;\n  padding: 0.25rem 2.5rem 0.25rem 0.8rem;\n  background: #FF3E79;\n  border-radius: 1rem;\n  float: right;\n  text-transform: uppercase;\n  display: flex;\n}\n.modal-form__close--active:active, .modal-form__close--active:focus {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n}\n\n.modal-caller__overlay {\n  padding-right: 257px;\n  gap: 0;\n  margin-left: 0;\n  justify-content: flex-end;\n  display: flex;\n}\n.modal-caller__close {\n  width: 2.5rem;\n  height: 2.5rem;\n  margin-top: 1.5rem;\n  z-index: 1;\n}\n.modal-caller__inner {\n  max-width: 20rem;\n  padding-top: 6.5rem;\n  min-height: 100vh;\n  position: absolute;\n  right: 0;\n  padding-right: 2rem;\n  padding-left: 2rem;\n  background-color: #fff;\n  box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2);\n}\n.modal-caller__menu {\n  width: 100%;\n  height: 100%;\n  display: block;\n  position: fixed;\n  top: 0;\n  right: 0;\n  -webkit-backdrop-filter: blur(0.25rem);\n  backdrop-filter: blur(0.25rem);\n  z-index: 2;\n  display: none;\n  overflow-y: scroll;\n}\n.modal-caller__menu.active {\n  display: block;\n}\n.modal-caller__title {\n  font-family: \"TT Lakes\";\n  font-size: 1.5rem;\n  line-height: 2rem;\n  letter-spacing: -0.6px;\n}\n.modal-caller__call {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  margin-bottom: 1rem;\n}\n.modal-caller__input {\n  width: 16rem;\n  height: 3rem;\n  padding: 0.8rem 1rem;\n  border: 1px solid #EAEAEA;\n  border-radius: 8px;\n}\n.modal-caller__input[type] {\n  font-family: \"TT Lakes\";\n  font-size: 1rem;\n  line-height: 1.5rem;\n  color: #B5B6BC;\n}\n.modal-caller__text {\n  font-family: \"TT Lakes\";\n  font-size: 0.9rem;\n  line-height: 1rem;\n  color: #B5B6BC;\n  margin-bottom: 3.4rem;\n}\n.modal-caller__text span {\n  color: #FF3E79;\n}\n.modal-caller__btn {\n  font-family: \"TT Lakes\";\n  font-size: 0.8rem;\n  line-height: 1.5rem;\n  color: #fff;\n  width: 9rem;\n  height: 2rem;\n  padding: 0.25rem 2.5rem 0.25rem 0.8rem;\n  background: #FF3E79;\n  border-radius: 1rem;\n  float: right;\n  text-transform: uppercase;\n  display: flex;\n}\n.modal-caller__close--active {\n  width: 2.5rem;\n  height: 2.5rem;\n  border: solid #FF3E79;\n  border-radius: 50%;\n}\n@media (min-width: 47.5rem){\n  .header__logo {\n    margin-left: -12.5rem;\n  }\n  .header__logo::after {\n    display: none;\n  }\n  .header__logo::before {\n    content: \"\";\n    position: absolute;\n    border-right: solid #EAEAEA;\n    top: 0.6rem;\n    right: 7.5rem;\n    height: 1.9rem;\n  }\n  .header__btn-call, .header__btn-message, .header__users {\n    display: block;\n    margin-left: 1rem;\n  }\n  .header__btn--border {\n    position: relative;\n  }\n  .header__btn--border::after {\n    content: \"\";\n    position: absolute;\n    border-right: solid #EAEAEA;\n    top: 0.4rem;\n    right: -1rem;\n    height: 1.9rem;\n  }\n  .header__btn-mail {\n    margin-left: 2rem;\n  }\n  .about__inner {\n    display: flex;\n  }\n  .about__text {\n    letter-spacing: 0.013rem;\n    line-height: 1.25rem;\n  }\n  .about__img {\n    max-width: 22.5rem;\n    max-height: auto;\n  }\n  .span-tab {\n    display: block;\n  }\n  .brends__slider::after {\n    display: none;\n  }\n  div .brends__slide {\n    max-width: 11.8rem;\n    margin-bottom: 0;\n  }\n  .brends__swiper-wrapper {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 1.5rem;\n  }\n  .brends__btn-onclick {\n    display: block;\n  }\n  .brends__swiper-wrapper {\n    max-height: 6rem;\n  }\n  .repair__slider::after {\n    display: none;\n  }\n  .repair__slider-wrapper {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 1.5rem;\n    max-height: 12.5rem;\n  }\n  .repair__btn-onclick {\n    display: block;\n  }\n  .price__slider::after {\n    display: none;\n  }\n  div .price__slide {\n    width: 45rem;\n    height: 4.1rem;\n    margin-bottom: 0;\n    border: none;\n    border-radius: none;\n  }\n  div .price__slide:not(:last-child)::before {\n    content: \"\";\n    border-bottom: solid #EAEAEA;\n    width: 43rem;\n    display: block;\n    position: absolute;\n    bottom: 0.1rem;\n    align-items: center;\n    align-content: center;\n    left: 2%;\n  }\n  .price__slide-content {\n    display: grid;\n    grid-template-columns: 22rem 3rem 5.1rem;\n    grid-gap: 2.5rem;\n  }\n  .price__slide-title {\n    display: none;\n  }\n  .price__slide-btn {\n    display: block;\n    margin-top: -2.5rem;\n  }\n  .price__slider-wrapper {\n    display: flex;\n    flex-direction: column;\n    gap: 0;\n    max-width: 45rem;\n    border: solid #fff;\n    border-radius: 0.4rem;\n  }\n  .price__title-desctop {\n    font-family: \"TT Lakes\";\n    font-size: 0.9rem;\n    line-height: 1rem;\n    color: #B5B6BC;\n    padding-left: 1rem;\n    display: grid;\n    grid-template-columns: 23rem 3rem 5.1rem;\n    grid-gap: 2.5rem;\n    margin-bottom: 1rem;\n  }\n  .footer__content:first-child {\n    text-align: left;\n  }\n  .footer__content:nth-child(2) {\n    white-space: nowrap;\n  }\n  .footer__content:last-child {\n    flex-basis: 33%;\n    text-align: right;\n  }\n  .footer {\n    flex-direction: initial;\n    gap: 9.1rem;\n  }\n  .modal-form__overlay {\n    margin-left: 21rem;\n  }\n  .modal-form__close {\n    z-index: 1;\n  }\n  .modal-form__inner {\n    padding-top: 6.5rem;\n  }\n  .modal-caller__overlay {\n    margin-left: 21rem;\n  }\n  .modal-caller__close {\n    z-index: 1;\n  }\n  .modal-caller__inner {\n    padding-top: 6.5rem;\n  }\n}\n@media (min-width: 47.5rem) and (min-width: 56.2rem){\n  .header__logo {\n    margin-left: 3.5rem;\n  }\n  .header__logo::before {\n    display: none;\n  }\n  .header__logo::after {\n    display: none;\n  }\n}\n@media (min-width: 56.2rem){\n  div .price__slide {\n    width: 53rem;\n  }\n  div .price__slide:not(:last-child)::before {\n    width: 50rem;\n  }\n  .price__slide-content {\n    grid-gap: 5.7rem;\n  }\n  .price__title-desctop {\n    grid-gap: 5.7rem;\n  }\n  .footer__content {\n    font-size: 0.9rem;\n  }\n}\n@media (min-width: 90rem){\n  .site-wrapper {\n    display: flex;\n  }\n  .header {\n    display: none;\n  }\n  .burger__menu {\n    display: block;\n    -webkit-transform: none;\n            transform: none;\n    -webkit-backdrop-filter: none;\n            backdrop-filter: none;\n    position: static;\n    overflow: hidden;\n  }\n  .burger__overlay {\n    position: static;\n    width: auto;\n  }\n  .burger__overlay-inner {\n    padding-top: 1.5rem;\n  }\n  .burger__btn {\n    display: none;\n  }\n  .burger__logo {\n    padding-right: 7rem;\n  }\n  .burger__navigation {\n    margin-bottom: 15rem;\n  }\n  .burger-container {\n    background-color: #fff;\n    min-height: 100vh;\n  }\n  .services__inner {\n    margin-top: 2.7rem;\n    display: flex;\n    align-items: flex-start;\n  }\n  .services__title {\n    margin-right: 28.1rem;\n  }\n  .services__buttons {\n    display: block;\n    display: flex;\n    gap: 2rem;\n  }\n  .services__buttons li {\n    display: flex;\n    align-items: center;\n    gap: 1rem;\n  }\n  .services__menu {\n    overflow: visible;\n    flex-wrap: wrap;\n  }\n  .span-desctop {\n    display: block;\n  }\n  .brends__swiper-wrapper {\n    max-height: 12.5rem;\n  }\n  .repair__slider-wrapper {\n    max-height: 400px;\n  }\n  div .price__slide {\n    width: 66rem;\n  }\n  div .price__slide:not(:last-child)::before {\n    width: 63rem;\n  }\n  .price__slide-content {\n    grid-template-columns: 21.8rem 5rem 5.1rem;\n    grid-gap: 9.4rem;\n  }\n  .price__title-desctop {\n    grid-template-columns: 21.8rem 5rem 5.1rem;\n    grid-gap: 10rem;\n  }\n  .footer__content:first-child {\n    text-align: left;\n  }\n  .footer__content:nth-child(2) {\n    white-space: nowrap;\n  }\n  .footer__content:last-child {\n    flex-basis: 33%;\n    text-align: right;\n  }\n  .footer {\n    flex-direction: initial;\n    gap: 9.1rem;\n  }\n  .modal-form__overlay {\n    gap: 2rem;\n    margin-left: 42rem;\n    justify-content: space-around;\n  }\n  .modal-form__close {\n    margin-top: -0.5rem;\n  }\n  .modal-form__inner {\n    max-width: 28rem;\n    padding-top: 1.1rem;\n  }\n  .modal-form__input {\n    width: 24rem;\n    height: 3rem;\n  }\n  .modal-form__textarea {\n    width: 24rem;\n    height: 7.4rem;\n  }\n  .modal-caller__overlay {\n    gap: 2rem;\n    margin-left: 42rem;\n    justify-content: space-around;\n  }\n  .modal-caller__close {\n    margin-top: -0.5rem;\n  }\n  .modal-caller__inner {\n    max-width: 28rem;\n    padding-top: 1.1rem;\n  }\n  .modal-caller__input {\n    width: 24rem;\n    height: 3rem;\n  }\n}\n@media (max-width: 20rem){\n  .brends__slider {\n    position: relative;\n  }\n  .brends__slider::after {\n    content: \"\";\n    position: absolute;\n    top: -0.75rem;\n    left: 16rem;\n    z-index: 5;\n    width: 2rem;\n    height: 13.8rem;\n    background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\n  }\n  .repair__slider {\n    position: relative;\n  }\n  .repair__slider::after {\n    content: \"\";\n    position: absolute;\n    top: -0.75rem;\n    left: 16rem;\n    z-index: 5;\n    width: 2rem;\n    height: 13.8rem;\n    background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\n  }\n  .price__slider {\n    position: relative;\n  }\n  .price__slider::after {\n    content: \"\";\n    position: absolute;\n    top: -0.75rem;\n    left: 16rem;\n    z-index: 5;\n    width: 2rem;\n    height: 13.8rem;\n    background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\n  }\n}\n@media (max-width: 47.5rem){\n  .modal-form__text {\n    margin-bottom: 1rem;\n  }\n  .modal-caller__text {\n    margin-bottom: 1rem;\n  }\n}", "",{"version":3,"sources":["webpack://./src/index.scss","webpack://./src/style/_fonts.scss","webpack://./src/style/_overall.scss","webpack://./src/style/_global.scss","webpack://./src/style/_var.scss","webpack://./src/style/Components/_header.scss","webpack://./src/style/Components/_burger.scss","webpack://./src/style/Components/_services.scss","webpack://./src/style/Components/_about.scss","webpack://./src/style/Components/_brends-slider.scss","webpack://./src/style/Components/_repair.scss","webpack://./src/style/Components/_price.scss","webpack://./src/style/Components/_footer.scss","webpack://./src/style/Components/_modal-form.scss","webpack://./src/style/Components/_modal-caller.scss","webpack://./<no source>"],"names":[],"mappings":"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","sourcesContent":["@import '~normalize.css';\n@import 'style/fonts';\n@import 'style/var';\n@import 'style/overall';\n@import 'style/global';\n\n\n\n@import 'style/Components/header';\n@import 'style/Components/burger';\n@import 'style/Components/services';\n@import 'style/Components/about';\n@import 'style/Components/brends-slider';\n@import 'style/Components/repair';\n@import 'style/Components/price';\n@import 'style/Components/footer';\n@import 'style/Components/modal-form';\n@import 'style/Components/modal-caller';\n","@font-face {\n  font-family: 'TT Lakes';\n  font-weight: normal;\n  font-style: normal;\n  src: url('../fonts/TTLakes-Regular.woff2') format('woff2'),\n    url('../fonts/TTLakes-Regular.woff') format('woff');\n}\n@font-face {\n  font-family: 'TT Lakes';\n  font-weight: 500;\n  font-style: normal;\n  src: url('../fonts/TTLakes-Medium.woff2') format('woff2'),\n    url('../fonts/TTLakes-Medium.woff') format('woff');\n}\n@font-face {\n  font-family: 'TT Lakes';\n  font-weight: bold;\n  font-style: normal;\n  src: url('../fonts/TTLakes-Bold.woff2') format('woff2'),\n    url('../fonts/TTLakes-Bold.woff') format('woff');\n}\n",".container {\n  max-width: 72rem;\n  padding: 0 1rem;\n  margin: 0 auto;\n  position: relative;\n  overflow: hidden;\n}\n.site-wrapper{\n max-width: 92rem;\n margin: 0 auto;\n  \n}\n\n.btn-reset {\n  border: none;\n  outline: none;\n  background-color: transparent;\n  cursor: pointer;\n  padding: 0;\n}\n\na {\n  outline: none;\n\n}\n\n\ninput[type=\"radio\"]{\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n}\n\n.btn-on{\n  display: block;\n}\n.btn-close{\n  display: none;\n}\n.burger-close{\n  display: none;\n}\n.body-overflow{\n  overflow: hidden;\n}\ndiv .swiper-wrapper {\n  overflow: visible;\n}\ndiv > div.btn-slides-none{\n  display: none;\n}\n\ndiv > div.btn-slides-block{\n  max-height: unset;\n}\n.site-wrapper{\n  @media (min-width: 90rem){\n    display: flex;\n  }\n}\n:focus {\n  box-shadow: 0 0 3px rgba(0,0,0,.75);\n}","html {\n\tbox-sizing: border-box;\n}\n\n*,\n*::before,\n*::after {\n\tbox-sizing: inherit;\n}\n\nbody {\n\tfont-family: 'SFProDisplay', sans-serif;\n\tmargin: 0;\n\tbackground-color: $body;\n}\n\nh1, h2, h3, h4, h5, h6 {\n\tmargin: 0;\n\tpadding: 0;\n}\n\np {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nul, ol, menu {\n\tmargin: 0;\n\tpadding: 0;\n\tlist-style: none;\n}\n\na {\n\tcolor: inherit;\n\ttext-decoration: none;\n}\n\nimg {\n\tmax-width: 100%;\n\t\n}","$back: rgb(41, 41, 9);\n$blackText: #1B1C21;\n$text: #B5B6BC;\n$white: #fff;\n$border: #EAEAEA;\n$pink: #FF3E79;\n$pagination: #B5B6BC;\n$body: #F8F8F8;\n$line:#D9FFF5;\n$arrow: #41f6d7;\n\n\n\n",".header{\n\n    &__position{\n        border-bottom: solid $line;\n        background-color: $white;\n        margin-bottom: 1.5rem;\n        width: 100vw;\n        // margin-left: calc(50% - 50vw);\n\n    }\n\n\n    &__inner {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        padding-top: 1rem;\n        padding-bottom: 1rem;\n    }\n\n    &__logo{\n        position: relative;\n\n        &::after{\n            content: \"\";\n            position: absolute;\n            border-right: solid $border;\n            top: 0.6rem;\n            right: -0.9rem;\n            height: 1.9rem;\n        }\n        @media (min-width: 47.5rem){\n            margin-left: -12.5rem;\n            &::after{\n                display: none;\n            }\n\n            @media (min-width: 56.2rem){\n                margin-left: 3.5rem;\n                &::before{\n                    display: none;\n                }\n\n                &::after{\n                    display: none;\n                }\n            }\n\n            &::before{\n                content: \"\";\n                position: absolute;\n                border-right: solid $border;\n                top: 0.6rem;\n                right: 7.5rem;\n                height: 1.9rem;\n            }\n        }\n    }\n\n\n    &__buttons{\n        display: flex;\n    }\n\n\n    &__btn-call,\n    &__btn-message ,\n    &__users{\n        display: none;\n\n        @media (min-width: 47.5rem){\n            display: block;\n            margin-left: 1rem;\n        } \n    }   \n\n    &__btn--border{\n        @media (min-width: 47.5rem){\n        position: relative;\n        &::after{\n            content: \"\";\n            position: absolute;\n            border-right: solid $border;\n            top: 0.4rem;\n            right: -1rem;\n            height: 1.9rem;\n        }\n    }}\n\n    &__btn-mail {\n        margin-right: 1rem;\n    \n        @media (min-width: 47.5rem){\n            margin-left: 2rem;\n        }\n    }\n    @media (min-width: 90rem){\n        display: none;\n    }\n\n    &__burger--active:focus,\n    &__burger--active:active{\n        width: 2.5rem;\n        height: 2.5rem;\n        border: solid $pink;\n        border-radius: 50%;\n    }\n\n    &__btn-call--active:active,\n    &__btn-call--active:focus{\n        width: 2.5rem;\n        height: 2.5rem;\n        border: solid $pink;\n        border-radius: 50%;\n    }\n\n    &__btn-chat--active:active,\n    &__btn-chat--active:focus{\n        width: 2.5rem;\n        height: 2.5rem;\n        border: solid $pink;\n        border-radius: 50%;\n    }\n\n    &__user--active:active,\n    &__user--active:focus{\n        width: 2.5rem;\n        height: 2.5rem;\n        border: solid $pink;\n        border-radius: 50%;\n    }    \n\n    &__btn-mail--active:active,\n    &__btn-mail--active:focus{\n        width: 2.5rem;\n        height: 2.5rem;\n        border: solid $pink;\n        border-radius: 50%;\n    }\n\n    &__btn-status--active:active,\n    &__btn-status--active:focus{\n        width: 2.5rem;\n        height: 2.5rem;\n        border: solid $pink;\n        border-radius: 50%;\n    }\n}",".burger{\n    max-width: 20rem;\n    &__menu{\n    width: 100%;\n    height: 100%;\n    display: block;\n    position: fixed;\n    top: 0;\n    left: 0;\n    -webkit-backdrop-filter: blur(0.25rem);\n    backdrop-filter: blur(0.25rem);\n    z-index: 2;\n    display: none;\n    transition: transform 1s;\n    overflow-y: scroll;\n    @media (min-width: 90rem){\n        display: block;\n        transform: none;\n        backdrop-filter:none;\n        position: static;\n        overflow: hidden;\n    }\n}\n\n    &__menu.active{\n        display: block;\n    }\n\n    &__overlay{\n    position: absolute;\n    left: 0.1rem;\n    min-height: 100vh;\n    padding-left: 1.8rem;\n    padding-top: 1.1rem;\n    background-color: $white;\n    box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2); \n\n    @media (min-width: 90rem){\n        position: static;\n        width: auto;\n    }\n    }\n\n    &__overlay-inner{\n    display: flex;\n    margin-bottom: 2.3rem;\n    align-items: center;\n\n    @media (min-width: 90rem){\n        padding-top: 1.5rem;\n    }\n}\n\n&__btn{\n    margin-right: 1rem;\n    @media (min-width: 90rem){\n        display: none;\n    }\n}\n&__logo{\n    padding-right: 4rem;\n\n    @media (min-width: 90rem){\n        padding-right: 7rem;\n    }\n}\n\n&__btn-search{\n    margin-right: 1rem;\n}\n&__navigation{\n    margin-bottom: 2rem;\n\n    @media (min-width: 90rem){\n        margin-bottom: 15rem;\n    }\n}\n\n&__list li:nth-child(3){\n    position: relative;\n    &::before{\n        content: \"\";\n        position: absolute;\n        width: 0.25rem;\n        height: 1.5rem;\n        left: -1.8rem;\n        background: #41f6d7;\n        border-radius: 1px;\n    }\n}\n\n&__list-item{\n    margin-bottom: 1.8rem;\n}\n&__link--active:hover,\n&__link--active:focus,\n&__link--active:active{\n    transition: 0.5s;\n    color: $text;\n}\n&__buttons{\n    display: flex;\n    gap: 1rem;\n    margin-bottom: 1.1rem;\n}\n&__mail{\n    display: block;\n    margin-bottom: 0.8rem;\n    font-family: 'TT Lakes';\n    font-size: 1rem;\n}\n&__tel{\n    font-family: 'TT Lakes';\n    font-size: 1.5rem;\n    display: block;\n    margin-bottom: 2.6rem;\n}\n&__radio {\n    padding-left: 0;\n    padding-right: 0.4rem;\n    cursor: pointer;\n}\n&__radio:hover{\n    color: $text;\n}\n&__radio:active{\n    color: $text;\n}\n&__radio:focus{\n    border: solid $pink;\n}\n&__radio:disabled{\n    color: $back;\n}\n\n&__btn--active:active,\n&__btn--active:focus{\n    width: 2.5rem;\n        height: 2.5rem;\n        border: solid $pink;\n        border-radius: 50%;\n        padding: 0;\n}\n\n&__btn-search--active:active,\n&__btn-search--active:focus{\n    width: 2.5rem;\n    height: 2.5rem;\n    border: solid $pink;\n    border-radius: 50%;\n    padding: 0;\n}\n\n&__button-tel--active:active,\n&__button-tel--active:focus{\n    width: 2.5rem;\n    height: 2.5rem;\n    border: solid $pink;\n    border-radius: 50%;\n    padding: 0;\n}\n\n&__button-chat--active:active,\n&__button-chat--active:focus{\n    width: 2.5rem;\n    height: 2.5rem;\n    border: solid $pink;\n    border-radius: 50%;\n    padding: 0;\n}\n\n&__button-user--active:active,\n&__button-user--active:focus{\n\n}\n\n\n}\n\n\n.burger-container{\n    @media (min-width: 90rem){\n        background-color: $white;\n        min-height: 100vh;\n    }\n}\n\n",".services{\n\n    &__inner{\n        margin-bottom: 1.5rem;\n\n        @media (min-width: 90rem){\n            margin-top: 2.7rem;\n            display: flex;\n            align-items: flex-start;\n        }\n    }\n    &__title {\n        font-family: 'TT Lakes';\n        font-size: 1.75rem;\n        line-height: 2.5rem;\n        margin-bottom: 1.5rem;\n        position: relative;\n\n        &::before{\n            content: \"\";\n            position: absolute;\n            width: 0.25rem;\n            height: 2.5rem;\n            left: -0.9rem;\n            background: $arrow;\n            border-radius: 1px;\n        }\n\n        @media (min-width: 90rem){\n            margin-right: 28.1rem;\n        }\n    }\n\n    &__buttons{\n        display: none;\n\n        @media (min-width: 90rem){\n            display: block;\n            display: flex;\n            gap: 2rem;\n        }\n    }\n\n    &__buttons li{\n        @media (min-width: 90rem){\n            display: flex;\n            align-items: center;\n            gap: 1rem;\n        }\n    }\n    &__menu {\n        display: flex;\n        overflow-y: hidden;\n        @media (min-width: 90rem){\n            overflow: visible;\n            flex-wrap: wrap;\n        }\n    }\n    &__item {\n        white-space: nowrap;\n        display: block;\n        padding: 0.5rem 1rem;\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1.5rem;\n        color: $text;\n        transition: 0.3s;\n        border-radius: 6px;\n        border: solid transparent;\n    }\n    &__item--active:hover,\n    &__item--active:focus,\n    &__item--active:active{\n        transition: 0.3s;\n        background-color: $white;\n        border: solid $line;\n        border-radius: 6px;\n        transition: 0.5s;\n    }\n}\n\n",".about{\n    &__inner{\n        margin-bottom: 2.5rem;\n\n        @media (min-width: 47.5rem){\n            display: flex;\n        }\n    }\n    &__text {\n        font-family: 'TT Lakes';\n        font-size: 0.9rem;\n        line-height: 1.2rem;\n        letter-spacing: 0.012rem;\n        margin-bottom: 1rem;\n        color: $blackText;\n\n        @media (min-width: 47.5rem){\n            letter-spacing: 0.013rem;\n            line-height: 1.25rem;\n        }\n    }\n    \n    &__btn-on {\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        margin-bottom: 1rem;\n        position: relative;\n        padding-left: 2rem;\n        border: solid transparent;\n\n        &::before{\n            content: \"«\";\n            position: absolute;\n            font-size: 1.6rem;\n            transform: rotate(0.75turn);\n            left: 0;\n            top: -0.3rem;\n            color: $arrow;\n        }\n    }\n\n    &__btn-close{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        margin-bottom: 1rem;\n        position: relative;\n        padding-left: 2rem;\n        border: solid transparent;\n\n        &::before{\n            content: \"«\";\n            position: absolute;\n            font-size: 1.6rem;\n            transform: rotate(0.25turn);\n            left: 0;\n            top: -0.3rem;\n            color: $arrow;\n        }\n    }\n\n    &__img {\n        border-radius: 5px;\n        max-width: 100%;\n        max-height: auto;\n        @media (min-width: 47.5rem){\n            max-width: 22.5rem;\n            max-height: auto;\n        }\n    }\n}\n.span-tab{\n    @media (min-width: 47.5rem){\n        display: block;\n    }\n}\n\n.span-desctop{\n    @media(min-width: 90rem){\n        display: block;\n    }\n}",".brends{\n    margin-bottom: 1.5rem;\n\n    &__title-container{\n        border-top: solid $line;\n        height: 5rem;\n        background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\n        margin-bottom: 2rem;\n        width: 100vw;\n    }\n\n    &__title{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1.5rem;\n        text-transform: uppercase;\n        color: $text;\n        padding: 1rem;\n    }\n\n    &__slider{\n\n        @media (max-width: 20rem){\n            position: relative;\n\n            &::after{\n                content: \"\";\n                position: absolute;\n                top: -0.75rem;\n                left: 16rem;\n                z-index: 5;\n                width: 2rem;\n                height: 13.8rem;\n                background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\n                }\n            }\n\n            @media (min-width: 47.5rem){\n                &::after{\n                    display: none;\n                }\n            }\n    }\n\n   div &__slide{\n        display: flex;\n        max-width: 13rem;\n        border-radius: 5px;\n        padding: 1rem 1rem;\n        border: solid $border;\n        margin-bottom: 2rem;\n        background-color: $white;\n\n        @media (min-width: 47.5rem){\n            max-width: 11.8rem;\n            margin-bottom: 0;\n        }\n    }\n\n    &__slide-lenovo,\n    &__slide-Samsung{\n        padding-right: 2.5rem;\n        width: 100%;\n        max-width: 6.8rem;\n    }\n\n    &__slide-Apple,\n    &__slide-Hp{\n        padding-right: 6rem;\n        width: 3.25rem;\n    }\n\n    &__slide-Acer{\n        padding-right: 3.3rem;\n        width: 6rem;\n    }\n\n    &__slide-Bosch{\n        width: 8rem;\n        padding-right: 1.3rem;\n    }\n\n    &__slide-ViewSonic,\n    &__slide-Sony{\n        padding-right: 1.3rem;\n    }\n\n    &__swiper-wrapper{\n        @media (min-width: 47.5rem){\n            display: flex;\n            flex-wrap: wrap;\n            gap: 1.5rem;\n        }\n    }\n\n    &__btn-onclick{\n        display: none;\n\n        @media (min-width: 47.5rem){\n            display: block;\n        }\n    }\n\n    &__btn-on{\n        position: relative;\n        font-family: 'TT Lakes';\n        font-style: normal;\n        font-weight: 500;\n        font-size: 1rem;\n        line-height: 1.5rem;\n        padding-top: 1.5rem;\n        padding-left: 2rem;\n\n        &::before{\n        content: \"«\";\n        position: absolute;\n        font-size: 1.6rem;\n        -webkit-transform: rotate(0.75turn);\n        transform: rotate(0.75turn);\n        left: 0.2rem;\n        color: $arrow;\n        }\n    }\n\n    &__btn-of{\n        position: relative;\n        font-family: 'TT Lakes';\n        font-style: normal;\n        font-weight: 500;\n        font-size: 1rem;\n        line-height: 1.5rem;\n        padding-top: 1.5rem;\n        padding-left: 2rem;\n\n        &::before{\n        content: \"«\";\n        position: absolute;\n        font-size: 1.6rem;\n        -webkit-transform: rotate(0.25turn);\n        transform: rotate(0.25turn);\n        left: 0.2rem;\n        color: $arrow;\n        }\n    }\n\n    &__swiper-wrapper{\n        @media (min-width: 47.5rem){\n            max-height: 6rem;\n        }\n\n        @media(min-width: 90rem){\n            max-height: 12.5rem;\n        }\n    }\n    \n}\n.swiper-pagination-bullet{\n    min-width: 0.60rem;\n}\ndiv .swiper-pagination-bullet-active{\n    background: $pagination;\n}",".repair{\n    &__title-container{\n        border-top: solid $line;\n        height: 5rem;\n        background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\n        margin-bottom: 2rem;\n        width: 100vw;\n        \n    }\n\n    &__title{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1.5rem;\n        text-transform: uppercase;\n        color: $text;\n        padding: 1rem;\n    }\n\n    \n    &__slider{\n\n        @media (max-width: 20rem){\n            position: relative;\n\n            &::after{\n                content: \"\";\n                position: absolute;\n                top: -0.75rem;\n                left: 16rem;\n                z-index: 5;\n                width: 2rem;\n                height: 13.8rem;\n                background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\n                }\n            }\n\n            @media (min-width: 47.5rem){\n                &::after{\n                    display: none;\n                }\n            }\n    }\n\n    div &__slide{\n        display: flex;\n        flex-direction: column;\n        width: 13rem;\n        height: 10rem;\n        border: solid $border;\n        border-radius: 0.4rem;\n        background-color: $white;\n        position: relative;\n        margin-bottom: 2rem;\n    }\n\n    &__slide-text{\n        padding-top: 1rem;\n        padding-left: 1rem;\n    }\n\n    &__slide-btn{\n        position: absolute;\n        bottom: 1rem;\n        right: 1rem;\n\n\n        // display: flex;\n        // align-items: flex-end; сохраняю если потребуется вернуть кнопку в поток\n        // padding-bottom: 1rem;\n        // padding-left: 1rem;\n    }\n\n   &__slider-wrapper{\n    @media (min-width: 47.5rem){\n        display: flex;\n        flex-wrap: wrap;\n        gap: 1.5rem;\n        max-height: 12.5rem;\n    }\n\n    @media(min-width: 90rem){\n        max-height: 400px;\n    }\n   }\n\n\n   &__btn-onclick{\n    display: none;\n\n    @media (min-width: 47.5rem){\n        display: block;\n    }\n   }\n    &__slide-on{\n        position: relative;\n        font-family: 'TT Lakes';\n        font-style: normal;\n        font-weight: 500;\n        font-size: 1rem;\n        line-height: 1.5rem;\n        padding-top: 1.5rem;\n        padding-left: 2rem;\n    \n        &::before{\n        content: \"«\";\n        position: absolute;\n        font-size: 1.6rem;\n        -webkit-transform: rotate(0.75turn);\n        transform: rotate(0.75turn);\n        left: 0.2rem;\n        color: $arrow;\n        }\n    }\n    &__slide-of{\n        position: relative;\n        font-family: 'TT Lakes';\n        font-style: normal;\n        font-weight: 500;\n        font-size: 1rem;\n        line-height: 1.5rem;\n        padding-top: 1.5rem;\n        padding-left: 2rem;\n    \n        &::before{\n        content: \"«\";\n        position: absolute;\n        font-size: 1.6rem;\n        -webkit-transform: rotate(0.25turn);\n        transform: rotate(0.25turn);\n        left: 0.2rem;\n        color: $arrow;\n        }\n    }\n\n}\n.swiper-wrapper{\n    overflow: hidden;\n}",".price{\n    &__title-container{\n        border-top: solid $line;\n        height: 5rem;\n        background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);\n        margin-top: 2rem;\n        margin-bottom: 2rem;\n        width: 100vw;\n        \n    }\n\n    &__title{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1.5rem;\n        text-transform: uppercase;\n        color: $text;\n        padding: 1rem;\n    }\n\n    \n    &__slider{\n\n        @media (max-width: 20rem){\n            position: relative;\n\n            &::after{\n                content: \"\";\n                position: absolute;\n                top: -0.75rem;\n                left: 16rem;\n                z-index: 5;\n                width: 2rem;\n                height: 13.8rem;\n                background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);\n                }\n            }\n\n            @media (min-width: 47.5rem){\n                &::after{\n                    display: none;\n                }\n            }\n    }\n\n    div &__slide{\n        width: 16.3rem;\n        height: 12.5rem;\n        border: solid $border;\n        border-radius: 0.4rem;\n        background-color: $white;\n        position: relative;\n        margin-bottom: 2rem;\n\n        @media (min-width: 47.5rem){\n            width: 45rem;\n            height: 4.1rem;\n            margin-bottom: 0;\n            border: none;\n            border-radius: none;\n\n            &:not(:last-child)::before{\n                content: \"\";\n                border-bottom: solid $border;\n                width: 43rem;\n                display: block;\n                position: absolute;\n                bottom: 0.1rem;\n                align-items: center;\n                align-content: center;\n                left: 2%;\n            }\n        }\n\n        @media(min-width: 90rem){\n            width: 66rem;\n\n            &:not(:last-child)::before{\n                width: 63rem;\n            }\n        }\n\n        @media (min-width: 56.2rem){\n            width: 53rem;\n\n            &:not(:last-child)::before{\n                width: 50rem;\n            }\n        }\n    }\n\n    &__slide-content{\n        padding-top: 1rem;\n        padding-left: 1rem;\n        max-width: 16.25rem;\n\n        @media (min-width: 47.5rem){\n            display: grid;\n            grid-template-columns: 22rem 3rem 5.1rem;\n            grid-gap: 2.5rem;\n        }\n\n        @media(min-width: 90rem){\n         grid-template-columns: 21.8rem 5rem 5.1rem;  \n         grid-gap: 9.4rem; \n        }\n\n        @media (min-width: 56.2rem){\n            grid-gap: 5.7rem;\n        }\n    }\n\n    &__slide-text{\n        padding-top: 1rem;\n        padding-left: 1rem;\n    }\n\n    &__slide-lining{\n        @media (min-width: 47.5rem){\n           \n        }\n    }\n\n    &__slide-title{\n        font-family: 'TT Lakes';\n        font-size: 0.9rem;\n        line-height: 1rem;\n        color: $text;\n        padding-bottom: 0.25rem;\n\n        @media (min-width: 47.5rem){\n            display: none;\n        }\n    }\n\n    &__slide-lining{\n        font-family: 'TT Lakes';\n        font-size: 0.9rem;\n        line-height: 1.1rem;\n        padding-bottom: 1rem;\n    }\n\n    &__slide-btn{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1.5rem;\n        color: $white;\n        width: 4rem;\n        height: 1.5rem;\n        padding: 0.25rem 2.5rem 0.25rem 0.8rem;\n        background: $pink;\n        border-radius: 1rem;\n        position: relative;\n        float: right;\n        margin-top: -3rem;\n        margin-right: 1rem;\n\n        &::after{\n            content: \"\";\n            position: absolute;\n            display: block;\n            top: 0.8rem;\n            right: 0.7rem;\n            border: solid 2px $white;\n            border-radius: 7px;\n            background-color: $white;\n            width: 0.4rem;\n            -webkit-transform: rotate(45deg);\n            transform: rotate(45deg);\n        }\n        &::before{\n            content: \"\";\n            position: absolute;\n            display: block;\n            top: 1.1rem;\n            right: 0.7rem;\n            border: solid 2px $white;\n            border-radius: 7px;\n            background-color: $white;\n            width: 0.4rem;\n            -webkit-transform: rotate(130deg);\n            transform: rotate(130deg);\n        }\n\n        @media (min-width: 47.5rem){\n            display: block;\n            margin-top: -2.5rem;\n        }\n    }\n\n    &__info{\n        margin-top: 1rem;\n        max-width: 26rem;\n    }\n\n    &__info-text{    \n    font-family: 'TT Lakes';\n    font-size: 0.9rem;\n    line-height: 1.25rem;\n    margin-bottom: 1rem;\n    }\n\n    &__info-link{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1.5rem;\n        text-transform: uppercase;\n        padding-right: 1rem;\n    }\n\n    &__slider-wrapper{\n        @media (min-width: 47.5rem){\n            display: flex;\n            flex-direction: column;\n            gap: 0;\n            max-width: 45rem;\n            border: solid $white;\n            border-radius: 0.4rem;\n        }\n       }\n\n       &__title-desctop{\n        display: none;\n\n        @media (min-width: 47.5rem){\n            font-family: 'TT Lakes';\n            font-size: 0.9rem;\n            line-height: 1rem;\n            color: $text;\n            padding-left: 1rem;\n            display: grid;\n            grid-template-columns: 23rem 3rem 5.1rem;\n            grid-gap: 2.5rem;\n            margin-bottom: 1rem;\n        }\n\n        @media(min-width: 90rem){\n            grid-template-columns: 21.8rem 5rem 5.1rem;  \n            grid-gap: 10rem; \n           }\n\n           @media (min-width: 56.2rem){\n            grid-gap: 5.7rem;\n        }\n       }\n}",".footer{\n    display: flex;\n    flex-direction: column;\n    text-align: center;\n    opacity: 0.72;\n    border-top: solid $line;\n    margin-top: 2.5rem;\n    width: 100vw;\n\n    &__content{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1rem;\n        color: $text;\n        mix-blend-mode: normal;\n        margin-top: 1rem;\n        padding-bottom: 1rem;\n\n        @media (min-width: 56.2rem){\n            font-size: 0.9rem;\n        }\n\n        @media(min-width: 47.5rem){\n            &:first-child{\n                text-align: left;\n            }\n            &:nth-child(2){\n                white-space: nowrap;\n            }\n            &:last-child{\n                flex-basis: 33%;\n                text-align: right;\n            }\n        }\n\n        @media(min-width: 90rem){\n            &:first-child{\n                text-align: left;\n            }\n            &:nth-child(2){\n                white-space: nowrap;\n            }\n            &:last-child{\n                flex-basis: 33%;\n                text-align: right;\n            }\n        }\n    }\n\n    \n    @media(min-width: 47.5rem){\n        flex-direction: unset;\n        gap: 9.1rem;\n    }\n\n    @media(min-width: 90rem){\n        flex-direction: unset;\n        gap: 9.1rem;\n    }\n}",".modal-form{\n    &__overlay{\n        padding-right: 257px;\n        gap: 0;\n        margin-left: 0;\n        justify-content: flex-end;\n        display: flex;\n        \n        @media (min-width: 47.5rem){\n           margin-left: 21rem;\n        }\n\n        @media (min-width: 90rem){\n            gap: 2rem;\n            margin-left: 42rem;\n            justify-content: space-around;\n        }\n    }\n    &__close{\n        width: 2.5rem;\n        height: 2.5rem;\n        margin-top: 1.5rem;\n        z-index: 1;\n\n        @media (min-width: 47.5rem){\n            z-index: 1;\n         }\n\n         @media (min-width: 90rem){\n                margin-top: -0.5rem;\n        }\n    }\n\n    &__inner{\n        max-width: 20rem;\n        padding-top: 6.5rem;\n        min-height: 100vh;\n        position: absolute;\n        right: 0;\n        padding-right: 2rem;\n        padding-left: 2rem;\n        background-color: $white;\n        box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2);\n\n        @media (min-width: 47.5rem){\n            padding-top: 6.5rem;\n          \n        }\n\n        @media (min-width: 90rem){\n            max-width: 28rem;\n            padding-top: 1.1rem;\n    }\n    }\n\n   \n    &__menu{\n        width: 100%;\n        height: 100%;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        -webkit-backdrop-filter: blur(0.25rem);\n        backdrop-filter: blur(0.25rem);\n        z-index: 2;\n        display: none;\n        overflow-y: scroll;\n    }\n\n    &__menu.active{\n        display: block;\n    }\n\n    &__title{\n        font-family: 'TT Lakes';\n        font-size: 1.5rem;\n        line-height: 2rem;\n        letter-spacing: -0.6px;\n    }\n\n    &__call{\n        display: flex;\n        flex-direction: column;\n        gap: 1rem;\n        margin-bottom: 1rem;\n    }\n\n    &__input{\n        width: 16rem;\n        height: 3rem;\n        padding: 0.8rem 1rem;\n        border: 1px solid #EAEAEA;\n        border-radius: 8px;\n\n        @media (min-width: 90rem){\n         width: 24rem;\n        height: 3rem;\n    }\n    }\n\n    &__input[type]{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1.5rem;\n        color: $text;\n    }   \n\n    &__textarea{\n        width: 16rem;\n        height: 7.4rem;\n        padding: 0.8rem 1rem;\n        border: 1px solid #EAEAEA;\n        border-radius: 8px;\n\n        @media (min-width: 90rem){\n        width: 24rem;\n        height: 7.4rem;\n       }\n        \n    }\n\n    &__textarea::placeholder{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1.5rem;\n        color: $text;\n    }\n\n    &__text{\n        font-family: 'TT Lakes';\n        font-size: 0.9rem;\n        line-height: 1rem;\n        color: $text;\n        margin-bottom: 3.4rem;\n\n        @media (max-width: 47.5rem){\n            margin-bottom: 1rem;\n        }\n    }\n\n    &__text span{\n        color: $pink;\n    }\n\n    &__btn{\n        font-family: 'TT Lakes';\n        font-size: 0.8rem;\n        line-height: 1.5rem;\n        color: $white;\n        width: 9rem;\n        height: 2rem;\n        padding: 0.25rem 2.5rem 0.25rem 0.8rem;\n        background: $pink;\n        border-radius: 1rem;\n        float: right;\n        text-transform: uppercase;\n        display: flex;\n    }\n\n    &__close--active:active,\n    &__close--active:focus{\n        width: 2.5rem;\n        height: 2.5rem;\n        border: solid $pink;\n        border-radius: 50%;\n    }\n}",".modal-caller{\n    &__overlay{\n        padding-right: 257px;\n        gap: 0;\n        margin-left: 0;\n        justify-content: flex-end;\n        display: flex;\n        \n        @media (min-width: 47.5rem){\n           margin-left: 21rem;\n        }\n\n        @media (min-width: 90rem){\n            gap: 2rem;\n            margin-left: 42rem;\n            justify-content: space-around;\n        }\n    }\n    &__close{\n        width: 2.5rem;\n        height: 2.5rem;\n        margin-top: 1.5rem;\n        z-index: 1;\n\n        @media (min-width: 47.5rem){\n            z-index: 1;\n         }\n\n         @media (min-width: 90rem){\n                margin-top: -0.5rem;\n        }\n    }\n\n    &__inner{\n        max-width: 20rem;\n        padding-top: 6.5rem;\n        min-height: 100vh;\n        position: absolute;\n        right: 0;\n        padding-right: 2rem;\n        padding-left: 2rem;\n        background-color: $white;\n        box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2);\n\n        @media (min-width: 47.5rem){\n            padding-top: 6.5rem;\n          \n        }\n\n        @media (min-width: 90rem){\n            max-width: 28rem;\n            padding-top: 1.1rem;\n    }\n    }\n\n   \n    &__menu{\n        width: 100%;\n        height: 100%;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        -webkit-backdrop-filter: blur(0.25rem);\n        backdrop-filter: blur(0.25rem);\n        z-index: 2;\n        display: none;\n        overflow-y: scroll;\n    }\n\n    &__menu.active{\n        display: block;\n    }\n\n    &__title{\n        font-family: 'TT Lakes';\n        font-size: 1.5rem;\n        line-height: 2rem;\n        letter-spacing: -0.6px;\n    }\n\n    &__call{\n        display: flex;\n        flex-direction: column;\n        gap: 1rem;\n        margin-bottom: 1rem;\n    }\n\n    &__input{\n        width: 16rem;\n        height: 3rem;\n        padding: 0.8rem 1rem;\n        border: 1px solid #EAEAEA;\n        border-radius: 8px;\n\n        @media (min-width: 90rem){\n         width: 24rem;\n        height: 3rem;\n    }\n    }\n\n    &__input[type]{\n        font-family: 'TT Lakes';\n        font-size: 1rem;\n        line-height: 1.5rem;\n        color: $text;\n    }  \n\n    &__text{\n        font-family: 'TT Lakes';\n        font-size: 0.9rem;\n        line-height: 1rem;\n        color: $text;\n        margin-bottom: 3.4rem;\n\n        @media (max-width: 47.5rem){\n            margin-bottom: 1rem;\n        }\n    }\n\n    &__text span{\n        color: $pink;\n    }\n\n    &__btn{\n        font-family: 'TT Lakes';\n        font-size: 0.8rem;\n        line-height: 1.5rem;\n        color: $white;\n        width: 9rem;\n        height: 2rem;\n        padding: 0.25rem 2.5rem 0.25rem 0.8rem;\n        background: $pink;\n        border-radius: 1rem;\n        float: right;\n        text-transform: uppercase;\n        display: flex;\n    }\n\n    &__close--active{\n        width: 2.5rem;\n        height: 2.5rem;\n        border: solid $pink;\n        border-radius: 50%;\n    }\n}",null],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -241,7 +547,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  f
   \*****************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 /*
@@ -336,7 +641,6 @@ module.exports = function (cssWithMappingToString) {
   \********************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 module.exports = function (url, options) {
@@ -372,7 +676,6 @@ module.exports = function (url, options) {
   \************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 module.exports = function (item) {
@@ -398,7 +701,6 @@ module.exports = function (item) {
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -417,13 +719,17 @@ var ___HTML_LOADER_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(
 var ___HTML_LOADER_IMPORT_7___ = new URL(/* asset import */ __webpack_require__(/*! ./img/search.svg */ "./src/img/search.svg"), __webpack_require__.b);
 var ___HTML_LOADER_IMPORT_8___ = new URL(/* asset import */ __webpack_require__(/*! ./img/info-img.jpg */ "./src/img/info-img.jpg"), __webpack_require__.b);
 var ___HTML_LOADER_IMPORT_9___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Lenovo.svg */ "./src/img/Lenovo.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_10___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Samsung.svg */ "./src/img/Samsung.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_11___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Apple.svg */ "./src/img/Apple.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_12___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Bosch.svg */ "./src/img/Bosch.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_13___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Hp.svg */ "./src/img/Hp.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_14___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Acer.svg */ "./src/img/Acer.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_15___ = new URL(/* asset import */ __webpack_require__(/*! ./img/ViewSonic.svg */ "./src/img/ViewSonic.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_16___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Sony.svg */ "./src/img/Sony.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_10___ = new URL(/* asset import */ __webpack_require__(/*! ./img/go.svg */ "./src/img/go.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_11___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Samsung.svg */ "./src/img/Samsung.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_12___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Apple.svg */ "./src/img/Apple.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_13___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Bosch.svg */ "./src/img/Bosch.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_14___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Hp.svg */ "./src/img/Hp.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_15___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Acer.svg */ "./src/img/Acer.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_16___ = new URL(/* asset import */ __webpack_require__(/*! ./img/ViewSonic.svg */ "./src/img/ViewSonic.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_17___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Sony.svg */ "./src/img/Sony.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_18___ = new URL(/* asset import */ __webpack_require__(/*! ./img/Line.svg */ "./src/img/Line.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_19___ = new URL(/* asset import */ __webpack_require__(/*! ./img/close.svg */ "./src/img/close.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_20___ = new URL(/* asset import */ __webpack_require__(/*! ./img/goside.svg */ "./src/img/goside.svg"), __webpack_require__.b);
 // Module
 var ___HTML_LOADER_REPLACEMENT_0___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_0___);
 var ___HTML_LOADER_REPLACEMENT_1___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_1___);
@@ -442,7 +748,11 @@ var ___HTML_LOADER_REPLACEMENT_13___ = _node_modules_html_loader_dist_runtime_ge
 var ___HTML_LOADER_REPLACEMENT_14___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_14___);
 var ___HTML_LOADER_REPLACEMENT_15___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_15___);
 var ___HTML_LOADER_REPLACEMENT_16___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_16___);
-var code = "<!DOCTYPE html>\r\n<html lang=\"ru\">\r\n  <head>\r\n    <meta charset=\"UTF-8\" />\r\n    <meta name=\"description\" content=\"\" />\r\n    <meta name=\"keywords\" content=\"\" />\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n    <title>CPS</title>\r\n  </head>\r\n  <body>\r\n    <div class=\"container\">\r\n      <header class=\"header\">\r\n        <div class=\"header__inner container\">\r\n          <button class=\"btn-reset header__burger\">\r\n            <img\r\n              src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\"\r\n              alt=\"Кнопка бургер-меню-открытие\"\r\n              class=\"header__burger-img\"\r\n            />\r\n          </button>\r\n          <div class=\"logo header__logo\">\r\n            <a href=\"#\" class=\"header__logo-link\">\r\n              <img src=\"" + ___HTML_LOADER_REPLACEMENT_1___ + "\" alt=\"Логотип\" class=\"header__logo-img\" />\r\n            </a>\r\n          </div>\r\n          <ul class=\"header__buttons\">\r\n            <li class=\"header__items\">\r\n              <button class=\"btn-reset header__btn\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_2___ + "\"\r\n                  alt=\"Кнопка-телефон\"\r\n                  class=\"header__btn-phone\"\r\n                />\r\n              </button>\r\n            </li>\r\n            <li class=\"header__items\">\r\n              <button class=\"btn-reset header__btn\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_3___ + "\"\r\n                  alt=\"Кнопка-чат\"\r\n                  class=\"header__btn-chat\"\r\n                />\r\n              </button>\r\n            </li>\r\n            <li class=\"header__items\">\r\n              <button class=\"btn-reset header__btn header__btn--border\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_4___ + "\"\r\n                  alt=\"Кнопка-профиль\"\r\n                  class=\"header__user\"\r\n                />\r\n              </button>\r\n            </li>\r\n            <li class=\"header__items\">\r\n              <button class=\"btn-reset header__btn\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_5___ + "\"\r\n                  alt=\"Кнопка-оставить заявку на ремонт\"\r\n                  class=\"header__btn-repair\"\r\n                />\r\n              </button>\r\n            </li>\r\n            <li class=\"header__items\">\r\n              <button class=\"btn-reset header__btn\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_6___ + "\"\r\n                  alt=\"Кнопка-проверка статуса\"\r\n                  class=\"header__btn-status\"\r\n                />\r\n              </button>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </header>\r\n      <main>\r\n        <section class=\"burger\">\r\n          <aside class=\"burger__menu\">\r\n            <div class=\"burger__overlay\">\r\n              <div class=\"burger__overlay-inner\">\r\n                <button class=\"btn-reset burger__btn\">\r\n                  <img src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\" alt=\"Кнопка бургер-меню-закрытие\" />\r\n                </button>\r\n                <div class=\"logo burger__logo\">\r\n                  <a href=\"#\" class=\"burger__logo-link\">\r\n                    <img\r\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_1___ + "\"\r\n                      alt=\"Логотип\"\r\n                      class=\"burger__logo-img\"\r\n                    />\r\n                  </a>\r\n                </div>\r\n                <button class=\"btn-reset burger__btn-search\">\r\n                  <a href=\"#\" class=\"burger__btn-search-link\">\r\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_7___ + "\" alt=\"Кнопка-поиска\" />\r\n                  </a>\r\n                </button>\r\n              </div>\r\n              <nav class=\"burger__navigation\">\r\n                <ul class=\"burger__list\">\r\n                  <li class=\"burger__list-item\">\r\n                    <a class=\"burger__link\" href=\"#\"> Ремонт техники </a>\r\n                  </li>\r\n                  <li class=\"burger__list-item\">\r\n                    <a class=\"burger__link\" href=\"#\"> Услуги и сервисы </a>\r\n                  </li>\r\n                  <li class=\"burger__list-item\">\r\n                    <a class=\"burger__link\" href=\"#\">\r\n                      Корпоративным клиентам\r\n                    </a>\r\n                  </li>\r\n                  <li class=\"burger__list-item\">\r\n                    <a class=\"burger__link\" href=\"#\"> Продавцам техники </a>\r\n                  </li>\r\n                  <li class=\"burger__list-item\">\r\n                    <a class=\"burger__link\" href=\"#\"> Партнерам </a>\r\n                  </li>\r\n                  <li class=\"burger__list-item\">\r\n                    <a class=\"burger__link\" href=\"#\"> Производителям </a>\r\n                  </li>\r\n                  <li class=\"burger__list-item\">\r\n                    <a class=\"burger__link\" href=\"#\"> Наши сервисные центры </a>\r\n                  </li>\r\n                  <li class=\"burger__list-item\">\r\n                    <a class=\"burger__link\" href=\"#\"> Контакты </a>\r\n                  </li>\r\n                </ul>\r\n              </nav>\r\n              <ul class=\"burger__buttons\">\r\n                <li class=\"burger__btn-item\">\r\n                  <button class=\"btn-reset burger__button\">\r\n                    <img\r\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_2___ + "\"\r\n                      alt=\"Кнопка-телефон\"\r\n                      class=\"burger__button-image\"\r\n                    />\r\n                  </button>\r\n                </li>\r\n                <li class=\"burger__btn-item\">\r\n                  <button class=\"btn-reset burger__button\">\r\n                    <img\r\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_3___ + "\"\r\n                      alt=\"Кнопка-чат\"\r\n                      class=\"burger__button-image\"\r\n                    />\r\n                  </button>\r\n                </li>\r\n                <li class=\"burger__btn-item\">\r\n                  <button class=\"btn-reset burger__button\">\r\n                    <img\r\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_4___ + "\"\r\n                      alt=\"Кнопка-профиль\"\r\n                      class=\"burger__button-image\"\r\n                    />\r\n                  </button>\r\n                </li>\r\n              </ul>\r\n              <a href=\"mailto:mail@cps.com\" class=\"burger__mail\"\r\n                >mail@cps.com</a\r\n              >\r\n              <a href=\"tel:8 800 890 8900\" class=\"burger__tel\"\r\n                >8 800 890 8900</a\r\n              >\r\n              <input type=\"radio\" id=\"ru\" />\r\n              <label class=\"burger__radio\" for=\"ru\">RU</label>\r\n              <input type=\"radio\" id=\"en\" />\r\n              <label class=\"burger__radio\" for=\"en\">EN</label>\r\n              <input type=\"radio\" id=\"ch\" />\r\n              <label class=\"burger__radio\" for=\"ch\">CH</label>\r\n            </div>\r\n          </aside>\r\n        </section>\r\n        <section class=\"services\">\r\n          <div class=\"services__inner\">\r\n            <h1 class=\"services__title\">Услуги и сервисы</h1>\r\n            <ul class=\"services__buttons\">\r\n              <li class=\"services__buttons-item\">\r\n                <span class=\"repair-span\"> Оставить заявку </span>\r\n                <button class=\"btn-reset services__btn\">\r\n                  <img\r\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_5___ + "\"\r\n                    alt=\"Кнопка-оставить заявку на ремонт\"\r\n                    class=\"services__btn-repair\"\r\n                  />\r\n                </button>\r\n              </li>\r\n              <li class=\"services__buttons-item\">\r\n                <span class=\"status-span\"> Статус ремонта </span>\r\n                <button class=\"btn-reset services__btn\">\r\n                  <img\r\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_6___ + "\"\r\n                    alt=\"Кнопка-проверка статуса\"\r\n                    class=\"services__btn-status\"\r\n                  />\r\n                </button>\r\n              </li>\r\n            </ul>\r\n            <nav class=\"services__navigation\">\r\n              <menu class=\"services__menu\">\r\n                <li class=\"services__item\">\r\n                  <a href=\"#\" class=\"services__link\"> Ремонтируемые бренды </a>\r\n                </li>\r\n                <li class=\"services__item\">\r\n                  <a href=\"#\" class=\"services__link\">\r\n                    Ремонтируемые устройства\r\n                  </a>\r\n                </li>\r\n                <li class=\"services__item\">\r\n                  <a href=\"#\" class=\"services__link\"> Цены на услуги </a>\r\n                </li>\r\n                <li class=\"services__item\">\r\n                  <a href=\"#\" class=\"services__link\">\r\n                    Адреса сервисных центров\r\n                  </a>\r\n                </li>\r\n                <li class=\"services__item\">\r\n                  <a href=\"#\" class=\"services__link\"> Специальные цены </a>\r\n                </li>\r\n                <li class=\"services__item\">\r\n                  <a href=\"#\" class=\"services__link\"> Отзывы </a>\r\n                </li>\r\n              </menu>\r\n            </nav>\r\n          </div>\r\n        </section>\r\n        <section class=\"about\">\r\n          <div class=\"about__inner\">\r\n            <div class=\"about__nested\">\r\n              <p class=\"about__text\">\r\n                Мы являемся авторизованным сервисным центром по ремонту техники\r\n                Dell. Только у нас вы можете отремонтировать свой ноутбук Dell с\r\n                официальной гарантией производителя.<br />\r\n                <br /><span class=\"span-tab\"\r\n                  >Мы успешно работаем с 1992 года и заслужили репутацию\r\n                  надежного партнера,</span\r\n                >\r\n                <span class=\"span-desctop\"\r\n                  >что подтверждает большое количество постоянных клиентов. Мы\r\n                  гордимся тем, что к нам обращаются по рекомендациям и, в свою\r\n                  очередь, советуют нас родным и близким.</span\r\n                >\r\n              </p>\r\n              <button class=\"btn-reset about__btn\">Читать далее</button>\r\n            </div>\r\n            <div class=\"about__image\">\r\n              <img\r\n                src=\"" + ___HTML_LOADER_REPLACEMENT_8___ + "\"\r\n                alt=\"Ремонт техники Dell\"\r\n                class=\"about__img\"\r\n              />\r\n            </div>\r\n          </div>\r\n        </section>\r\n        <section class=\"brends\">\r\n          <div class=\"brends__title-container\">\r\n            <h2 class=\"brends__title\">Ремонт техники различных брендов</h2>\r\n          </div>\r\n          <div class=\"brends__slider swiper\">\r\n            <div class=\"brends__swiper-wrapper swiper-wrapper\">\r\n              <div class=\"brends__slide-content brends__slide swiper-slide\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_9___ + "\"\r\n                  alt=\"Логотип Lenovo\"\r\n                  class=\"brends__slide-lenovo brends__slide-logo\"\r\n                />\r\n                <button class=\"btn-reset brends__slide-btn\"></button>\r\n              </div>\r\n              <div class=\"brends__slide-content brends__slide swiper-slide\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\"\r\n                  alt=\"Логотип Samsung\"\r\n                  class=\"brends__slide-Samsung brends__slide-logo\"\r\n                />\r\n                <button class=\"btn-reset brends__slide-btn\"></button>\r\n              </div>\r\n              <div class=\"brends__slide-content brends__slide swiper-slide\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_11___ + "\"\r\n                  alt=\"Логотип Apple\"\r\n                  class=\"brends__slide-Apple brends__slide-logo\"\r\n                />\r\n                <button class=\"btn-reset brends__slide-btn\"></button>\r\n              </div>\r\n              <div class=\"brends__slide-content brends__slide swiper-slide\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_12___ + "\"\r\n                  alt=\"Логотип Bosch\"\r\n                  class=\"brends__slide-Bosch brends__slide-logo\"\r\n                />\r\n                <button class=\"btn-reset brends__slide-btn\"></button>\r\n              </div>\r\n              <div class=\"brends__slide-content brends__slide swiper-slide\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_13___ + "\"\r\n                  alt=\"Логотип Hp\"\r\n                  class=\"brends__slide-Hp brends__slide-logo\"\r\n                />\r\n                <button class=\"btn-reset brends__slide-btn\"></button>\r\n              </div>\r\n              <div class=\"brends__slide-content brends__slide swiper-slide\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_14___ + "\"\r\n                  alt=\"Логотип Acer\"\r\n                  class=\"brends__slide-Acer brends__slide-logo\"\r\n                />\r\n                <button class=\"btn-reset brends__slide-btn\"></button>\r\n              </div>\r\n              <div class=\"brends__slide-content brends__slide swiper-slide\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_15___ + "\"\r\n                  alt=\"Логотип ViewSonic\"\r\n                  class=\"brends__slide-ViewSonic brends__slide-logo\"\r\n                />\r\n                <button class=\"btn-reset brends__slide-btn\"></button>\r\n              </div>\r\n              <div class=\"brends__slide-content brends__slide swiper-slide\">\r\n                <img\r\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_16___ + "\"\r\n                  alt=\"Логотип Sony\"\r\n                  class=\"brends__slide-Sony brends__slide-logo\"\r\n                />\r\n                <button class=\"btn-reset brends__slide-btn\"></button>\r\n              </div>\r\n            </div>\r\n            <div class=\"brends__swiper-pagination swiper-pagination\"></div>\r\n          </div>\r\n        </section>\r\n        <section class=\"repair\">\r\n          <div class=\"repair__title-container\">\r\n            <h2 class=\"repair__title\">Ремонт техники различных брендов</h2>\r\n          </div>\r\n          <div class=\"repair__slider swiper\">\r\n            <div class=\"repair__slider-wrapper swiper-wrapper\">\r\n              <div class=\"repair__slide swiper-slide\">\r\n                <p class=\"repair__slide-text\">Ремонт ноутбуков</p>\r\n                <button\r\n                  class=\"btn-reset repair__slide-btn brends__slide-btn\"\r\n                ></button>\r\n              </div>\r\n              <div class=\"repair__slide swiper-slide\">\r\n                <p class=\"repair__slide-text\">Ремонт планшетов</p>\r\n                <button\r\n                  class=\"btn-reset repair__slide-btn brends__slide-btn\"\r\n                ></button>\r\n              </div>\r\n              <div class=\"repair__slide swiper-slide\">\r\n                <p class=\"repair__slide-text\">Ремонт ПК</p>\r\n                <button\r\n                  class=\"btn-reset repair__slide-btn brends__slide-btn\"\r\n                ></button>\r\n              </div>\r\n              <div class=\"btn-reset repair__slide swiper-slide\">\r\n                <p class=\"repair__slide-text\">Ремонт мониторов</p>\r\n                <button\r\n                  class=\"btn-reset repair__slide-btn brends__slide-btn\"\r\n                ></button>\r\n              </div>\r\n            </div>\r\n            <div class=\"repair__swiper-pagination swiper-pagination\"></div>\r\n          </div>\r\n        </section>\r\n        <section class=\"price\">\r\n          <div class=\"price__title-container\">\r\n            <h2 class=\"price__title\">цены на услуги</h2>\r\n          </div>\r\n          <div class=\"price__slider swiper\">\r\n            <div class=\"price__slider-wrapper swiper-wrapper\">\r\n              <div class=\"price__slide swiper-slide\">\r\n                <div class=\"price__slide-content\">\r\n                  <div class=\"price__titile-box\">\r\n                    <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\r\n                    <p class=\"price__slide-lining\">\r\n                      Тестирование с выдачей технического заключения\r\n                    </p>\r\n                  </div>\r\n                  <div class=\"price__subtitle-box\">\r\n                    <h3 class=\"price__slide-title\">Цена</h3>\r\n                    <p class=\"price__slide-lining\">Бесплатно</p>\r\n                  </div>\r\n                  <div class=\"price__tarif-box\">\r\n                    <h3 class=\"price__slide-title\">Срок</h3>\r\n                    <p class=\"price__slide-lining\">30-120 мин</p>\r\n                  </div>\r\n                </div>\r\n                <button class=\"btn-reset price__slide-btn\">Заказать</button>\r\n              </div>\r\n              <div class=\"price__slide swiper-slide\">\r\n                <div class=\"price__slide-content\">\r\n                  <div class=\"price__titile-box\">\r\n                    <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\r\n                    <p class=\"price__slide-lining\">\r\n                      Тестирование с выдачей технического заключения\r\n                    </p>\r\n                  </div>\r\n                  <div class=\"price__subtitle-box\">\r\n                    <h3 class=\"price__slide-title\">Цена</h3>\r\n                    <p class=\"price__slide-lining\">Бесплатно</p>\r\n                  </div>\r\n                  <div class=\"price__tarif-box\">\r\n                    <h3 class=\"price__slide-title\">Срок</h3>\r\n                    <p class=\"price__slide-lining\">30-120 мин</p>\r\n                  </div>\r\n                </div>\r\n                <button class=\"btn-reset price__slide-btn\">Заказать</button>\r\n              </div>\r\n              <div class=\"price__slide swiper-slide\">\r\n                <div class=\"price__slide-content\">\r\n                  <div class=\"price__titile-box\">\r\n                    <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\r\n                    <p class=\"price__slide-lining\">\r\n                      Тестирование с выдачей технического заключения\r\n                    </p>\r\n                  </div>\r\n                  <div class=\"price__subtitle-box\">\r\n                    <h3 class=\"price__slide-title\">Цена</h3>\r\n                    <p class=\"price__slide-lining\">Бесплатно</p>\r\n                  </div>\r\n                  <div class=\"price__tarif-box\">\r\n                    <h3 class=\"price__slide-title\">Срок</h3>\r\n                    <p class=\"price__slide-lining\">30-120 мин</p>\r\n                  </div>\r\n                </div>\r\n                <button class=\"btn-reset price__slide-btn\">Заказать</button>\r\n              </div>\r\n              <div class=\"price__slide swiper-slide\">\r\n                <div class=\"price__slide-content\">\r\n                  <div class=\"price__titile-box\">\r\n                    <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\r\n                    <p class=\"price__slide-lining\">\r\n                      Тестирование с выдачей технического заключения\r\n                    </p>\r\n                  </div>\r\n                  <div class=\"price__subtitle-box\">\r\n                    <h3 class=\"price__slide-title\">Цена</h3>\r\n                    <p class=\"price__slide-lining\">Бесплатно</p>\r\n                  </div>\r\n                  <div class=\"price__tarif-box\">\r\n                    <h3 class=\"price__slide-title\">Срок</h3>\r\n                    <p class=\"price__slide-lining\">30-120 мин</p>\r\n                  </div>\r\n                </div>\r\n                <button class=\"btn-reset price__slide-btn\">Заказать</button>\r\n              </div>\r\n              <div class=\"price__slide swiper-slide\">\r\n                <div class=\"price__slide-content\">\r\n                  <div class=\"price__titile-box\">\r\n                    <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\r\n                    <p class=\"price__slide-lining\">\r\n                      Тестирование с выдачей технического заключения\r\n                    </p>\r\n                  </div>\r\n                  <div class=\"price__subtitle-box\">\r\n                    <h3 class=\"price__slide-title\">Цена</h3>\r\n                    <p class=\"price__slide-lining\">Бесплатно</p>\r\n                  </div>\r\n                  <div class=\"price__tarif-box\">\r\n                    <h3 class=\"price__slide-title\">Срок</h3>\r\n                    <p class=\"price__slide-lining\">30-120 мин</p>\r\n                  </div>\r\n                </div>\r\n                <button class=\"btn-reset price__slide-btn\">Заказать</button>\r\n              </div>\r\n            </div>\r\n            <div class=\"price__swiper-pagination swiper-pagination\"></div>\r\n          </div>\r\n          <div class=\"price__info\">\r\n            <p class=\"price__info-text\">\r\n              Все цены указаны с учетом НДС. Стоимость ремонта указана на\r\n              единичную услугу. Для получения коммерческого предложения на\r\n              постоянное обслуживание, оставьте заявку.\r\n            </p>\r\n            <div class=\"price__info-btn\">\r\n              <a href=\"#\" class=\"price__info-link\">\r\n                Получить коммерческое предложение\r\n              </a>\r\n            </div>\r\n          </div>\r\n        </section>\r\n      </main>\r\n      <footer class=\"footer\">\r\n        <p class=\"footer__content\">© 2019 CPS Разработано командой Apesong</p>\r\n        <p class=\"footer__content\">Политика конфиденциальности</p>\r\n        <p class=\"footer__content\">\r\n          Информация, размещенная на данной странице, не является публичной\r\n          офертой\r\n        </p>\r\n      </footer>\r\n    </div>\r\n  </body>\r\n</html>\r\n";
+var ___HTML_LOADER_REPLACEMENT_17___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_17___);
+var ___HTML_LOADER_REPLACEMENT_18___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_18___);
+var ___HTML_LOADER_REPLACEMENT_19___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_19___);
+var ___HTML_LOADER_REPLACEMENT_20___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_20___);
+var code = "<!DOCTYPE html>\n<html lang=\"ru\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"description\" content=\"\" />\n    <meta name=\"keywords\" content=\"\" />\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>CPS</title>\n  </head>\n  <body>\n    <header class=\"header header__position\" id=\"atr\">\n      <div class=\"header__inner container\">\n        <button class=\"btn-reset header__burger header__burger--active\">\n          <img\n            src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\"\n            alt=\"Кнопка бургер-меню-открытие\"\n            class=\"header__burger-img\"\n          />\n        </button>\n        <div class=\"logo header__logo\">\n          <a href=\"#\" class=\"header__logo-link\">\n            <img src=\"" + ___HTML_LOADER_REPLACEMENT_1___ + "\" alt=\"Логотип\" class=\"header__logo-img\" />\n          </a>\n        </div>\n        <ul class=\"header__buttons\">\n          <li class=\"header__items\">\n            <button class=\"btn-reset header__btn header__btn-call header__btn-call--active\">\n              <img\n                src=\"" + ___HTML_LOADER_REPLACEMENT_2___ + "\"\n                alt=\"Кнопка-телефон\"\n                class=\"header__btn-phone\"\n              />\n            </button>\n          </li>\n          <li class=\"header__items\">\n            <button class=\"btn-reset header__btn header__btn-message header__btn-chat--active\">\n              <img\n                src=\"" + ___HTML_LOADER_REPLACEMENT_3___ + "\"\n                alt=\"Кнопка-чат\"\n                class=\"header__btn-chat\"\n              />\n            </button>\n          </li>\n          <li class=\"header__items\">\n            <button class=\"btn-reset header__btn header__btn--border header__users header__user--active\">\n              <img\n                src=\"" + ___HTML_LOADER_REPLACEMENT_4___ + "\"\n                alt=\"Кнопка-профиль\"\n                class=\"header__user\"\n              />\n            </button>\n          </li>\n          <li class=\"header__items\">\n            <button class=\"btn-reset header__btn header__btn-mail btn-mail header__btn-mail--active\">\n              <img\n                src=\"" + ___HTML_LOADER_REPLACEMENT_5___ + "\"\n                alt=\"Кнопка-оставить заявку на ремонт\"\n                class=\"header__btn-repair\"\n              />\n            </button>\n          </li>\n          <li class=\"header__items\">\n            <button class=\"btn-reset header__btn btn-status  header__btn-status--active\">\n              <img\n                src=\"" + ___HTML_LOADER_REPLACEMENT_6___ + "\"\n                alt=\"Кнопка-проверка статуса\"\n                class=\"header__btn-status\"\n              />\n            </button>\n          </li>\n        </ul>\n      </div>\n    </header>\n    <div class=\"site-wrapper\">\n      <div class=\"burger-container\">\n        <section class=\"burger\">\n          <aside class=\"burger__menu\">\n            <div class=\"burger__overlay\">\n              <div class=\"burger__overlay-inner\">\n                <button class=\"btn-reset burger__btn burger__btn--active\">\n                  <img src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\" alt=\"Кнопка бургер-меню-закрытие\" />\n                </button>\n                <div class=\"logo burger__logo\">\n                  <a href=\"#\" class=\"burger__logo-link\">\n                    <img\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_1___ + "\"\n                      alt=\"Логотип\"\n                      class=\"burger__logo-img\"\n                    />\n                  </a>\n                </div>\n                <button class=\"btn-reset burger__btn-search burger__btn-search--active\">\n                  <a href=\"#\" class=\"burger__btn-search-link\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_7___ + "\" alt=\"Кнопка-поиска\" />\n                  </a>\n                </button>\n              </div>\n              <nav class=\"burger__navigation\">\n                <ul class=\"burger__list\">\n                  <li class=\"burger__list-item \">\n                    <a class=\"burger__link burger__link--active\" href=\"#\"> Ремонт техники </a>\n                  </li>\n                  <li class=\"burger__list-item \">\n                    <a class=\"burger__link burger__link--active\" href=\"#\"> Услуги и сервисы </a>\n                  </li>\n                  <li class=\"burger__list-item \">\n                    <a class=\"burger__link burger__link--active\" href=\"#\">\n                      Корпоративным клиентам\n                    </a>\n                  </li>\n                  <li class=\"burger__list-item \">\n                    <a class=\"burger__link burger__link--active\" href=\"#\"> Продавцам техники </a>\n                  </li>\n                  <li class=\"burger__list-item \">\n                    <a class=\"burger__link burger__link--active\" href=\"#\"> Партнерам </a>\n                  </li>\n                  <li class=\"burger__list-item \">\n                    <a class=\"burger__link burger__link--active\" href=\"#\"> Производителям </a>\n                  </li>\n                  <li class=\"burger__list-item \">\n                    <a class=\"burger__link burger__link--active\" href=\"#\"> Наши сервисные центры </a>\n                  </li>\n                  <li class=\"burger__list-item \">\n                    <a class=\"burger__link burger__link--active\" href=\"#\"> Контакты </a>\n                  </li>\n                </ul>\n              </nav>\n              <ul class=\"burger__buttons\">\n                <li class=\"burger__btn-item\">\n                  <button class=\"btn-reset burger__button burger__button-tel burger__button-tel--active\">\n                    <img\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_2___ + "\"\n                      alt=\"Кнопка-телефон\"\n                      class=\"burger__button-image\"\n                    />\n                  </button>\n                </li>\n                <li class=\"burger__btn-item\">\n                  <button class=\"btn-reset burger__button burger__button-chat burger__button-chat--active\">\n                    <img\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_3___ + "\"\n                      alt=\"Кнопка-чат\"\n                      class=\"burger__button-image\"\n                    />\n                  </button>\n                </li>\n                <li class=\"burger__btn-item\">\n                  <button class=\"btn-reset burger__button burger__button-user--ative\">\n                    <img\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_4___ + "\"\n                      alt=\"Кнопка-профиль\"\n                      class=\"burger__button-image\"\n                    />\n                  </button>\n                </li>\n              </ul>\n              <a href=\"mailto:mail@cps.com\" class=\"burger__mail\"\n                >mail@cps.com</a\n              >\n              <a href=\"tel:8 800 890 8900\" class=\"burger__tel\"\n                >8 800 890 8900</a\n              >\n              <input type=\"radio\" id=\"ru\" />\n              <label class=\"burger__radio\" for=\"ru\">RU</label>\n              <input type=\"radio\" id=\"en\" />\n              <label class=\"burger__radio\" for=\"en\">EN</label>\n              <input type=\"radio\" id=\"ch\" />\n              <label class=\"burger__radio\" for=\"ch\">CH</label>\n            </div>\n          </aside>\n        </section>\n      </div>\n      <div class=\"container\" id=\"elem\">\n        <main>\n          <section class=\"services\">\n            <div class=\"services__inner\">\n              <h1 class=\"services__title\">Услуги и сервисы</h1>\n              <ul class=\"services__buttons\">\n                <li class=\"services__buttons-item\">\n                  <span class=\"repair-span\"> Оставить заявку </span>\n                  <button class=\"btn-reset services__btn btn-mail-services\">\n                    <img\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_5___ + "\"\n                      alt=\"Кнопка-оставить заявку на ремонт\"\n                      class=\"services__btn-repair\"\n                    />\n                  </button>\n                </li>\n                <li class=\"services__buttons-item\">\n                  <span class=\"status-span\"> Статус ремонта </span>\n                  <button class=\"btn-reset services__btn btn-status-services\">\n                    <img\n                      src=\"" + ___HTML_LOADER_REPLACEMENT_6___ + "\"\n                      alt=\"Кнопка-проверка статуса\"\n                      class=\"services__btn-status\"\n                    />\n                  </button>\n                </li>\n              </ul>\n            </div>\n            <nav class=\"services__navigation\">\n              <menu class=\"services__menu\">\n                <li class=\"services__item services__item--active\">\n                  <a href=\"#\" class=\"services__link\">\n                    Ремонтируемые бренды\n                  </a>\n                </li>\n                <li class=\"services__item services__item--active\">\n                  <a href=\"#\" class=\"services__link\">\n                    Ремонтируемые устройства\n                  </a>\n                </li>\n                <li class=\"services__item services__item--active\">\n                  <a href=\"#\" class=\"services__link\"> Цены на услуги </a>\n                </li>\n                <li class=\"services__item services__item--active\">\n                  <a href=\"#\" class=\"services__link\">\n                    Адреса сервисных центров\n                  </a>\n                </li>\n                <li class=\"services__item services__item--active\">\n                  <a href=\"#\" class=\"services__link\"> Специальные цены </a>\n                </li>\n                <li class=\"services__item services__item--active\">\n                  <a href=\"#\" class=\"services__link\"> Отзывы </a>\n                </li>\n              </menu>\n            </nav>\n          </section>\n          <section class=\"about\">\n            <div class=\"about__inner\">\n              <div class=\"about__nested\">\n                <p class=\"about__text\">\n                  Мы являемся авторизованным сервисным центром по ремонту\n                  техники Dell. Только у нас вы можете отремонтировать свой\n                  ноутбук Dell с официальной гарантией производителя.<br />\n                  <br /><span class=\"btn-close span-tab\"\n                    >Мы успешно работаем с 1992 года и заслужили репутацию\n                    надежного партнера,</span\n                  >\n                  <span class=\"btn-close span-desctop\"\n                    >что подтверждает большое количество постоянных клиентов. Мы\n                    гордимся тем, что к нам обращаются по рекомендациям и, в\n                    свою очередь, советуют нас родным и близким.</span\n                  >\n                </p>\n                <button class=\"btn-reset about__btn\">\n                  <div class=\"about__btn-on\">\n                  Читать далее\n                </div>\n                  <div class=\"about__btn-close btn-close\">\n                    Скрыть\n                  </div>\n                </button>\n              </div>\n              <div class=\"about__image\">\n                <img\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_8___ + "\"\n                  alt=\"Ремонт техники Dell\"\n                  class=\"about__img\"\n                />\n              </div>\n            </div>\n          </section>\n          <section class=\"brends\">\n            <div class=\"brends__title-container\">\n              <h2 class=\"brends__title\">Ремонт техники различных брендов</h2>\n            </div>\n            <div class=\"brends__slider swiper\">\n              <div class=\"brends__swiper-wrapper swiper-wrapper\">\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_9___ + "\"\n                    alt=\"Логотип Lenovo\"\n                    class=\"brends__slide-lenovo brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_11___ + "\"\n                    alt=\"Логотип Samsung\"\n                    class=\"brends__slide-Samsung brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_12___ + "\"\n                    alt=\"Логотип Apple\"\n                    class=\"brends__slide-Apple brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_13___ + "\"\n                    alt=\"Логотип Bosch\"\n                    class=\"brends__slide-Bosch brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_14___ + "\"\n                    alt=\"Логотип Hp\"\n                    class=\"brends__slide-Hp brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_15___ + "\"\n                    alt=\"Логотип Acer\"\n                    class=\"brends__slide-Acer brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_16___ + "\"\n                    alt=\"Логотип ViewSonic\"\n                    class=\"brends__slide-ViewSonic brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_17___ + "\"\n                    alt=\"Логотип Sony\"\n                    class=\"brends__slide-Sony brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n\n\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_9___ + "\"\n                    alt=\"Логотип Lenovo\"\n                    class=\"brends__slide-lenovo brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_11___ + "\"\n                    alt=\"Логотип Samsung\"\n                    class=\"brends__slide-Samsung brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_12___ + "\"\n                    alt=\"Логотип Apple\"\n                    class=\"brends__slide-Apple brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_13___ + "\"\n                    alt=\"Логотип Bosch\"\n                    class=\"brends__slide-Bosch brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_14___ + "\"\n                    alt=\"Логотип Hp\"\n                    class=\"brends__slide-Hp brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_15___ + "\"\n                    alt=\"Логотип Acer\"\n                    class=\"brends__slide-Acer brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_16___ + "\"\n                    alt=\"Логотип ViewSonic\"\n                    class=\"brends__slide-ViewSonic brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"brends__slide-content brends__slide swiper-slide\">\n                  <img\n                    src=\"" + ___HTML_LOADER_REPLACEMENT_17___ + "\"\n                    alt=\"Логотип Sony\"\n                    class=\"brends__slide-Sony brends__slide-logo\"\n                  />\n                  <button class=\"btn-reset brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n              </div>\n              <div class=\"brends__swiper-pagination swiper-pagination\"></div>\n            </div>\n            <button class=\"btn-reset brends__btn-onclick\">\n              <div class=\"brends__btn-on\">\n                Показать все\n              </div>\n              <div class=\"brends__btn-of btn-close\">\n                Скрыть все\n              </div>\n            </button>\n          </section>\n          <section class=\"repair\">\n            <div class=\"repair__title-container\">\n              <h2 class=\"repair__title\">Ремонт техники различных брендов</h2>\n            </div>\n            <div class=\"repair__slider swiper\">\n              <div class=\"repair__slider-wrapper swiper-wrapper\">\n                <div class=\"repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт ноутбуков</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт планшетов</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт ПК</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"btn-reset repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт мониторов</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n\n\n                <div class=\"repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт ноутбуков</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт планшетов</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт ПК</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"btn-reset repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт мониторов</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>   <div class=\"repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт ноутбуков</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт планшетов</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт ПК</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n                <div class=\"btn-reset repair__slide swiper-slide\">\n                  <p class=\"repair__slide-text\">Ремонт мониторов</p>\n                  <button class=\"btn-reset repair__slide-btn brends__slide-btn\">\n                    <img src=\"" + ___HTML_LOADER_REPLACEMENT_10___ + "\" alt=\"Кнопка-слайдера\" />\n                  </button>\n                </div>\n              </div>\n              <div class=\"repair__swiper-pagination swiper-pagination\"></div>\n            </div>\n            <button class=\"btn-reset repair__btn-onclick\">\n              <div class=\"repair__slide-on\">\n                Показать все\n              </div>\n              <div class=\"repair__slide-of btn-close\">\n                Скрыть все\n              </div>\n            </button>\n          </section>\n          <section class=\"price\">\n            <div class=\"price__title-container\">\n              <h2 class=\"price__title\">цены на услуги</h2>\n            </div>\n            <div class=\"price__title-desctop\">\n              <p>Ремонтные услуги</p>\n              <p>Цена</p>\n              <p>Срок</p>\n            </div>\n            <div class=\"price__slider swiper\">\n              <div class=\"price__slider-wrapper swiper-wrapper\">\n                <div class=\"price__slide swiper-slide\">\n                  <div class=\"price__slide-content\">\n                    <div class=\"price__titile-box\">\n                      <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\n                      <p class=\"price__slide-lining\">Диагностика</p>\n                    </div>\n                    <div class=\"price__subtitle-box\">\n                      <h3 class=\"price__slide-title\">Цена</h3>\n                      <p class=\"price__slide-lining\">Бесплатно</p>\n                    </div>\n                    <div class=\"price__tarif-box\">\n                      <h3 class=\"price__slide-title\">Срок</h3>\n                      <p class=\"price__slide-lining\">30-120 мин</p>\n                    </div>\n                  </div>\n                  <button class=\"btn-reset price__slide-btn\">Заказать</button>\n                </div>\n                <div class=\"price__slide swiper-slide\">\n                  <div class=\"price__slide-content\">\n                    <div class=\"price__titile-box\">\n                      <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\n                      <p class=\"price__slide-lining\">Замена дисплея</p>\n                    </div>\n                    <div class=\"price__subtitle-box\">\n                      <h3 class=\"price__slide-title\">Цена</h3>\n                      <p class=\"price__slide-lining\">Бесплатно</p>\n                    </div>\n                    <div class=\"price__tarif-box\">\n                      <h3 class=\"price__slide-title\">Срок</h3>\n                      <p class=\"price__slide-lining\">30-120 мин</p>\n                    </div>\n                  </div>\n                  <button class=\"btn-reset price__slide-btn\">Заказать</button>\n                </div>\n                <div class=\"price__slide swiper-slide\">\n                  <div class=\"price__slide-content\">\n                    <div class=\"price__titile-box\">\n                      <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\n                      <p class=\"price__slide-lining\">\n                        Замена полифонического динамика\n                      </p>\n                    </div>\n                    <div class=\"price__subtitle-box\">\n                      <h3 class=\"price__slide-title\">Цена</h3>\n                      <p class=\"price__slide-lining\">Бесплатно</p>\n                    </div>\n                    <div class=\"price__tarif-box\">\n                      <h3 class=\"price__slide-title\">Срок</h3>\n                      <p class=\"price__slide-lining\">30-120 мин</p>\n                    </div>\n                  </div>\n                  <button class=\"btn-reset price__slide-btn\">Заказать</button>\n                </div>\n                <div class=\"price__slide swiper-slide\">\n                  <div class=\"price__slide-content\">\n                    <div class=\"price__titile-box\">\n                      <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\n                      <p class=\"price__slide-lining\">\n                        Тестирование с выдачей технического заключения\n                      </p>\n                    </div>\n                    <div class=\"price__subtitle-box\">\n                      <h3 class=\"price__slide-title\">Цена</h3>\n                      <p class=\"price__slide-lining\">Бесплатно</p>\n                    </div>\n                    <div class=\"price__tarif-box\">\n                      <h3 class=\"price__slide-title\">Срок</h3>\n                      <p class=\"price__slide-lining\">30-120 мин</p>\n                    </div>\n                  </div>\n                  <button class=\"btn-reset price__slide-btn\">Заказать</button>\n                </div>\n                <div class=\"price__slide swiper-slide\">\n                  <div class=\"price__slide-content\">\n                    <div class=\"price__titile-box\">\n                      <h3 class=\"price__slide-title\">Ремонтные услуги</h3>\n                      <p class=\"price__slide-lining\">\n                        Замена программного обеспечения\n                      </p>\n                    </div>\n                    <div class=\"price__subtitle-box\">\n                      <h3 class=\"price__slide-title\">Цена</h3>\n                      <p class=\"price__slide-lining\">Бесплатно</p>\n                    </div>\n                    <div class=\"price__tarif-box\">\n                      <h3 class=\"price__slide-title\">Срок</h3>\n                      <p class=\"price__slide-lining\">30-120 мин</p>\n                    </div>\n                  </div>\n                  <button class=\"btn-reset price__slide-btn\">Заказать</button>\n                </div>\n              </div>\n              <div class=\"price__swiper-pagination swiper-pagination\"></div>\n            </div>\n            <div class=\"price__info\">\n              <p class=\"price__info-text\">\n                Все цены указаны с учетом НДС. Стоимость ремонта указана на\n                единичную услугу. Для получения коммерческого предложения на\n                постоянное обслуживание, оставьте заявку.\n              </p>\n              <div class=\"price__info-btn\">\n                <a href=\"#\" class=\"price__info-link\">\n                  Получить коммерческое предложение\n                </a>\n                <img src=\"" + ___HTML_LOADER_REPLACEMENT_18___ + "\" alt=\"Кнопка Прайс\" />\n              </div>\n            </div>\n          </section>\n        </main>\n        <footer class=\"footer\">\n          <p class=\"footer__content\">© 2019 CPS Разработано командой Apesong</p>\n          <p class=\"footer__content\">Политика конфиденциальности</p>\n          <p class=\"footer__content\">\n            Информация, размещенная на данной странице, не является публичной\n            офертой\n          </p>\n        </footer>\n      </div>\n      <div class=\"modal-container\">\n        <section class=\"modal-form\"  role=\"dialog\" aria-modal=\"true\" \n        aria-live=\"assertive\">\n          <div class=\"modal-form__menu\">\n            <div class=\"modal-form__overlay\">\n              <button class=\"btn-reset modal-form__close modal-form__close--active\">\n                <img\n                  class=\"modal-form__img-close\"\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_19___ + "\"\n                  alt=\"Кнопка Закрытия\"\n                />\n              </button>\n              <div class=\"modal-form__inner\">\n                <h2 class=\"modal-form__title\">\n                  Обратная связь\n                </h2>\n                <form action=\"URL\" class=\"modal-form__call\" id=\"modal-form\">\n                  <input\n                    class=\"modal-form__name modal-form__input\"\n                    type=\"text\"\n                    placeholder=\"Имя\"\n                    required\n                  />\n                  <input\n                    class=\"modal-form__tel modal-form__input\"\n                    type=\"tel\"\n                    placeholder=\"Телефон\"\n                    required\n                  />\n                  <input\n                    class=\"modal-form__email modal-form__input\"\n                    type=\"email\"\n                    placeholder=\"Почта\"\n                    required\n                  />\n                  <textarea\n                    class=\"modal-form__textarea\"\n                    name=\"message\"\n                    id=\"\"\n                    cols=\"30\"\n                    rows=\"10\"\n                    placeholder=\"Сообщение\"\n                  ></textarea>\n                </form>\n                <div class=\"modal-form__text\">\n                  Нажимая “отправить”, вы даете согласие на <span>обработку персональных данных</span> \n                  и соглашаетесь с нашей <span> политикой\n                    конфиденциальности</span>\n                </div>\n                <button\n                  class=\"btn-reset modal-form__btn\"\n                  type=\"submit\"\n                >ОТПРАВИТЬ\n                <img src=\"" + ___HTML_LOADER_REPLACEMENT_20___ + "\" alt=\"line-btn\">\n              </button>\n              </div>\n            </div>\n          </div>\n        </section>\n        <section class=\"modal-caller\" role=\"dialog\" aria-modal=\"true\" \n        aria-live=\"assertive\">\n          <div class=\"modal-caller__menu\">\n            <div class=\"modal-caller__overlay\">\n              <button class=\"btn-reset modal-caller__close modal-caller__close--active\">\n                <img\n                  class=\"modal-caller__img-close\"\n                  src=\"" + ___HTML_LOADER_REPLACEMENT_19___ + "\"\n                  alt=\"Кнопка Закрытия\"\n                />\n              </button>\n              <div class=\"modal-caller__inner\">\n                <h2 class=\"modal-caller__title\">\n                  Заказать звонок\n                </h2>\n                <form class=\"modal-caller__call\" id=\"modalCall\">\n                  <input\n                    class=\"modal-form__tel modal-caller__input\"\n                    type=\"tel\"\n                    placeholder=\"Телефон\"\n                    required\n                  />\n                </form>\n                <div class=\"modal-form__text\">\n                  Нажимая “отправить”, вы даете согласие на <span>обработку персональных данных</span> \n                  и соглашаетесь с нашей <span> политикой\n                    конфиденциальности</span>\n                </div>\n                <button\n                  class=\"btn-reset modal-caller__btn\"\n                  type=\"submit\"\n                >ОТПРАВИТЬ\n                <img src=\"" + ___HTML_LOADER_REPLACEMENT_20___ + "\" alt=\"line-btn\">\n              </button>\n              </div>\n            </div>\n          </div>\n        </section>\n      </div>\n    </div>\n  </body>\n</html>\n";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
@@ -454,7 +764,6 @@ var code = "<!DOCTYPE html>\r\n<html lang=\"ru\">\r\n  <head>\r\n    <meta chars
   \*********************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 module.exports = function (url, options) {
@@ -490,7 +799,6 @@ module.exports = function (url, options) {
   \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -545,7 +853,6 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
   \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -600,7 +907,6 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
   \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -655,7 +961,6 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -710,7 +1015,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \****************************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 var stylesInDOM = [];
@@ -804,7 +1108,6 @@ module.exports = function (list, options) {
   \********************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 var memo = {};
@@ -848,7 +1151,6 @@ module.exports = insertBySelector;
   \**********************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 /* istanbul ignore next  */
@@ -868,7 +1170,6 @@ module.exports = insertStyleElement;
   \**********************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 
 
 /* istanbul ignore next  */
@@ -888,7 +1189,6 @@ module.exports = setAttributesWithoutAttributes;
   \***************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 /* istanbul ignore next  */
@@ -959,7 +1259,6 @@ module.exports = domAPI;
   \*********************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 /* istanbul ignore next  */
@@ -983,7 +1282,6 @@ module.exports = styleTagTransform;
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module) => {
 
-"use strict";
 module.exports = "data:application/font-woff;charset=utf-8;base64, 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";
 
 /***/ }),
@@ -994,7 +1292,6 @@ module.exports = "data:application/font-woff;charset=utf-8;base64, d09GRgABAAAAA
   \*************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "fonts/TTLakes-Bold.woff";
 
 /***/ }),
@@ -1005,7 +1302,6 @@ module.exports = __webpack_require__.p + "fonts/TTLakes-Bold.woff";
   \**************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "fonts/TTLakes-Bold.woff2";
 
 /***/ }),
@@ -1016,7 +1312,6 @@ module.exports = __webpack_require__.p + "fonts/TTLakes-Bold.woff2";
   \***************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "fonts/TTLakes-Medium.woff";
 
 /***/ }),
@@ -1027,7 +1322,6 @@ module.exports = __webpack_require__.p + "fonts/TTLakes-Medium.woff";
   \****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "fonts/TTLakes-Medium.woff2";
 
 /***/ }),
@@ -1038,7 +1332,6 @@ module.exports = __webpack_require__.p + "fonts/TTLakes-Medium.woff2";
   \****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "fonts/TTLakes-Regular.woff";
 
 /***/ }),
@@ -1049,7 +1342,6 @@ module.exports = __webpack_require__.p + "fonts/TTLakes-Regular.woff";
   \*****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "fonts/TTLakes-Regular.woff2";
 
 /***/ }),
@@ -1060,7 +1352,6 @@ module.exports = __webpack_require__.p + "fonts/TTLakes-Regular.woff2";
   \**************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/Acer.svg";
 
 /***/ }),
@@ -1071,7 +1362,6 @@ module.exports = __webpack_require__.p + "assets/Acer.svg";
   \***************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/Apple.svg";
 
 /***/ }),
@@ -1082,7 +1372,6 @@ module.exports = __webpack_require__.p + "assets/Apple.svg";
   \***************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/Bosch.svg";
 
 /***/ }),
@@ -1093,7 +1382,6 @@ module.exports = __webpack_require__.p + "assets/Bosch.svg";
   \************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/Hp.svg";
 
 /***/ }),
@@ -1104,8 +1392,17 @@ module.exports = __webpack_require__.p + "assets/Hp.svg";
   \****************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/Lenovo.svg";
+
+/***/ }),
+
+/***/ "./src/img/Line.svg":
+/*!**************************!*\
+  !*** ./src/img/Line.svg ***!
+  \**************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/Line.svg";
 
 /***/ }),
 
@@ -1115,7 +1412,6 @@ module.exports = __webpack_require__.p + "assets/Lenovo.svg";
   \*****************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/Samsung.svg";
 
 /***/ }),
@@ -1126,7 +1422,6 @@ module.exports = __webpack_require__.p + "assets/Samsung.svg";
   \**************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/Sony.svg";
 
 /***/ }),
@@ -1137,7 +1432,6 @@ module.exports = __webpack_require__.p + "assets/Sony.svg";
   \*******************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/ViewSonic.svg";
 
 /***/ }),
@@ -1148,7 +1442,6 @@ module.exports = __webpack_require__.p + "assets/ViewSonic.svg";
   \****************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/burger.svg";
 
 /***/ }),
@@ -1159,7 +1452,6 @@ module.exports = __webpack_require__.p + "assets/burger.svg";
   \**************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/call.svg";
 
 /***/ }),
@@ -1170,7 +1462,6 @@ module.exports = __webpack_require__.p + "assets/call.svg";
   \**************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/chat.svg";
 
 /***/ }),
@@ -1181,8 +1472,37 @@ module.exports = __webpack_require__.p + "assets/chat.svg";
   \*********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/checkstatus.svg";
+
+/***/ }),
+
+/***/ "./src/img/close.svg":
+/*!***************************!*\
+  !*** ./src/img/close.svg ***!
+  \***************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/close.svg";
+
+/***/ }),
+
+/***/ "./src/img/go.svg":
+/*!************************!*\
+  !*** ./src/img/go.svg ***!
+  \************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/go.svg";
+
+/***/ }),
+
+/***/ "./src/img/goside.svg":
+/*!****************************!*\
+  !*** ./src/img/goside.svg ***!
+  \****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/goside.svg";
 
 /***/ }),
 
@@ -1192,7 +1512,6 @@ module.exports = __webpack_require__.p + "assets/checkstatus.svg";
   \******************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/info-img.jpg";
 
 /***/ }),
@@ -1203,7 +1522,6 @@ module.exports = __webpack_require__.p + "assets/info-img.jpg";
   \**************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/logo.svg";
 
 /***/ }),
@@ -1214,7 +1532,6 @@ module.exports = __webpack_require__.p + "assets/logo.svg";
   \*****************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/profile.svg";
 
 /***/ }),
@@ -1225,7 +1542,6 @@ module.exports = __webpack_require__.p + "assets/profile.svg";
   \****************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/repair.svg";
 
 /***/ }),
@@ -1236,7 +1552,6 @@ module.exports = __webpack_require__.p + "assets/repair.svg";
   \****************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 module.exports = __webpack_require__.p + "assets/search.svg";
 
 /***/ }),
@@ -1247,7 +1562,6 @@ module.exports = __webpack_require__.p + "assets/search.svg";
   \***************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "extend": () => (/* binding */ extend),
@@ -1414,7 +1728,6 @@ function getWindow() {
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getBreakpoint)
@@ -1465,7 +1778,6 @@ function getBreakpoint(breakpoints, base = 'window', containerEl) {
   \*******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1487,7 +1799,6 @@ __webpack_require__.r(__webpack_exports__);
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ setBreakpoint)
@@ -1573,7 +1884,6 @@ function setBreakpoint() {
   \**********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1619,7 +1929,6 @@ function checkOverflow() {
   \********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ addClasses)
@@ -1683,7 +1992,6 @@ function addClasses() {
   \***************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1705,7 +2013,6 @@ __webpack_require__.r(__webpack_exports__);
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ removeClasses)
@@ -1728,7 +2035,6 @@ function removeClasses() {
   \******************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2361,7 +2667,6 @@ Swiper.use([_modules_resize_resize_js__WEBPACK_IMPORTED_MODULE_5__["default"], _
   \**********************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2492,7 +2797,6 @@ __webpack_require__.r(__webpack_exports__);
   \****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2604,7 +2908,6 @@ __webpack_require__.r(__webpack_exports__);
   \**************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2717,7 +3020,6 @@ function detachEvents() {
   \****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ onClick)
@@ -2742,7 +3044,6 @@ function onClick(e) {
   \***************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ onLoad)
@@ -2763,7 +3064,6 @@ function onLoad(e) {
   \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ onResize)
@@ -2829,7 +3129,6 @@ function onResize() {
   \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ onScroll)
@@ -2873,7 +3172,6 @@ function onScroll() {
   \*******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ onTouchEnd)
@@ -3038,7 +3336,6 @@ function onTouchEnd(event) {
   \********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ onTouchMove)
@@ -3295,7 +3592,6 @@ function onTouchMove(event) {
   \*********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ onTouchStart)
@@ -3423,7 +3719,6 @@ function onTouchStart(event) {
   \*******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -3445,7 +3740,6 @@ __webpack_require__.r(__webpack_exports__);
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ setGrabCursor)
@@ -3474,7 +3768,6 @@ function setGrabCursor(moving) {
   \*****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ unsetGrabCursor)
@@ -3503,7 +3796,6 @@ function unsetGrabCursor() {
   \************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -3528,7 +3820,6 @@ __webpack_require__.r(__webpack_exports__);
   \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ loopCreate)
@@ -3560,7 +3851,6 @@ function loopCreate(slideRealIndex) {
   \******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ loopDestroy)
@@ -3596,7 +3886,6 @@ function loopDestroy() {
   \**************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ loopFix)
@@ -3757,7 +4046,6 @@ function loopFix({
   \********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ moduleExtendParams)
@@ -3804,7 +4092,6 @@ function moduleExtendParams(params, allModulesParams) {
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Observer)
@@ -3889,7 +4176,6 @@ function Observer({
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Resize)
@@ -3971,7 +4257,6 @@ function Resize({
   \*************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -4008,7 +4293,6 @@ __webpack_require__.r(__webpack_exports__);
   \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ slideNext)
@@ -4050,7 +4334,6 @@ function slideNext(speed = this.params.speed, runCallbacks = true, internal) {
   \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ slidePrev)
@@ -4120,7 +4403,6 @@ function slidePrev(speed = this.params.speed, runCallbacks = true, internal) {
   \******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ slideReset)
@@ -4139,7 +4421,6 @@ function slideReset(speed = this.params.speed, runCallbacks = true, internal) {
   \***************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ slideTo)
@@ -4296,7 +4577,6 @@ function slideTo(index = 0, speed = this.params.speed, runCallbacks = true, inte
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ slideToClickedSlide)
@@ -4348,7 +4628,6 @@ function slideToClickedSlide() {
   \**********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ slideToClosest)
@@ -4390,7 +4669,6 @@ function slideToClosest(speed = this.params.speed, runCallbacks = true, internal
   \*******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ slideToLoop)
@@ -4421,7 +4699,6 @@ function slideToLoop(index = 0, speed = this.params.speed, runCallbacks = true, 
   \******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -4446,7 +4723,6 @@ __webpack_require__.r(__webpack_exports__);
   \**************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ setTransition)
@@ -4467,7 +4743,6 @@ function setTransition(duration, byController) {
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ transitionEmit)
@@ -4509,7 +4784,6 @@ function transitionEmit({
   \**************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ transitionEnd)
@@ -4540,7 +4814,6 @@ function transitionEnd(runCallbacks = true, direction) {
   \****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ transitionStart)
@@ -4572,7 +4845,6 @@ function transitionStart(runCallbacks = true, direction) {
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getSwiperTranslate)
@@ -4607,7 +4879,6 @@ function getSwiperTranslate(axis = this.isHorizontal() ? 'x' : 'y') {
   \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -4638,7 +4909,6 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ maxTranslate)
@@ -4655,7 +4925,6 @@ function maxTranslate() {
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ minTranslate)
@@ -4672,7 +4941,6 @@ function minTranslate() {
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ setTranslate)
@@ -4732,7 +5000,6 @@ function setTranslate(translate, byController) {
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ translateTo)
@@ -4817,7 +5084,6 @@ function translateTo(translate = 0, speed = this.params.speed, runCallbacks = tr
   \**************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -4860,7 +5126,6 @@ __webpack_require__.r(__webpack_exports__);
   \**************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ updateActiveIndex),
@@ -4972,7 +5237,6 @@ function updateActiveIndex(newActiveIndex) {
   \*************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ updateAutoHeight)
@@ -5031,7 +5295,6 @@ function updateAutoHeight(speed) {
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ updateClickedSlide)
@@ -5076,7 +5339,6 @@ function updateClickedSlide(e) {
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ updateProgress)
@@ -5152,7 +5414,6 @@ function updateProgress(translate) {
   \*******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ updateSize)
@@ -5198,7 +5459,6 @@ function updateSize() {
   \*********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ updateSlides)
@@ -5500,7 +5760,6 @@ function updateSlides() {
   \****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ updateSlidesClasses)
@@ -5567,7 +5826,6 @@ function updateSlidesClasses() {
   \***************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ updateSlidesOffset)
@@ -5590,7 +5848,6 @@ function updateSlidesOffset() {
   \*****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ updateSlidesProgress)
@@ -5649,7 +5906,6 @@ function updateSlidesProgress(translate = this && this.translate || 0) {
   \**************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ A11y)
@@ -6008,7 +6264,6 @@ function A11y({
   \**********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Autoplay)
@@ -6302,7 +6557,6 @@ function Autoplay({
   \**************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Controller)
@@ -6500,7 +6754,6 @@ function Controller({
   \******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EffectCards)
@@ -6635,7 +6888,6 @@ function EffectCards({
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EffectCoverflow)
@@ -6752,7 +7004,6 @@ function EffectCoverflow({
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EffectCreative)
@@ -6911,7 +7162,6 @@ function EffectCreative({
   \****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EffectCube)
@@ -7096,7 +7346,6 @@ function EffectCube({
   \****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EffectFade)
@@ -7176,7 +7425,6 @@ function EffectFade({
   \****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ EffectFlip)
@@ -7301,7 +7549,6 @@ function EffectFlip({
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ freeMode)
@@ -7544,7 +7791,6 @@ function freeMode({
   \**************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Grid)
@@ -7665,7 +7911,6 @@ function Grid({
   \************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ HashNavigation)
@@ -7771,7 +8016,6 @@ function HashNavigation({
   \********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ History)
@@ -7924,7 +8168,6 @@ function History({
   \**********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Keyboard)
@@ -8053,7 +8296,6 @@ function Keyboard({
   \******************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Manipulation)
@@ -8088,7 +8330,6 @@ function Manipulation({
   \**********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ addSlide)
@@ -8155,7 +8396,6 @@ function addSlide(index, slides) {
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ appendSlide)
@@ -8203,7 +8443,6 @@ function appendSlide(slides) {
   \**************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ prependSlide)
@@ -8255,7 +8494,6 @@ function prependSlide(slides) {
   \*****************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ removeAllSlides)
@@ -8277,7 +8515,6 @@ function removeAllSlides() {
   \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ removeSlide)
@@ -8330,7 +8567,6 @@ function removeSlide(slidesIndexes) {
   \**************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Mousewheel)
@@ -8729,7 +8965,6 @@ function Mousewheel({
   \**************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Navigation)
@@ -8930,7 +9165,6 @@ function Navigation({
   \**************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Pagination)
@@ -9393,7 +9627,6 @@ function Pagination({
   \**********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Parallax)
@@ -9514,7 +9747,6 @@ function Parallax({
   \************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Scrollbar)
@@ -9879,7 +10111,6 @@ function Scrollbar({
   \******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Thumb)
@@ -10085,7 +10316,6 @@ function Thumb({
   \********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Virtual)
@@ -10426,7 +10656,6 @@ function Virtual({
   \**************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Zoom)
@@ -11029,7 +11258,6 @@ function Zoom({
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ classesToSelector)
@@ -11047,7 +11275,6 @@ function classesToSelector(classes = '') {
   \*********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createElementIfNotDefined)
@@ -11080,7 +11307,6 @@ function createElementIfNotDefined(swiper, originalParams, params, checkProps) {
   \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createShadow)
@@ -11106,7 +11332,6 @@ function createShadow(params, slideEl, side) {
   \***************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ effectInit)
@@ -11176,7 +11401,6 @@ function effectInit(params) {
   \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ effectTarget)
@@ -11200,7 +11424,6 @@ function effectTarget(effectParams, slideEl) {
   \*********************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ effectVirtualTransitionEnd)
@@ -11259,7 +11482,6 @@ function effectVirtualTransitionEnd({
   \***************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getBrowser": () => (/* binding */ getBrowser)
@@ -11303,7 +11525,6 @@ function getBrowser() {
   \**************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getDevice": () => (/* binding */ getDevice)
@@ -11370,7 +11591,6 @@ function getDevice(overrides = {}) {
   \***************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getSupport": () => (/* binding */ getSupport)
@@ -11402,7 +11622,6 @@ function getSupport() {
   \**************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "preload": () => (/* binding */ preload),
@@ -11451,7 +11670,6 @@ const preload = swiper => {
   \*********************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "animateCSSModeScroll": () => (/* binding */ animateCSSModeScroll),
@@ -11752,7 +11970,6 @@ function elementOuterSize(el, size, includeMargins) {
   \*******************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "A11y": () => (/* reexport safe */ _modules_a11y_a11y_js__WEBPACK_IMPORTED_MODULE_10__["default"]),
@@ -11982,9 +12199,8 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
@@ -11992,8 +12208,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html */ "./src/index.html");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./src/index.scss");
 /* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/burger */ "./src/modules/burger.js");
-/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_burger__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/slider */ "./src/modules/slider.js");
+/* harmony import */ var _modules_brendSlider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/brendSlider */ "./src/modules/brendSlider.js");
+/* harmony import */ var _modules_repairSlider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/repairSlider */ "./src/modules/repairSlider.js");
+/* harmony import */ var _modules_priceSlider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/priceSlider */ "./src/modules/priceSlider.js");
+/* harmony import */ var _modules_elements__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/elements */ "./src/modules/elements.js");
+/* harmony import */ var _modules_btn_on__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/btn-on */ "./src/modules/btn-on.js");
+/* harmony import */ var _modules_modal_call__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/modal-call */ "./src/modules/modal-call.js");
+/* harmony import */ var _modules_modal_caller__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/modal-caller */ "./src/modules/modal-caller.js");
+
+
+
+
+
+
 
 
 
@@ -12002,4 +12229,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=main.d1fef8d8abef349108db.js.map
+//# sourceMappingURL=main.a777ce93ebc4870d0ed3.js.map
