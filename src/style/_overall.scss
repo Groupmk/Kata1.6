@@ -3,7 +3,14 @@
   padding: 0 1rem;
   margin: 0 auto;
   position: relative;
+  overflow: hidden;
 }
+.site-wrapper{
+ max-width: 92rem;
+ margin: 0 auto;
+  
+}
+
 .btn-reset {
   border: none;
   outline: none;
@@ -14,10 +21,43 @@
 
 a {
   outline: none;
+
 }
+
 
 input[type="radio"]{
   opacity: 0;
   z-index: -1;
   position: absolute;
+}
+
+.btn-on{
+  display: block;
+}
+.btn-close{
+  display: none;
+}
+.burger-close{
+  display: none;
+}
+.body-overflow{
+  overflow: hidden;
+}
+div .swiper-wrapper {
+  overflow: visible;
+}
+div > div.btn-slides-none{
+  display: none;
+}
+
+div > div.btn-slides-block{
+  max-height: unset;
+}
+.site-wrapper{
+  @media (min-width: 90rem){
+    display: flex;
+  }
+}
+:focus {
+  box-shadow: 0 0 3px rgba(0,0,0,.75);
 }

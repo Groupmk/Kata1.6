@@ -1,4 +1,10 @@
 import './index.html';
 import './index.scss';
 import './modules/burger'
-import './modules/slider'
+import './modules/brendSlider'
+import './modules/repairSlider'
+import './modules/priceSlider'
+import './modules/elements'
+import './modules/btn-on'
+import './modules/modal-call'
+import './modules/modal-caller'

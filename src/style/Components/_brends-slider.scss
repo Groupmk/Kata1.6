@@ -4,10 +4,9 @@
     &__title-container{
         border-top: solid $line;
         height: 5rem;
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
         background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);
         margin-bottom: 2rem;
+        width: 100vw;
     }
 
     &__title{
@@ -20,17 +19,26 @@
     }
 
     &__slider{
-        position: relative;
 
-        &::after{
-            content: "";
-            position: absolute;
-            top: -0.75rem;
-            left: 16rem;
-            z-index: 5;
-            width: 2rem;
-            height: 5.8rem;
-            background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);
+        @media (max-width: 20rem){
+            position: relative;
+
+            &::after{
+                content: "";
+                position: absolute;
+                top: -0.75rem;
+                left: 16rem;
+                z-index: 5;
+                width: 2rem;
+                height: 13.8rem;
+                background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);
+                }
+            }
+
+            @media (min-width: 47.5rem){
+                &::after{
+                    display: none;
+                }
             }
     }
 
@@ -42,69 +50,109 @@
         border: solid $border;
         margin-bottom: 2rem;
         background-color: $white;
+
+        @media (min-width: 47.5rem){
+            max-width: 11.8rem;
+            margin-bottom: 0;
+        }
     }
 
     &__slide-lenovo,
     &__slide-Samsung{
-        padding-right: 1rem;
+        padding-right: 2.5rem;
         width: 100%;
         max-width: 6.8rem;
     }
 
     &__slide-Apple,
     &__slide-Hp{
-        padding-right: 5rem;
+        padding-right: 6rem;
         width: 3.25rem;
     }
 
     &__slide-Acer{
-        padding-right: 2rem;
+        padding-right: 3.3rem;
         width: 6rem;
     }
 
     &__slide-Bosch{
         width: 8rem;
+        padding-right: 1.3rem;
     }
 
-    &__slide-btn-bosch{
-        margin-left: 0;
+    &__slide-ViewSonic,
+    &__slide-Sony{
+        padding-right: 1.3rem;
     }
 
-    &__slide-btn{
+    &__swiper-wrapper{
+        @media (min-width: 47.5rem){
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+    }
+
+    &__btn-onclick{
+        display: none;
+
+        @media (min-width: 47.5rem){
+            display: block;
+        }
+    }
+
+    &__btn-on{
         position: relative;
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 100%;
-        border: solid $pink;
-        margin-left: 2rem;
+        font-family: 'TT Lakes';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        padding-top: 1.5rem;
+        padding-left: 2rem;
 
-        &::after{
-            content: "";
-            position: absolute;
-            display: block;
-            top: 1rem;
-            left: 1rem;
-            border: solid 2px #FF3E79;
-            border-radius: 7px;
-            background-color: #FF3E79;
-            width: 0.5rem;
-            -webkit-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
         &::before{
-            content: "";
-            position: absolute;
-            display: block;
-            top: 1.4rem;
-            left: 1rem;
-            border: solid 2px #FF3E79;
-            border-radius: 7px;
-            background-color: #FF3E79;
-            width: 0.5rem;
-            -webkit-transform: rotate(130deg);
-            transform: rotate(130deg);
+        content: "«";
+        position: absolute;
+        font-size: 1.6rem;
+        -webkit-transform: rotate(0.75turn);
+        transform: rotate(0.75turn);
+        left: 0.2rem;
+        color: $arrow;
         }
     }
+
+    &__btn-of{
+        position: relative;
+        font-family: 'TT Lakes';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        padding-top: 1.5rem;
+        padding-left: 2rem;
+
+        &::before{
+        content: "«";
+        position: absolute;
+        font-size: 1.6rem;
+        -webkit-transform: rotate(0.25turn);
+        transform: rotate(0.25turn);
+        left: 0.2rem;
+        color: $arrow;
+        }
+    }
+
+    &__swiper-wrapper{
+        @media (min-width: 47.5rem){
+            max-height: 6rem;
+        }
+
+        @media(min-width: 90rem){
+            max-height: 12.5rem;
+        }
+    }
+    
 }
 .swiper-pagination-bullet{
     min-width: 0.60rem;

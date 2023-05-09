@@ -2,6 +2,12 @@
 
     &__inner{
         margin-bottom: 1.5rem;
+
+        @media (min-width: 90rem){
+            margin-top: 2.7rem;
+            display: flex;
+            align-items: flex-start;
+        }
     }
     &__title {
         font-family: 'TT Lakes';
@@ -16,35 +22,58 @@
             width: 0.25rem;
             height: 2.5rem;
             left: -0.9rem;
-            background: #41F6D7;
+            background: $arrow;
             border-radius: 1px;
+        }
+
+        @media (min-width: 90rem){
+            margin-right: 28.1rem;
         }
     }
 
     &__buttons{
         display: none;
+
+        @media (min-width: 90rem){
+            display: block;
+            display: flex;
+            gap: 2rem;
+        }
+    }
+
+    &__buttons li{
+        @media (min-width: 90rem){
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
     }
     &__menu {
         display: flex;
         overflow-y: hidden;
+        @media (min-width: 90rem){
+            overflow: visible;
+            flex-wrap: wrap;
+        }
     }
     &__item {
         white-space: nowrap;
         display: block;
         padding: 0.5rem 1rem;
-        font-family: "TT Lakes";
+        font-family: 'TT Lakes';
         font-size: 1rem;
-        color: var(--nav-text-color);
+        line-height: 1.5rem;
+        color: $text;
         transition: 0.3s;
         border-radius: 6px;
         border: solid transparent;
     }
-    &__item:hover,
-    &__item:focus,
-    &__item:active{
+    &__item--active:hover,
+    &__item--active:focus,
+    &__item--active:active{
         transition: 0.3s;
-        background-color: var(--white-color);
-        border: solid #D9FFF5;
+        background-color: $white;
+        border: solid $line;
         border-radius: 6px;
         transition: 0.5s;
     }

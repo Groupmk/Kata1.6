@@ -1,79 +1,187 @@
 .burger{
-    padding: 0 1.9rem;
-    display: none;
-}
-
-.active{
+    max-width: 20rem;
+    &__menu{
     width: 100%;
     height: 100%;
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     -webkit-backdrop-filter: blur(0.25rem);
     backdrop-filter: blur(0.25rem);
     z-index: 2;
+    display: none;
+    transition: transform 1s;
+    overflow-y: scroll;
+    @media (min-width: 90rem){
+        display: block;
+        transform: none;
+        backdrop-filter:none;
+        position: static;
+        overflow: hidden;
+    }
 }
-.burger__menu{
-    width: 21rem;
+
+    &__menu.active{
+        display: block;
+    }
+
+    &__overlay{
     position: absolute;
     left: 0.1rem;
+    min-height: 100vh;
     padding-left: 1.8rem;
     padding-top: 1.1rem;
-    background-color: var(--white-color);
-     box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2); 
-}
-.burger__overlay-inner{
+    background-color: $white;
+    box-shadow: 1rem 0 3.25rem rgba(14, 24, 80, 0.2); 
+
+    @media (min-width: 90rem){
+        position: static;
+        width: auto;
+    }
+    }
+
+    &__overlay-inner{
     display: flex;
     margin-bottom: 2.3rem;
+    align-items: center;
+
+    @media (min-width: 90rem){
+        padding-top: 1.5rem;
+    }
 }
-.burger__btn{
-    padding-right: 1rem;
+
+&__btn{
+    margin-right: 1rem;
+    @media (min-width: 90rem){
+        display: none;
+    }
 }
-.burger__logo{
-    padding-right: 5rem;
+&__logo{
+    padding-right: 4rem;
+
+    @media (min-width: 90rem){
+        padding-right: 7rem;
+    }
 }
-.burger__navigation{
-    margin-bottom: 15rem;
+
+&__btn-search{
+    margin-right: 1rem;
 }
-.burger__list-item{
-    padding-bottom: 1.8rem;
+&__navigation{
+    margin-bottom: 2rem;
+
+    @media (min-width: 90rem){
+        margin-bottom: 15rem;
+    }
 }
-.burger__list-item:hover{
+
+&__list li:nth-child(3){
+    position: relative;
+    &::before{
+        content: "";
+        position: absolute;
+        width: 0.25rem;
+        height: 1.5rem;
+        left: -1.8rem;
+        background: #41f6d7;
+        border-radius: 1px;
+    }
+}
+
+&__list-item{
+    margin-bottom: 1.8rem;
+}
+&__link--active:hover,
+&__link--active:focus,
+&__link--active:active{
     transition: 0.5s;
-    color: var(--nav-text-color);
+    color: $text;
 }
-.burger__buttons{
+&__buttons{
     display: flex;
     gap: 1rem;
     margin-bottom: 1.1rem;
 }
-.burger__mail{
+&__mail{
     display: block;
     margin-bottom: 0.8rem;
     font-family: 'TT Lakes';
     font-size: 1rem;
 }
-.burger__tel{
+&__tel{
     font-family: 'TT Lakes';
     font-size: 1.5rem;
     display: block;
     margin-bottom: 2.6rem;
 }
-.burger__radio {
+&__radio {
     padding-left: 0;
     padding-right: 0.4rem;
     cursor: pointer;
 }
-.burger__radio:hover{
-    color: var(--nav-text-color);
+&__radio:hover{
+    color: $text;
 }
-.burger__radio:active{
-    color: var(--nav-text-color);
+&__radio:active{
+    color: $text;
 }
-.burger__radio:focus{
-    border: solid var(--pink-color);
+&__radio:focus{
+    border: solid $pink;
 }
-.burger__radio:disabled{
-    color: var(--black-color);
+&__radio:disabled{
+    color: $back;
 }
+
+&__btn--active:active,
+&__btn--active:focus{
+    width: 2.5rem;
+        height: 2.5rem;
+        border: solid $pink;
+        border-radius: 50%;
+        padding: 0;
+}
+
+&__btn-search--active:active,
+&__btn-search--active:focus{
+    width: 2.5rem;
+    height: 2.5rem;
+    border: solid $pink;
+    border-radius: 50%;
+    padding: 0;
+}
+
+&__button-tel--active:active,
+&__button-tel--active:focus{
+    width: 2.5rem;
+    height: 2.5rem;
+    border: solid $pink;
+    border-radius: 50%;
+    padding: 0;
+}
+
+&__button-chat--active:active,
+&__button-chat--active:focus{
+    width: 2.5rem;
+    height: 2.5rem;
+    border: solid $pink;
+    border-radius: 50%;
+    padding: 0;
+}
+
+&__button-user--active:active,
+&__button-user--active:focus{
+
+}
+
+
+}
+
+
+.burger-container{
+    @media (min-width: 90rem){
+        background-color: $white;
+        min-height: 100vh;
+    }
+}
+

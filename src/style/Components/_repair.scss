@@ -2,10 +2,10 @@
     &__title-container{
         border-top: solid $line;
         height: 5rem;
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
         background: linear-gradient(156deg, #F8F8F8 0%, #FFFFFF 98.61%);
         margin-bottom: 2rem;
+        width: 100vw;
+        
     }
 
     &__title{
@@ -19,24 +19,33 @@
 
     
     &__slider{
-        position: relative;
 
-        &::after{
-            content: "";
-            position: absolute;
-            top: -0.75rem;
-            left: 16rem;
-            z-index: 5;
-            width: 2rem;
-            height: 11.8rem;
-            background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);
+        @media (max-width: 20rem){
+            position: relative;
+
+            &::after{
+                content: "";
+                position: absolute;
+                top: -0.75rem;
+                left: 16rem;
+                z-index: 5;
+                width: 2rem;
+                height: 13.8rem;
+                background: linear-gradient(270deg, #F8F8F8 16.84%, rgba(248, 248, 248, 0.0001) 100%);
+                }
+            }
+
+            @media (min-width: 47.5rem){
+                &::after{
+                    display: none;
+                }
             }
     }
 
     div &__slide{
         display: flex;
         flex-direction: column;
-        width: 15rem;
+        width: 13rem;
         height: 10rem;
         border: solid $border;
         border-radius: 0.4rem;
@@ -54,5 +63,77 @@
         position: absolute;
         bottom: 1rem;
         right: 1rem;
+
+
+        // display: flex;
+        // align-items: flex-end; сохраняю если потребуется вернуть кнопку в поток
+        // padding-bottom: 1rem;
+        // padding-left: 1rem;
     }
+
+   &__slider-wrapper{
+    @media (min-width: 47.5rem){
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        max-height: 12.5rem;
+    }
+
+    @media(min-width: 90rem){
+        max-height: 400px;
+    }
+   }
+
+
+   &__btn-onclick{
+    display: none;
+
+    @media (min-width: 47.5rem){
+        display: block;
+    }
+   }
+    &__slide-on{
+        position: relative;
+        font-family: 'TT Lakes';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        padding-top: 1.5rem;
+        padding-left: 2rem;
+    
+        &::before{
+        content: "«";
+        position: absolute;
+        font-size: 1.6rem;
+        -webkit-transform: rotate(0.75turn);
+        transform: rotate(0.75turn);
+        left: 0.2rem;
+        color: $arrow;
+        }
+    }
+    &__slide-of{
+        position: relative;
+        font-family: 'TT Lakes';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        padding-top: 1.5rem;
+        padding-left: 2rem;
+    
+        &::before{
+        content: "«";
+        position: absolute;
+        font-size: 1.6rem;
+        -webkit-transform: rotate(0.25turn);
+        transform: rotate(0.25turn);
+        left: 0.2rem;
+        color: $arrow;
+        }
+    }
+
+}
+.swiper-wrapper{
+    overflow: hidden;
 }

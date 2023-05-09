@@ -1,15 +1,26 @@
 .about{
     &__inner{
         margin-bottom: 2.5rem;
+
+        @media (min-width: 47.5rem){
+            display: flex;
+        }
     }
     &__text {
         font-family: 'TT Lakes';
         font-size: 0.9rem;
         line-height: 1.2rem;
+        letter-spacing: 0.012rem;
         margin-bottom: 1rem;
+        color: $blackText;
+
+        @media (min-width: 47.5rem){
+            letter-spacing: 0.013rem;
+            line-height: 1.25rem;
+        }
     }
     
-    &__btn {
+    &__btn-on {
         font-family: 'TT Lakes';
         font-size: 1rem;
         margin-bottom: 1rem;
@@ -24,16 +35,47 @@
             transform: rotate(0.75turn);
             left: 0;
             top: -0.3rem;
-            color: #41f6d7;
+            color: $arrow;
         }
     }
+
+    &__btn-close{
+        font-family: 'TT Lakes';
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        position: relative;
+        padding-left: 2rem;
+        border: solid transparent;
+
+        &::before{
+            content: "«";
+            position: absolute;
+            font-size: 1.6rem;
+            transform: rotate(0.25turn);
+            left: 0;
+            top: -0.3rem;
+            color: $arrow;
+        }
+    }
+
     &__img {
         border-radius: 5px;
-        width: 20rem;
-        height: 11rem;
+        max-width: 100%;
+        max-height: auto;
+        @media (min-width: 47.5rem){
+            max-width: 22.5rem;
+            max-height: auto;
+        }
     }
 }
-.span-tab,
-.span-desctop {
-    display: none;
+.span-tab{
+    @media (min-width: 47.5rem){
+        display: block;
+    }
+}
+
+.span-desctop{
+    @media(min-width: 90rem){
+        display: block;
+    }
 }

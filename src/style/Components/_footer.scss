@@ -3,10 +3,9 @@
     flex-direction: column;
     text-align: center;
     opacity: 0.72;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
     border-top: solid $line;
     margin-top: 2.5rem;
+    width: 100vw;
 
     &__content{
         font-family: 'TT Lakes';
@@ -16,5 +15,46 @@
         mix-blend-mode: normal;
         margin-top: 1rem;
         padding-bottom: 1rem;
+
+        @media (min-width: 56.2rem){
+            font-size: 0.9rem;
+        }
+
+        @media(min-width: 47.5rem){
+            &:first-child{
+                text-align: left;
+            }
+            &:nth-child(2){
+                white-space: nowrap;
+            }
+            &:last-child{
+                flex-basis: 33%;
+                text-align: right;
+            }
+        }
+
+        @media(min-width: 90rem){
+            &:first-child{
+                text-align: left;
+            }
+            &:nth-child(2){
+                white-space: nowrap;
+            }
+            &:last-child{
+                flex-basis: 33%;
+                text-align: right;
+            }
+        }
+    }
+
+    
+    @media(min-width: 47.5rem){
+        flex-direction: unset;
+        gap: 9.1rem;
+    }
+
+    @media(min-width: 90rem){
+        flex-direction: unset;
+        gap: 9.1rem;
     }
 }
