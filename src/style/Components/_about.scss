@@ -1,0 +1,39 @@
+.about{
+    &__inner{
+        margin-bottom: 2.5rem;
+    }
+    &__text {
+        font-family: 'TT Lakes';
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    &__btn {
+        font-family: 'TT Lakes';
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        position: relative;
+        padding-left: 2rem;
+        border: solid transparent;
+
+        &::before{
+            content: "«";
+            position: absolute;
+            font-size: 1.6rem;
+            transform: rotate(0.75turn);
+            left: 0;
+            top: -0.3rem;
+            color: #41f6d7;
+        }
+    }
+    &__img {
+        border-radius: 5px;
+        width: 20rem;
+        height: 11rem;
+    }
+}
+.span-tab,
+.span-desctop {
+    display: none;
+}

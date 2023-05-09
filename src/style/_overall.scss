@@ -1,0 +1,23 @@
+.container {
+  max-width: 72rem;
+  padding: 0 1rem;
+  margin: 0 auto;
+  position: relative;
+}
+.btn-reset {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+a {
+  outline: none;
+}
+
+input[type="radio"]{
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+}

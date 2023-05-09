@@ -1,0 +1,49 @@
+.header{
+    border-bottom: solid #D9FFF5;
+    background-color: var(--white-color);
+    margin-bottom: 1.5rem;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    &__logo{
+        position: relative;
+
+        &::after{
+            content: "";
+            position: absolute;
+            border-right: solid $border;
+            top: 0.6rem;
+            right: -0.9rem;
+            height: 1.9rem;
+        }
+    }
+
+
+    &__buttons{
+        display: flex;
+    }
+
+    &__btn-phone,
+    &__btn-chat ,
+    &__user{
+        display: none;
+    }   
+
+    &__btn-repair {
+        padding-right: 1rem;
+    
+    }
+
+}
+.burger{
+    display: none;
+}
