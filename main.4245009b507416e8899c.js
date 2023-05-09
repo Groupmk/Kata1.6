@@ -79,15 +79,21 @@ __webpack_require__.r(__webpack_exports__);
 _elements__WEBPACK_IMPORTED_MODULE_0__.menuBtn.addEventListener('click', function () {
   _elements__WEBPACK_IMPORTED_MODULE_0__.menu.classList.add('active');
   _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.add('body-overflow');
+  elem.setAttribute('inert', 'inert');
+  atr.setAttribute('inert', 'inert');
 });
 _elements__WEBPACK_IMPORTED_MODULE_0__.close.addEventListener('click', function () {
   _elements__WEBPACK_IMPORTED_MODULE_0__.menu.classList.remove('active');
   _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.toggle('body-overflow');
+  elem.removeAttribute('inert');
+  atr.removeAttribute('inert');
 });
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     _elements__WEBPACK_IMPORTED_MODULE_0__.menu.classList.remove('active');
     _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.remove('body-overflow');
+    elem.removeAttribute('inert');
+    atr.removeAttribute('inert');
   }
 });
 window.addEventListener('click', function (targetClose) {
@@ -96,6 +102,8 @@ window.addEventListener('click', function (targetClose) {
     if (!target.closest('.burger__overlay')) {
       _elements__WEBPACK_IMPORTED_MODULE_0__.menu.classList.toggle('active');
       _elements__WEBPACK_IMPORTED_MODULE_0__.body.classList.toggle('body-overflow');
+      elem.removeAttribute('inert');
+      atr.removeAttribute('inert');
     }
   }
 });
@@ -12229,4 +12237,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=main.b60c8e76e84ae647ac22.js.map
+//# sourceMappingURL=main.4245009b507416e8899c.js.map
