@@ -6,10 +6,11 @@ import { btnBrends, elementsToSledeBrends, btnSliderOn, btnSliderOf} from './ele
 import { mediaQuerySmall } from './matchMedia';
 
   let swiper
+  let brendSlider = swiper
 
   function sliderFunc(){
     if(mediaQuerySmall.matches){
-        swiper = new Swiper('.brends__slider', {
+      brendSlider = new Swiper('.brends__slider', {
           modules: [Navigation, Pagination],
           slidesPerView: 'auto',
           spaceBetween: 16,
@@ -18,8 +19,8 @@ import { mediaQuerySmall } from './matchMedia';
             clickable: true,
           },
         });
-    }else if(swiper){
-      swiper.destroy();
+    }else if(brendSlider){
+      brendSlider.destroy();
     }
  }
 mediaQuerySmall.addEventListener('change', sliderFunc)

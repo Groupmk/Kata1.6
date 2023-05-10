@@ -6,10 +6,11 @@ import { elementsToSledeRepair, btnRepair, btnSlideOn, btnSlideOf } from './elem
 import { mediaQuerySmall} from './matchMedia';
  
   let swiper
+  let repairSlider = swiper
 
   function sliderFunc(){
     if(mediaQuerySmall.matches){
-        swiper = new Swiper('.repair__slider', {
+      repairSlider = new Swiper('.repair__slider', {
           modules: [Navigation, Pagination],
           slidesPerView: 'auto',
           spaceBetween: 16,
@@ -18,13 +19,12 @@ import { mediaQuerySmall} from './matchMedia';
             clickable: true,
           },
         });
-    }else if(swiper){
-      swiper.destroy();
+    }else if(repairSlider){
+      repairSlider.destroy();
     }
  }
 mediaQuerySmall.addEventListener('change', sliderFunc)
 sliderFunc(mediaQuerySmall)
-
 
 function btnRep(){
   elementsToSledeRepair.classList.toggle('btn-slides-block')

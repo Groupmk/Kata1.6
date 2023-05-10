@@ -5,10 +5,11 @@ import 'swiper/css/pagination';
 import { mediaQuerySmall } from './matchMedia';
 
   let swiper
+  let priceSlider = swiper
 
   function sliderFunc(){
     if(mediaQuerySmall.matches){
-        swiper = new Swiper('.price__slider', {
+      priceSlider = new Swiper('.price__slider', {
           modules: [Navigation, Pagination],
           slidesPerView: 'auto',
           spaceBetween: 16,
@@ -17,8 +18,8 @@ import { mediaQuerySmall } from './matchMedia';
             clickable: true,
           },
         });
-    }else if(swiper){
-      swiper.destroy();
+    }else if(priceSlider){
+      priceSlider.destroy();
     }
  }
 mediaQuerySmall.addEventListener('change', sliderFunc)

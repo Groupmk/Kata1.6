@@ -20,6 +20,12 @@
         }
     }
     
+    &__btn{
+        @media(min-width: 90rem){
+            display: none;
+        }
+    }
+
     &__btn-on {
         font-family: 'TT Lakes';
         font-size: 1rem;
